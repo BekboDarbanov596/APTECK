@@ -1,0 +1,2237 @@
+{
+  "meta": {
+    "demo": true,
+    "note": "Демо-данные: цены и наличие примерные, координаты аптек приблизительные.",
+    "generatedAt": "2026-11-08"
+  },
+  "drugs": [
+    {
+      "id": "paracetamol-500",
+      "name": "Парацетамол",
+      "strength": "500 мг",
+      "form": "Таблетки",
+      "pack": "10 шт.",
+      "inn": "парацетамол",
+      "rx": false,
+      "aliases": [
+        "paracetamol"
+      ],
+      "category": "Боль и температура"
+    },
+    {
+      "id": "panadol-500",
+      "name": "Панадол",
+      "strength": "500 мг",
+      "form": "Таблетки",
+      "pack": "12 шт.",
+      "inn": "парацетамол",
+      "rx": false,
+      "aliases": [
+        "panadol"
+      ],
+      "category": "Боль и температура"
+    },
+    {
+      "id": "ibuprofen-200",
+      "name": "Ибупрофен",
+      "strength": "200 мг",
+      "form": "Таблетки",
+      "pack": "50 шт.",
+      "inn": "ибупрофен",
+      "rx": false,
+      "aliases": [
+        "ibuprofen"
+      ],
+      "category": "Боль и температура"
+    },
+    {
+      "id": "nurofen-200",
+      "name": "Нурофен",
+      "strength": "200 мг",
+      "form": "Таблетки",
+      "pack": "10 шт.",
+      "inn": "ибупрофен",
+      "rx": false,
+      "aliases": [
+        "nurofen"
+      ],
+      "category": "Боль и температура"
+    },
+    {
+      "id": "citramon-p",
+      "name": "Цитрамон П",
+      "strength": "",
+      "form": "Таблетки",
+      "pack": "10 шт.",
+      "inn": "ацетилсалициловая кислота + парацетамол + кофеин",
+      "rx": false,
+      "aliases": [
+        "citramon",
+        "tsitramon"
+      ],
+      "category": "Боль и температура"
+    },
+    {
+      "id": "no-spa-40",
+      "name": "Но-шпа",
+      "strength": "40 мг",
+      "form": "Таблетки",
+      "pack": "24 шт.",
+      "inn": "дротаверин",
+      "rx": false,
+      "aliases": [
+        "no-spa",
+        "nospa",
+        "ношпа"
+      ],
+      "category": "Боль и температура"
+    },
+    {
+      "id": "drotaverin-40",
+      "name": "Дротаверин",
+      "strength": "40 мг",
+      "form": "Таблетки",
+      "pack": "20 шт.",
+      "inn": "дротаверин",
+      "rx": false,
+      "aliases": [
+        "drotaverin"
+      ],
+      "category": "Боль и температура"
+    },
+    {
+      "id": "suprastin-25",
+      "name": "Супрастин",
+      "strength": "25 мг",
+      "form": "Таблетки",
+      "pack": "20 шт.",
+      "inn": "хлоропирамин",
+      "rx": false,
+      "aliases": [
+        "suprastin"
+      ],
+      "category": "Аллергия"
+    },
+    {
+      "id": "loratadin-10",
+      "name": "Лоратадин",
+      "strength": "10 мг",
+      "form": "Таблетки",
+      "pack": "10 шт.",
+      "inn": "лоратадин",
+      "rx": false,
+      "aliases": [
+        "loratadin",
+        "loratadine"
+      ],
+      "category": "Аллергия"
+    },
+    {
+      "id": "amoxicillin-500",
+      "name": "Амоксициллин",
+      "strength": "500 мг",
+      "form": "Капсулы",
+      "pack": "16 шт.",
+      "inn": "амоксициллин",
+      "rx": true,
+      "aliases": [
+        "amoxicillin"
+      ],
+      "category": "Антибиотики"
+    },
+    {
+      "id": "azithromycin-250",
+      "name": "Азитромицин",
+      "strength": "250 мг",
+      "form": "Капсулы",
+      "pack": "6 шт.",
+      "inn": "азитромицин",
+      "rx": true,
+      "aliases": [
+        "azithromycin",
+        "azitromicin"
+      ],
+      "category": "Антибиотики"
+    },
+    {
+      "id": "augmentin-875",
+      "name": "Аугментин",
+      "strength": "875/125 мг",
+      "form": "Таблетки",
+      "pack": "14 шт.",
+      "inn": "амоксициллин + клавулановая кислота",
+      "rx": true,
+      "aliases": [
+        "augmentin"
+      ],
+      "category": "Антибиотики"
+    },
+    {
+      "id": "ceftriaxone-1g",
+      "name": "Цефтриаксон",
+      "strength": "1 г",
+      "form": "Порошок для инъекций",
+      "pack": "1 фл.",
+      "inn": "цефтриаксон",
+      "rx": true,
+      "aliases": [
+        "ceftriaxone",
+        "ceftriakson"
+      ],
+      "category": "Антибиотики"
+    },
+    {
+      "id": "omeprazol-20",
+      "name": "Омепразол",
+      "strength": "20 мг",
+      "form": "Капсулы",
+      "pack": "30 шт.",
+      "inn": "омепразол",
+      "rx": false,
+      "aliases": [
+        "omeprazol",
+        "omeprazole"
+      ],
+      "category": "Желудок и кишечник"
+    },
+    {
+      "id": "smecta-3",
+      "name": "Смекта",
+      "strength": "3 г",
+      "form": "Порошок",
+      "pack": "10 пак.",
+      "inn": "диосмектит",
+      "rx": false,
+      "aliases": [
+        "smecta"
+      ],
+      "category": "Желудок и кишечник"
+    },
+    {
+      "id": "activated-carbon",
+      "name": "Активированный уголь",
+      "strength": "250 мг",
+      "form": "Таблетки",
+      "pack": "10 шт.",
+      "inn": "активированный уголь",
+      "rx": false,
+      "aliases": [
+        "ugol",
+        "уголь"
+      ],
+      "category": "Желудок и кишечник"
+    },
+    {
+      "id": "loperamid-2",
+      "name": "Лоперамид",
+      "strength": "2 мг",
+      "form": "Капсулы",
+      "pack": "20 шт.",
+      "inn": "лоперамид",
+      "rx": false,
+      "aliases": [
+        "loperamid",
+        "loperamide"
+      ],
+      "category": "Желудок и кишечник"
+    },
+    {
+      "id": "enalapril-10",
+      "name": "Эналаприл",
+      "strength": "10 мг",
+      "form": "Таблетки",
+      "pack": "20 шт.",
+      "inn": "эналаприл",
+      "rx": true,
+      "aliases": [
+        "enalapril"
+      ],
+      "category": "Сердце и давление"
+    },
+    {
+      "id": "amlodipin-5",
+      "name": "Амлодипин",
+      "strength": "5 мг",
+      "form": "Таблетки",
+      "pack": "30 шт.",
+      "inn": "амлодипин",
+      "rx": true,
+      "aliases": [
+        "amlodipin",
+        "amlodipine"
+      ],
+      "category": "Сердце и давление"
+    },
+    {
+      "id": "metformin-850",
+      "name": "Метформин",
+      "strength": "850 мг",
+      "form": "Таблетки",
+      "pack": "60 шт.",
+      "inn": "метформин",
+      "rx": true,
+      "aliases": [
+        "metformin"
+      ],
+      "category": "Диабет"
+    },
+    {
+      "id": "aspirin-cardio-100",
+      "name": "Аспирин Кардио",
+      "strength": "100 мг",
+      "form": "Таблетки",
+      "pack": "28 шт.",
+      "inn": "ацетилсалициловая кислота",
+      "rx": false,
+      "aliases": [
+        "aspirin"
+      ],
+      "category": "Сердце и давление"
+    },
+    {
+      "id": "validol-60",
+      "name": "Валидол",
+      "strength": "60 мг",
+      "form": "Таблетки",
+      "pack": "10 шт.",
+      "inn": "ментола раствор в ментилизовалерате",
+      "rx": false,
+      "aliases": [
+        "validol"
+      ],
+      "category": "Сердце и давление"
+    },
+    {
+      "id": "corvalol-25",
+      "name": "Корвалол",
+      "strength": "25 мл",
+      "form": "Капли",
+      "pack": "1 фл.",
+      "inn": "фенобарбитал + этилбромизовалерианат",
+      "rx": false,
+      "aliases": [
+        "corvalol",
+        "korvalol"
+      ],
+      "category": "Сердце и давление"
+    },
+    {
+      "id": "nazivin-005",
+      "name": "Називин",
+      "strength": "0,05%",
+      "form": "Спрей назальный",
+      "pack": "10 мл",
+      "inn": "оксиметазолин",
+      "rx": false,
+      "aliases": [
+        "nazivin"
+      ],
+      "category": "Простуда и нос"
+    },
+    {
+      "id": "theraflu",
+      "name": "Терафлю",
+      "strength": "",
+      "form": "Порошок",
+      "pack": "10 пак.",
+      "inn": "парацетамол + фенилэфрин + фенирамин",
+      "rx": false,
+      "aliases": [
+        "theraflu",
+        "teraflu"
+      ],
+      "category": "Простуда и нос"
+    },
+    {
+      "id": "levomekol-40",
+      "name": "Левомеколь",
+      "strength": "40 г",
+      "form": "Мазь",
+      "pack": "1 туба",
+      "inn": "диоксометилтетрагидропиримидин + хлорамфеникол",
+      "rx": false,
+      "aliases": [
+        "levomekol"
+      ],
+      "category": "Кожа и раны"
+    },
+    {
+      "id": "diclofenac-50",
+      "name": "Диклофенак",
+      "strength": "50 мг",
+      "form": "Таблетки",
+      "pack": "20 шт.",
+      "inn": "диклофенак",
+      "rx": false,
+      "aliases": [
+        "diclofenac",
+        "diklofenak"
+      ],
+      "category": "Боль и температура"
+    }
+  ],
+  "pharmacies": [
+    {
+      "id": "neman-chuy-125",
+      "chain": "Неман Фарм",
+      "address": "просп. Чуй, 125",
+      "lat": 42.8762,
+      "lng": 74.6097,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "neman-kievskaya-98",
+      "chain": "Неман Фарм",
+      "address": "ул. Киевская, 98",
+      "lat": 42.8737,
+      "lng": 74.598,
+      "opensAt": "08:00",
+      "closesAt": "21:00",
+      "phone": null
+    },
+    {
+      "id": "neman-dzhal-23",
+      "chain": "Неман Фарм",
+      "address": "мкр Джал, 23",
+      "lat": 42.8352,
+      "lng": 74.5878,
+      "opensAt": "09:00",
+      "closesAt": "21:00",
+      "phone": null
+    },
+    {
+      "id": "aibolit-bokonbaeva-144",
+      "chain": "Айболит",
+      "address": "ул. Боконбаева, 144",
+      "lat": 42.8688,
+      "lng": 74.6002,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "aibolit-vostok5-12",
+      "chain": "Айболит",
+      "address": "мкр Восток-5, 12",
+      "lat": 42.8512,
+      "lng": 74.6648,
+      "opensAt": "09:00",
+      "closesAt": "20:00",
+      "phone": null
+    },
+    {
+      "id": "aibolit-manasa-67",
+      "chain": "Айболит",
+      "address": "просп. Манаса, 67",
+      "lat": 42.8652,
+      "lng": 74.5882,
+      "opensAt": "08:00",
+      "closesAt": "23:00",
+      "phone": null
+    },
+    {
+      "id": "farmamir-moskovskaya-134",
+      "chain": "ФармаМир",
+      "address": "ул. Московская, 134",
+      "lat": 42.8706,
+      "lng": 74.5992,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "farmamir-toktogula-93",
+      "chain": "ФармаМир",
+      "address": "ул. Токтогула, 93",
+      "lat": 42.8722,
+      "lng": 74.6052,
+      "opensAt": "09:00",
+      "closesAt": "21:00",
+      "phone": null
+    },
+    {
+      "id": "farmamir-tunguch-64",
+      "chain": "ФармаМир",
+      "address": "мкр Тунгуч, 64",
+      "lat": 42.8312,
+      "lng": 74.6262,
+      "opensAt": "09:00",
+      "closesAt": "20:00",
+      "phone": null
+    },
+    {
+      "id": "elaman-logvinenko-30",
+      "chain": "Эл Аман",
+      "address": "ул. Логвиненко, 30/1",
+      "lat": 42.869,
+      "lng": 74.596,
+      "opensAt": "08:00",
+      "closesAt": "18:00",
+      "phone": null
+    },
+    {
+      "id": "elaman-togoloka-moldo-1",
+      "chain": "Эл Аман",
+      "address": "ул. Тоголока Молдо, 1",
+      "lat": 42.8795,
+      "lng": 74.6115,
+      "opensAt": "08:00",
+      "closesAt": "20:00",
+      "phone": null
+    },
+    {
+      "id": "elaman-fuchika-15",
+      "chain": "Эл Аман",
+      "address": "ул. Фучика, 15",
+      "lat": 42.8875,
+      "lng": 74.587,
+      "opensAt": "08:00",
+      "closesAt": "18:00",
+      "phone": null
+    },
+    {
+      "id": "farmservis-ahunbaeva-131",
+      "chain": "Фарм-Сервис",
+      "address": "ул. Ахунбаева, 131",
+      "lat": 42.8445,
+      "lng": 74.603,
+      "opensAt": null,
+      "closesAt": null,
+      "phone": null
+    },
+    {
+      "id": "farmservis-beishenalievoi-29",
+      "chain": "Фарм-Сервис",
+      "address": "ул. Бейшеналиевой, 29",
+      "lat": 42.8815,
+      "lng": 74.62,
+      "opensAt": "08:00",
+      "closesAt": "21:00",
+      "phone": null
+    },
+    {
+      "id": "farvater-ibraimova-115",
+      "chain": "Фарватер",
+      "address": "ул. Ибраимова, 115",
+      "lat": 42.878,
+      "lng": 74.615,
+      "opensAt": "09:00",
+      "closesAt": "21:00",
+      "phone": null
+    },
+    {
+      "id": "zdorovie-zhibek-zholu-45",
+      "chain": "Аптека «Здоровье»",
+      "address": "ул. Жибек Жолу, 45",
+      "lat": 42.887,
+      "lng": 74.6,
+      "opensAt": "09:00",
+      "closesAt": "19:00",
+      "phone": null
+    }
+  ],
+  "offers": [
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "paracetamol-500",
+      "price": 25
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "nurofen-200",
+      "price": 215
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "no-spa-40",
+      "price": 290
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "amoxicillin-500",
+      "price": 123
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "azithromycin-250",
+      "price": 169
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "augmentin-875",
+      "price": 690
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "ceftriaxone-1g",
+      "price": 65
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "omeprazol-20",
+      "price": 96
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "smecta-3",
+      "price": 357
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "enalapril-10",
+      "price": 51
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "metformin-850",
+      "price": 170
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "validol-60",
+      "price": 31
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "corvalol-25",
+      "price": 63
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "nazivin-005",
+      "price": 277
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "theraflu",
+      "price": 471
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "levomekol-40",
+      "price": 168
+    },
+    {
+      "pharmacyId": "neman-chuy-125",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "ibuprofen-200",
+      "price": 106
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "nurofen-200",
+      "price": 214
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "citramon-p",
+      "price": 27
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "no-spa-40",
+      "price": 260
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "drotaverin-40",
+      "price": 48
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "suprastin-25",
+      "price": 258
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "amoxicillin-500",
+      "price": 124
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "augmentin-875",
+      "price": 729
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "smecta-3",
+      "price": 370
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "loperamid-2",
+      "price": 50
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "amlodipin-5",
+      "price": 85
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "aspirin-cardio-100",
+      "price": 306
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "validol-60",
+      "price": 31
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "corvalol-25",
+      "price": 62
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "nazivin-005",
+      "price": 282
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "theraflu",
+      "price": 509
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "levomekol-40",
+      "price": 161
+    },
+    {
+      "pharmacyId": "neman-kievskaya-98",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "panadol-500",
+      "price": 190
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "ibuprofen-200",
+      "price": 97
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "nurofen-200",
+      "price": 224
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "no-spa-40",
+      "price": 266
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "loratadin-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "amoxicillin-500",
+      "price": 123
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "azithromycin-250",
+      "price": 161
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "augmentin-875",
+      "price": 705
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "ceftriaxone-1g",
+      "price": 61
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "omeprazol-20",
+      "price": 90
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "smecta-3",
+      "price": 337
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "loperamid-2",
+      "price": 51
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "amlodipin-5",
+      "price": 82
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "metformin-850",
+      "price": 180
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "aspirin-cardio-100",
+      "price": 308
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "validol-60",
+      "price": 30
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "corvalol-25",
+      "price": 64
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "nazivin-005",
+      "price": 278
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "theraflu",
+      "price": 495
+    },
+    {
+      "pharmacyId": "neman-dzhal-23",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "panadol-500",
+      "price": 174
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "citramon-p",
+      "price": 24
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "no-spa-40",
+      "price": 266
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "drotaverin-40",
+      "price": 44
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "suprastin-25",
+      "price": 223
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "loratadin-10",
+      "price": 38
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "amoxicillin-500",
+      "price": 126
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "augmentin-875",
+      "price": 621
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "ceftriaxone-1g",
+      "price": 61
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "omeprazol-20",
+      "price": 94
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "smecta-3",
+      "price": 316
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "loperamid-2",
+      "price": 53
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "enalapril-10",
+      "price": 47
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "metformin-850",
+      "price": 171
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "aspirin-cardio-100",
+      "price": 294
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "validol-60",
+      "price": 32
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "corvalol-25",
+      "price": 60
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "nazivin-005",
+      "price": 267
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "theraflu",
+      "price": 479
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "levomekol-40",
+      "price": 146
+    },
+    {
+      "pharmacyId": "aibolit-bokonbaeva-144",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "ibuprofen-200",
+      "price": 91
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "nurofen-200",
+      "price": 199
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "citramon-p",
+      "price": 24
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "no-spa-40",
+      "price": 254
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "drotaverin-40",
+      "price": 43
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "suprastin-25",
+      "price": 226
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "loratadin-10",
+      "price": 39
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "azithromycin-250",
+      "price": 141
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "augmentin-875",
+      "price": 670
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "ceftriaxone-1g",
+      "price": 58
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "omeprazol-20",
+      "price": 91
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "smecta-3",
+      "price": 345
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "loperamid-2",
+      "price": 51
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "enalapril-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "amlodipin-5",
+      "price": 75
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "aspirin-cardio-100",
+      "price": 292
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "validol-60",
+      "price": 31
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "corvalol-25",
+      "price": 64
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "nazivin-005",
+      "price": 254
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "theraflu",
+      "price": 431
+    },
+    {
+      "pharmacyId": "aibolit-vostok5-12",
+      "drugId": "levomekol-40",
+      "price": 158
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "panadol-500",
+      "price": 174
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "ibuprofen-200",
+      "price": 98
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "nurofen-200",
+      "price": 209
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "suprastin-25",
+      "price": 248
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "amoxicillin-500",
+      "price": 113
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "azithromycin-250",
+      "price": 150
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "augmentin-875",
+      "price": 618
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "ceftriaxone-1g",
+      "price": 63
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "omeprazol-20",
+      "price": 86
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "smecta-3",
+      "price": 326
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "loperamid-2",
+      "price": 52
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "enalapril-10",
+      "price": 46
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "amlodipin-5",
+      "price": 78
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "metformin-850",
+      "price": 152
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "aspirin-cardio-100",
+      "price": 292
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "validol-60",
+      "price": 29
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "corvalol-25",
+      "price": 57
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "nazivin-005",
+      "price": 268
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "theraflu",
+      "price": 462
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "levomekol-40",
+      "price": 149
+    },
+    {
+      "pharmacyId": "aibolit-manasa-67",
+      "drugId": "diclofenac-50",
+      "price": 38
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "ibuprofen-200",
+      "price": 104
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "nurofen-200",
+      "price": 206
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "drotaverin-40",
+      "price": 47
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "loratadin-10",
+      "price": 43
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "amoxicillin-500",
+      "price": 124
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "azithromycin-250",
+      "price": 156
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "augmentin-875",
+      "price": 698
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "ceftriaxone-1g",
+      "price": 59
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "omeprazol-20",
+      "price": 90
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "smecta-3",
+      "price": 336
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "loperamid-2",
+      "price": 52
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "enalapril-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "amlodipin-5",
+      "price": 82
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "metformin-850",
+      "price": 173
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "aspirin-cardio-100",
+      "price": 289
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "validol-60",
+      "price": 29
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "corvalol-25",
+      "price": 63
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "theraflu",
+      "price": 467
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "levomekol-40",
+      "price": 159
+    },
+    {
+      "pharmacyId": "farmamir-moskovskaya-134",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "paracetamol-500",
+      "price": 24
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "panadol-500",
+      "price": 194
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "ibuprofen-200",
+      "price": 95
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "nurofen-200",
+      "price": 213
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "no-spa-40",
+      "price": 286
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "drotaverin-40",
+      "price": 49
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "suprastin-25",
+      "price": 252
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "loratadin-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "azithromycin-250",
+      "price": 148
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "ceftriaxone-1g",
+      "price": 64
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "omeprazol-20",
+      "price": 90
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "smecta-3",
+      "price": 341
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "enalapril-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "amlodipin-5",
+      "price": 87
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "metformin-850",
+      "price": 175
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "aspirin-cardio-100",
+      "price": 303
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "validol-60",
+      "price": 30
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "corvalol-25",
+      "price": 61
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "nazivin-005",
+      "price": 245
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "theraflu",
+      "price": 484
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "levomekol-40",
+      "price": 167
+    },
+    {
+      "pharmacyId": "farmamir-toktogula-93",
+      "drugId": "diclofenac-50",
+      "price": 43
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "paracetamol-500",
+      "price": 21
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "panadol-500",
+      "price": 191
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "nurofen-200",
+      "price": 222
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "no-spa-40",
+      "price": 255
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "amoxicillin-500",
+      "price": 130
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "azithromycin-250",
+      "price": 147
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "augmentin-875",
+      "price": 677
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "ceftriaxone-1g",
+      "price": 58
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "omeprazol-20",
+      "price": 94
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "smecta-3",
+      "price": 344
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "amlodipin-5",
+      "price": 86
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "metformin-850",
+      "price": 157
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "corvalol-25",
+      "price": 66
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "nazivin-005",
+      "price": 258
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "theraflu",
+      "price": 455
+    },
+    {
+      "pharmacyId": "farmamir-tunguch-64",
+      "drugId": "levomekol-40",
+      "price": 152
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "paracetamol-500",
+      "price": 19
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "panadol-500",
+      "price": 159
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "nurofen-200",
+      "price": 195
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "citramon-p",
+      "price": 23
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "no-spa-40",
+      "price": 230
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "drotaverin-40",
+      "price": 40
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "loratadin-10",
+      "price": 39
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "azithromycin-250",
+      "price": 139
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "augmentin-875",
+      "price": 645
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "ceftriaxone-1g",
+      "price": 57
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "omeprazol-20",
+      "price": 87
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "smecta-3",
+      "price": 287
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "activated-carbon",
+      "price": 11
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "loperamid-2",
+      "price": 45
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "enalapril-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "amlodipin-5",
+      "price": 77
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "metformin-850",
+      "price": 148
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "aspirin-cardio-100",
+      "price": 288
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "corvalol-25",
+      "price": 59
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "nazivin-005",
+      "price": 237
+    },
+    {
+      "pharmacyId": "elaman-logvinenko-30",
+      "drugId": "diclofenac-50",
+      "price": 35
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "paracetamol-500",
+      "price": 21
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "panadol-500",
+      "price": 175
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "ibuprofen-200",
+      "price": 91
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "nurofen-200",
+      "price": 203
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "citramon-p",
+      "price": 23
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "drotaverin-40",
+      "price": 41
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "loratadin-10",
+      "price": 39
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "amoxicillin-500",
+      "price": 113
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "azithromycin-250",
+      "price": 142
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "augmentin-875",
+      "price": 574
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "ceftriaxone-1g",
+      "price": 60
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "omeprazol-20",
+      "price": 89
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "smecta-3",
+      "price": 302
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "activated-carbon",
+      "price": 11
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "loperamid-2",
+      "price": 48
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "amlodipin-5",
+      "price": 79
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "nazivin-005",
+      "price": 217
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "theraflu",
+      "price": 426
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "levomekol-40",
+      "price": 132
+    },
+    {
+      "pharmacyId": "elaman-togoloka-moldo-1",
+      "drugId": "diclofenac-50",
+      "price": 38
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "paracetamol-500",
+      "price": 19
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "panadol-500",
+      "price": 159
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "ibuprofen-200",
+      "price": 94
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "nurofen-200",
+      "price": 200
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "drotaverin-40",
+      "price": 39
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "loratadin-10",
+      "price": 39
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "amoxicillin-500",
+      "price": 108
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "azithromycin-250",
+      "price": 141
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "augmentin-875",
+      "price": 608
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "ceftriaxone-1g",
+      "price": 59
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "smecta-3",
+      "price": 307
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "activated-carbon",
+      "price": 11
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "enalapril-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "amlodipin-5",
+      "price": 79
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "metformin-850",
+      "price": 143
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "aspirin-cardio-100",
+      "price": 277
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "validol-60",
+      "price": 27
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "nazivin-005",
+      "price": 247
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "theraflu",
+      "price": 413
+    },
+    {
+      "pharmacyId": "elaman-fuchika-15",
+      "drugId": "diclofenac-50",
+      "price": 37
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "panadol-500",
+      "price": 189
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "ibuprofen-200",
+      "price": 98
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "nurofen-200",
+      "price": 217
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "citramon-p",
+      "price": 28
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "drotaverin-40",
+      "price": 47
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "loratadin-10",
+      "price": 39
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "amoxicillin-500",
+      "price": 134
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "augmentin-875",
+      "price": 696
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "ceftriaxone-1g",
+      "price": 66
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "omeprazol-20",
+      "price": 98
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "smecta-3",
+      "price": 327
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "loperamid-2",
+      "price": 55
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "enalapril-10",
+      "price": 50
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "amlodipin-5",
+      "price": 86
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "metformin-850",
+      "price": 175
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "aspirin-cardio-100",
+      "price": 306
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "corvalol-25",
+      "price": 63
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "nazivin-005",
+      "price": 265
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "theraflu",
+      "price": 488
+    },
+    {
+      "pharmacyId": "farmservis-ahunbaeva-131",
+      "drugId": "diclofenac-50",
+      "price": 42
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "paracetamol-500",
+      "price": 24
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "ibuprofen-200",
+      "price": 100
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "nurofen-200",
+      "price": 235
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "drotaverin-40",
+      "price": 45
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "azithromycin-250",
+      "price": 159
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "augmentin-875",
+      "price": 723
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "ceftriaxone-1g",
+      "price": 62
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "omeprazol-20",
+      "price": 97
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "smecta-3",
+      "price": 333
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "metformin-850",
+      "price": 173
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "aspirin-cardio-100",
+      "price": 322
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "nazivin-005",
+      "price": 258
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "theraflu",
+      "price": 505
+    },
+    {
+      "pharmacyId": "farmservis-beishenalievoi-29",
+      "drugId": "levomekol-40",
+      "price": 156
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "ibuprofen-200",
+      "price": 94
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "nurofen-200",
+      "price": 209
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "no-spa-40",
+      "price": 251
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "drotaverin-40",
+      "price": 44
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "suprastin-25",
+      "price": 243
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "amoxicillin-500",
+      "price": 118
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "azithromycin-250",
+      "price": 156
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "augmentin-875",
+      "price": 620
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "ceftriaxone-1g",
+      "price": 59
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "omeprazol-20",
+      "price": 86
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "smecta-3",
+      "price": 352
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "amlodipin-5",
+      "price": 84
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "metformin-850",
+      "price": 165
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "aspirin-cardio-100",
+      "price": 296
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "validol-60",
+      "price": 29
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "corvalol-25",
+      "price": 63
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "theraflu",
+      "price": 459
+    },
+    {
+      "pharmacyId": "farvater-ibraimova-115",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "panadol-500",
+      "price": 212
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "ibuprofen-200",
+      "price": 112
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "nurofen-200",
+      "price": 247
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "citramon-p",
+      "price": 27
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "no-spa-40",
+      "price": 278
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "suprastin-25",
+      "price": 275
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "loratadin-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "amoxicillin-500",
+      "price": 137
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "augmentin-875",
+      "price": 758
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "ceftriaxone-1g",
+      "price": 64
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "omeprazol-20",
+      "price": 104
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "smecta-3",
+      "price": 373
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "loperamid-2",
+      "price": 58
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "enalapril-10",
+      "price": 51
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "amlodipin-5",
+      "price": 93
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "metformin-850",
+      "price": 180
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "aspirin-cardio-100",
+      "price": 339
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "validol-60",
+      "price": 34
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "corvalol-25",
+      "price": 71
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "theraflu",
+      "price": 520
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "levomekol-40",
+      "price": 170
+    },
+    {
+      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "drugId": "diclofenac-50",
+      "price": 48
+    }
+  ]
+}

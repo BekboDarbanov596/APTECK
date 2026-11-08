@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Аптека рядом — демо на телефоне</title>
+  <style>
+    :root {
+      --bg1: #e9f3ec;
+      --bg2: #cfe6d6;
+      --frame: #111614;
+      --text: #17201b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at 30% 20%, var(--bg1), var(--bg2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    /* Телефон 390×844 + рамка; масштабируется под высоту окна (см. скрипт). */
+    .stage { transform-origin: center center; }
+    .phone {
+      position: relative;
+      width: 414px;
+      height: 868px;
+      padding: 12px;
+      border-radius: 64px;
+      background: var(--frame);
+      border: 2px solid #2b332f;
+      box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.28),
+        0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    /* Боковые кнопки */
+    .phone::before, .phone::after {
+      content: "";
+      position: absolute;
+      width: 4px;
+      border-radius: 4px;
+      background: #232a27;
+    }
+    .phone::before { left: -4px; top: 170px; height: 90px; box-shadow: 0 -60px 0 #232a27; }
+    .phone::after { right: -4px; top: 210px; height: 120px; }
+    .screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 52px;
+      overflow: hidden;
+      background: #f3f7f5;
+    }
+    .status {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 48px;
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .island {
+      position: absolute;
+      top: 11px;
+      left: 50%;
+      width: 120px;
+      height: 34px;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      background: #000;
+      z-index: 3;
+    }
+    .icons { display: flex; gap: 6px; align-items: center; }
+    .icons svg { display: block; }
+    iframe {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 48px);
+      border: 0;
+    }
+    .home-bar {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      width: 134px;
+      height: 5px;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 2;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="phone">
+      <div class="screen">
+        <div class="island"></div>
+        <div class="status">
+          <span id="time">9:41</span>
+          <span class="icons" aria-hidden="true">
+            <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5" width="3" height="7" rx="1" fill="currentColor"/><rect x="10" y="2" width="3" height="10" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg>
+            <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0L8 11.5Zm-4.2-4.3L2.4 5.8a8 8 0 0 1 11.2 0l-1.4 1.4a6 6 0 0 0-8.4 0ZM.6 4 0 3.4a11.3 11.3 0 0 1 16 0l-.6.6-.8.8a10.2 10.2 0 0 0-13.2 0L.6 4Z" fill="currentColor"/></svg>
+            <svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.5"/><rect x="2" y="2" width="17" height="8" rx="2" fill="currentColor"/><rect x="23.5" y="4" width="2" height="4" rx="1" fill="currentColor" opacity="0.5"/></svg>
+          </span>
+        </div>
+        <iframe src="./" title="Аптека рядом"></iframe>
+        <div class="home-bar"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Часы в статус-баре
+    function tick() {
+      const d = new Date();
+      document.getElementById('time').textContent =
+        d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
+    }
+    tick();
+    setInterval(tick, 15000);
+
+    // Вписываем телефон в окно, сохраняя пропорции
+    function fit() {
+      const scale = Math.min(1, (window.innerHeight - 32) / 868, (window.innerWidth - 32) / 414);
+      document.getElementById('stage').style.transform = 'scale(' + scale + ')';
+    }
+    fit();
+    window.addEventListener('resize', fit);
+  </script>
+</body>
+</html>

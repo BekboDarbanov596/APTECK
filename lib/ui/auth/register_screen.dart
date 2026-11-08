@@ -1,0 +1,148 @@
+import 'package:flutter/material.dart';
+
+import '../../auth/auth_service.dart';
+import '../../auth/validators.dart';
+import '../theme.dart';
+import '../three/mesh.dart';
+import 'auth_widgets.dart';
+import 'login_screen.dart';
+
+/// Экран регистрации: имя, почта, пароль или Google.
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _form = GlobalKey<FormState>();
+  final _name = TextEditingController();
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  final _repeat = TextEditingController();
+  bool _loading = false;
+  bool _googleLoading = false;
+
+  @override
+  void dispose() {
+    _name.dispose();
+    _email.dispose();
+    _password.dispose();
+    _repeat.dispose();
+    super.dispose();
+  }
+
+  Future<void> _run(Future<void> Function() action, {bool google = false}) async {
+    setState(() => google ? _googleLoading = true : _loading = true);
+    try {
+      await action();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Аккаунт создан. Добро пожаловать!')),
+      );
+      Navigator.of(context).popUntil((r) => r.isFirst);
+    } catch (e) {
+      if (mounted) showAuthError(context, e);
+    } finally {
+      if (mounted) setState(() => _loading = _googleLoading = false);
+    }
+  }
+
+  void _submit() {
+    if (!(_form.currentState?.validate() ?? false)) return;
+    final auth = AuthScope.read(context);
+    _run(() => auth.register(name: _name.text, email: _email.text, password: _password.text));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final auth = AuthScope.of(context);
+    final busy = _loading || _googleLoading;
+    return AuthScaffold(
+      shape: Shape3D.heart,
+      title: 'Создать аккаунт',
+      subtitle: 'Это займёт меньше минуты',
+      children: [
+        GoogleButton(
+          loading: _googleLoading,
+          onPressed: busy ? null : () => _run(auth.signInWithGoogle, google: true),
+        ),
+        const OrDivider(),
+        Form(
+          key: _form,
+          child: AutofillGroup(
+            child: Column(
+              children: [
+                AuthField(
+                  controller: _name,
+                  label: 'Имя',
+                  icon: Icons.person_outline,
+                  autofillHints: const [AutofillHints.name],
+                  validator: validateName,
+                  enabled: !busy,
+                ),
+                AuthField(
+                  controller: _email,
+                  label: 'Почта',
+                  icon: Icons.alternate_email,
+                  keyboardType: TextInputType.emailAddress,
+                  autofillHints: const [AutofillHints.email],
+                  validator: validateEmail,
+                  enabled: !busy,
+                ),
+                AuthField(
+                  controller: _password,
+                  label: 'Пароль',
+                  icon: Icons.lock_outline,
+                  obscure: true,
+                  autofillHints: const [AutofillHints.newPassword],
+                  validator: validateNewPassword,
+                  enabled: !busy,
+                ),
+                AuthField(
+                  controller: _repeat,
+                  label: 'Повторите пароль',
+                  icon: Icons.lock_reset_outlined,
+                  obscure: true,
+                  textInputAction: TextInputAction.done,
+                  validator: (v) => validatePasswordRepeat(v, _password.text),
+                  onSubmitted: (_) => _submit(),
+                  enabled: !busy,
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(bottom: 16, left: 4),
+          child: Text(
+            'Минимум 8 символов, буквы и цифры.',
+            style: TextStyle(fontSize: 13, color: AppColors.textMuted),
+          ),
+        ),
+        AuthPrimaryButton(
+          label: 'Создать аккаунт',
+          loading: _loading,
+          onPressed: busy ? null : _submit,
+        ),
+        const SizedBox(height: 24),
+        Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            const Text('Уже есть аккаунт?', style: TextStyle(color: AppColors.textMuted)),
+            TextButton(
+              onPressed: busy
+                  ? null
+                  : () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute<void>(builder: (_) => const LoginScreen()),
+                      ),
+              child: const Text('Войти'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
