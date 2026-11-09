@@ -45,7 +45,10 @@ class _RootScreenState extends State<RootScreen> {
   Widget build(BuildContext context) {
     // Маршрут запросили с другой вкладки (например, из избранного) — показываем карту.
     final route = RouteScope.maybeOf(context);
-    if (route != null && route.active && route.takeShowMapRequest() && _tab != 0) {
+    if (route != null &&
+        route.active &&
+        route.takeShowMapRequest() &&
+        _tab != 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) setState(() => _tab = 0);
       });
@@ -65,7 +68,9 @@ class _RootScreenState extends State<RootScreen> {
       bottomNavigationBar: NavigationBar(
         selectedIndex: _tab,
         height: 64,
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        labelBehavior: route?.active == true && _tab == 0
+            ? NavigationDestinationLabelBehavior.alwaysShow
+            : NavigationDestinationLabelBehavior.onlyShowSelected,
         onDestinationSelected: (i) => setState(() => _tab = i),
         destinations: const [
           NavigationDestination(

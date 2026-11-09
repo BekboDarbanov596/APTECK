@@ -14,6 +14,14 @@ const types = {
 
 http.createServer((req, res) => {
   const urlPath = decodeURIComponent(req.url.split('?')[0]);
+  // The phone preview is source HTML and remains available across rebuilds.
+  if (urlPath === '/phone.html') {
+    res.writeHead(200, {
+      'Content-Type': types['.html'],
+      'Cache-Control': 'no-store',
+    });
+    return fs.createReadStream(path.join(__dirname, '..', 'web', 'phone.html')).pipe(res);
+  }
   let file = path.normalize(path.join(root, urlPath));
   if (!file.startsWith(root)) { res.writeHead(403); return res.end(); }
   if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) file = path.join(root, 'index.html');

@@ -286,4 +286,25 @@ void main() {
     expect(closed, isTrue);
     expect(tester.takeException(), isNull);
   });
+
+  for (final width in [320.0, 412.0]) {
+    testWidgets('Панель маршрута помещается на экране шириной $width', (tester) async {
+      await tester.binding.setSurfaceSize(Size(width, 1600));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final route = RouteState(RouteService(client: MockClient((_) async => ok(osrmBody()))));
+      await route.buildTo(pharmacy, from: const LatLng(42.8766, 74.6036), fromDevice: true);
+      await tester.pumpWidget(MaterialApp(
+        theme: buildTheme(),
+        home: Scaffold(
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: RoutePanel(route: route, onClose: () {}),
+          ),
+        ),
+      ));
+      await tester.pump(const Duration(seconds: 1));
+      expect(tester.takeException(), isNull);
+      await tester.pumpWidget(const SizedBox());
+    });
+  }
 }

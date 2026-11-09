@@ -114,8 +114,9 @@ RouteResult parseOsrmResponse(String body, TravelMode mode) {
     );
   }
   final routes = json['routes'] as List? ?? const [];
-  if (routes.isEmpty)
+  if (routes.isEmpty) {
     throw const RoutingException('Не удалось построить маршрут.');
+  }
   final route = routes.first as Map<String, dynamic>;
 
   final coords =
