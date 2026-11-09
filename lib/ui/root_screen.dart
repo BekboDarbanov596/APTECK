@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/models.dart';
 import '../state/app_state.dart';
+import '../state/route_state.dart';
 import 'home_screen.dart';
 import 'search_screen.dart';
 import 'tabs.dart';
@@ -42,6 +43,13 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Маршрут запросили с другой вкладки (например, из избранного) — показываем карту.
+    final route = RouteScope.maybeOf(context);
+    if (route != null && route.active && route.takeShowMapRequest() && _tab != 0) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) setState(() => _tab = 0);
+      });
+    }
     return Scaffold(
       body: IndexedStack(
         index: _tab,

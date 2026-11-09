@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
+import '../../logic/routing.dart';
 import '../../state/app_state.dart';
 import '../theme.dart';
 import 'common.dart';
@@ -23,6 +24,9 @@ class PharmacyMap extends StatelessWidget {
     required this.onMarkerTap,
     required this.onPopupTap,
     required this.onMapTap,
+    this.route,
+    this.routeTargetId,
+    this.onRouteTap,
   });
 
   final MapController controller;
@@ -37,12 +41,22 @@ class PharmacyMap extends StatelessWidget {
   final ValueChanged<PharmacyResult> onPopupTap;
   final VoidCallback onMapTap;
 
+  /// Построенный маршрут — рисуется линией по улицам.
+  final RouteResult? route;
+
+  /// Аптека, к которой строится маршрут (подсказка над ней не показывается).
+  final String? routeTargetId;
+
+  /// Кнопка «Маршрут» в подсказке над аптекой.
+  final ValueChanged<PharmacyResult>? onRouteTap;
+
   @override
   Widget build(BuildContext context) {
     PharmacyResult? highlighted;
     for (final r in results) {
-      if (r.pharmacy.id == highlightedId) highlighted = r;
+      if (r.pharmacy.id == highlightedId && r.pharmacy.id != routeTargetId) highlighted = r;
     }
+    final route = this.route;
     // Ближние падают первыми — волна расходится от пользователя.
     final order = {for (var i = 0; i < results.length; i++) results[i].pharmacy.id: i};
 
@@ -74,19 +88,10 @@ class PharmacyMap extends StatelessWidget {
             child: tile,
           ),
         ),
+        if (route != null && route.points.length > 1)
+          _AnimatedRoute(key: ValueKey(route), route: route),
         MarkerLayer(
           markers: [
-            if (showUser)
-              Marker(
-                point: userPoint,
-                width: 72,
-                height: 72,
-                child: const PulseRing(
-                  size: 40,
-                  color: AppColors.userDot,
-                  child: _UserDot(),
-                ),
-              ),
             for (final r in results)
               Marker(
                 key: ValueKey('${r.pharmacy.id}|$animationKey'),
@@ -108,13 +113,27 @@ class PharmacyMap extends StatelessWidget {
               Marker(
                 key: ValueKey('popup-${highlighted.pharmacy.id}'),
                 point: LatLng(highlighted.pharmacy.lat, highlighted.pharmacy.lng),
-                width: 230,
+                width: 250,
                 height: 84,
                 alignment: const Alignment(0, -2.5),
                 child: _Popup(
                   key: ValueKey('popup-${highlighted.pharmacy.id}'),
                   result: highlighted,
                   onTap: () => onPopupTap(highlighted!),
+                  onRoute: onRouteTap == null ? null : () => onRouteTap!(highlighted!),
+                ),
+              ),
+            // Точка «я здесь» — последней: не сдвигает метки аптек
+            // (иначе их анимация запускается заново) и рисуется поверх.
+            if (showUser || route != null)
+              Marker(
+                point: userPoint,
+                width: 72,
+                height: 72,
+                child: const PulseRing(
+                  size: 40,
+                  color: AppColors.userDot,
+                  child: _UserDot(),
                 ),
               ),
           ],
@@ -281,10 +300,11 @@ class _UserDot extends StatelessWidget {
 
 /// Подсказка над выбранной аптекой — раскрывается с 3D-наклоном.
 class _Popup extends StatelessWidget {
-  const _Popup({super.key, required this.result, required this.onTap});
+  const _Popup({super.key, required this.result, required this.onTap, this.onRoute});
 
   final PharmacyResult result;
   final VoidCallback onTap;
+  final VoidCallback? onRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -344,12 +364,86 @@ class _Popup extends StatelessWidget {
                       color: AppColors.green,
                     ),
                   ),
-                const Icon(Icons.chevron_right, color: AppColors.textMuted),
+                if (onRoute != null) ...[
+                  const SizedBox(width: 6),
+                  Tooltip(
+                    message: 'Маршрут',
+                    child: Material(
+                      color: AppColors.green,
+                      shape: const CircleBorder(),
+                      child: InkWell(
+                        customBorder: const CircleBorder(),
+                        onTap: onRoute,
+                        child: const Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(Icons.directions, color: Colors.white, size: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                ] else
+                  const Icon(Icons.chevron_right, color: AppColors.textMuted),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Линия маршрута, которая «прорисовывается» от старта к аптеке.
+/// Пешком — пунктир, на машине — сплошная.
+class _AnimatedRoute extends StatefulWidget {
+  const _AnimatedRoute({super.key, required this.route});
+
+  final RouteResult route;
+
+  @override
+  State<_AnimatedRoute> createState() => _AnimatedRouteState();
+}
+
+class _AnimatedRouteState extends State<_AnimatedRoute> with SingleTickerProviderStateMixin {
+  late final _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 1100))
+    ..forward();
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final all = widget.route.points;
+    final walk = widget.route.mode == TravelMode.walk;
+    return AnimatedBuilder(
+      animation: _c,
+      builder: (context, _) {
+        final t = Curves.easeInOutCubic.transform(_c.value);
+        final count = math.max(2, (all.length * t).ceil());
+        final points = all.sublist(0, math.min(count, all.length));
+        return PolylineLayer(
+          polylines: [
+            // Мягкая подложка — линия читается на любой карте.
+            Polyline(
+              points: points,
+              strokeWidth: 12,
+              color: AppColors.green.withValues(alpha: 0.18),
+            ),
+            Polyline(
+              points: points,
+              strokeWidth: walk ? 6 : 7,
+              color: walk ? AppColors.green : AppColors.greenDark,
+              borderStrokeWidth: walk ? 0 : 2,
+              borderColor: Colors.white,
+              pattern: walk
+                  ? StrokePattern.dotted(spacingFactor: 1.6)
+                  : const StrokePattern.solid(),
+            ),
+          ],
+        );
+      },
     );
   }
 }

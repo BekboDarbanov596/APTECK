@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../data/models.dart';
+import '../logic/routing.dart';
 
 /// Позвонить в аптеку. В демо-данных телефонов нет — честно сообщаем.
 Future<void> callPharmacy(BuildContext context, Pharmacy pharmacy) async {
@@ -19,12 +20,13 @@ Future<void> callPharmacy(BuildContext context, Pharmacy pharmacy) async {
   }
 }
 
-/// Построить маршрут до аптеки во внешнем приложении карт.
-Future<void> openRoute(BuildContext context, Pharmacy pharmacy) async {
+/// Открыть маршрут до аптеки во внешнем навигаторе (Google Карты).
+Future<void> openRoute(BuildContext context, Pharmacy pharmacy, {TravelMode? mode}) async {
   final messenger = ScaffoldMessenger.of(context);
   final uri = Uri.https('www.google.com', '/maps/dir/', {
     'api': '1',
     'destination': '${pharmacy.lat},${pharmacy.lng}',
+    if (mode != null) 'travelmode': mode == TravelMode.walk ? 'walking' : 'driving',
   });
   final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
   if (!ok) {

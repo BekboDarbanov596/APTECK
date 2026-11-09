@@ -6,8 +6,10 @@ import 'package:latlong2/latlong.dart' show LatLng;
 
 import '../data/models.dart';
 import '../logic/geo.dart';
+import '../logic/routing.dart';
 import '../logic/tips.dart';
 import '../state/app_state.dart';
+import '../state/route_state.dart';
 import 'assistant_screen.dart';
 import 'pharmacy_screen.dart';
 import 'theme.dart';
@@ -17,6 +19,7 @@ import 'widgets/intro_video_card.dart';
 import 'widgets/common.dart';
 import 'widgets/motion.dart';
 import 'widgets/pharmacy_map.dart';
+import 'widgets/route_panel.dart';
 import 'widgets/tips_carousel.dart';
 
 /// Популярные запросы, пока лекарство не выбрано.
@@ -56,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   double _height = 0;
   String? _lastDrugId;
   LocationStatus? _lastLocationStatus;
+  RouteResult? _lastRoute;
 
   @override
   void dispose() {
@@ -141,6 +145,38 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
   }
 
+  /// Построить маршрут до аптеки прямо на нашей карте.
+  void _startRoute(Pharmacy pharmacy) {
+    final route = RouteScope.read(context);
+    if (route == null) return;
+    final state = AppScope.read(context);
+    state.highlightPharmacy(pharmacy.id);
+    route.buildTo(
+      pharmacy,
+      from: LatLng(state.userLat, state.userLng),
+      fromDevice: state.hasDeviceLocation,
+    );
+  }
+
+  /// Маршрут готов — показываем его целиком над шторкой.
+  void _afterRouteChange(RouteState? route) {
+    final result = route?.result;
+    if (identical(result, _lastRoute)) return;
+    _lastRoute = result;
+    if (result == null) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_mapReady || !mounted) return;
+      if (_sheet.isAttached) {
+        _sheet.animateTo(0.45, duration: const Duration(milliseconds: 400), curve: Curves.easeOutCubic);
+      }
+      _flyer.flyToFit(CameraFit.coordinates(
+        coordinates: result.points,
+        maxZoom: 17,
+        padding: EdgeInsets.fromLTRB(48, 150, 72, _height * 0.45 + 30),
+      ));
+    });
+  }
+
   void _openAssistant() {
     showAssistantSheet(context);
   }
@@ -148,7 +184,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
+    final route = RouteScope.maybeOf(context);
     _afterStateChange(state);
+    _afterRouteChange(route);
 
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
@@ -174,6 +212,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 onMarkerTap: (r) => _onMarkerTap(state, r),
                 onPopupTap: _openPharmacy,
                 onMapTap: () => state.highlightPharmacy(null),
+                route: route?.result,
+                routeTargetId: route?.target?.id,
+                onRouteTap: route == null ? null : (r) => _startRoute(r.pharmacy),
               ),
             ),
             // Мягкое осветление сверху, чтобы поиск читался на любой карте.
@@ -272,6 +313,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 controller: scroll,
                 onOpenPharmacy: _openPharmacy,
                 onTipAction: (a) => _onTipAction(state, a),
+                route: route,
               ),
             ),
           ],
@@ -438,11 +480,15 @@ class _Sheet extends StatefulWidget {
     required this.controller,
     required this.onOpenPharmacy,
     required this.onTipAction,
+    this.route,
   });
 
   final ScrollController controller;
   final ValueChanged<PharmacyResult> onOpenPharmacy;
   final ValueChanged<TipAction> onTipAction;
+
+  /// Активный маршрут — тогда в шторке панель маршрута.
+  final RouteState? route;
 
   @override
   State<_Sheet> createState() => _SheetState();
@@ -476,7 +522,10 @@ class _SheetState extends State<_Sheet> {
               ),
             ),
           ),
-          ..._content(context, state),
+          if (widget.route?.active ?? false)
+            RoutePanel(route: widget.route!, onClose: widget.route!.clear)
+          else
+            ..._content(context, state),
         ],
       ),
     );

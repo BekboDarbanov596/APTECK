@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart';
 import '../logic/geo.dart';
 import '../logic/opening_hours.dart';
 import '../state/app_state.dart';
+import '../state/route_state.dart';
 import 'actions.dart';
 import 'theme.dart';
 import 'widgets/common.dart';
@@ -65,7 +66,21 @@ class PharmacyScreen extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => openRoute(context, p),
+                  onPressed: () {
+                    final route = RouteScope.read(context);
+                    // Без маршрутизатора (например, в тестах) — внешний навигатор.
+                    if (route == null) {
+                      openRoute(context, p);
+                      return;
+                    }
+                    state.highlightPharmacy(p.id);
+                    route.buildTo(
+                      p,
+                      from: LatLng(state.userLat, state.userLng),
+                      fromDevice: state.hasDeviceLocation,
+                    );
+                    Navigator.of(context).popUntil((r) => r.isFirst);
+                  },
                   icon: const Icon(Icons.directions),
                   label: const Text('Маршрут'),
                 ),

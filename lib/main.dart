@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'auth/auth_service.dart';
 import 'data/catalog_repository.dart';
+import 'logic/routing.dart';
 import 'state/app_state.dart';
+import 'state/route_state.dart';
 import 'ui/root_screen.dart';
 import 'ui/theme.dart';
 
@@ -13,14 +15,16 @@ void main() {
   // Без настроенного Firebase приложение работает как раньше,
   // а экраны входа сообщают, что вход ещё не подключён.
   final auth = AuthService(FirebaseAuthBackend())..init();
-  runApp(AptekaApp(state: state, auth: auth));
+  final route = RouteState(RouteService());
+  runApp(AptekaApp(state: state, auth: auth, route: route));
 }
 
 class AptekaApp extends StatelessWidget {
-  const AptekaApp({super.key, required this.state, required this.auth});
+  const AptekaApp({super.key, required this.state, required this.auth, required this.route});
 
   final AppState state;
   final AuthService auth;
+  final RouteState route;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,9 @@ class AptekaApp extends StatelessWidget {
       auth: auth,
       child: AppScope(
         state: state,
-        child: MaterialApp(
+        child: RouteScope(
+          route: route,
+          child: MaterialApp(
           title: 'Аптека рядом',
           debugShowCheckedModeBanner: false,
           theme: buildTheme(),
@@ -37,6 +43,7 @@ class AptekaApp extends StatelessWidget {
             dragDevices: PointerDeviceKind.values.toSet(),
           ),
           home: const RootScreen(),
+          ),
         ),
       ),
     );
