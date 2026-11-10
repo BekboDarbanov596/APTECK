@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'medical_illustration.dart';
 import 'liquid_glass.dart';
+import '../../l10n/lang.dart';
 import 'intro_video_native.dart'
     if (dart.library.js_interop) 'intro_video_web.dart'
     as player;
@@ -27,8 +28,8 @@ class IntroVideoCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Аптека рядом',
+              Text(
+                tr(context, 'Аптека рядом'),
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
@@ -46,20 +47,20 @@ class IntroVideoCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
               ],
-              const _Step(
+              _Step(
                 number: '01',
-                title: 'Найдите лекарство',
-                text: 'Введите название или выберите категорию.',
+                title: tr(context, 'Найдите лекарство'),
+                text: tr(context, 'Введите название или выберите категорию.'),
               ),
-              const _Step(
+              _Step(
                 number: '02',
-                title: 'Сравните аптеки',
-                text: 'Посмотрите цены, наличие и часы работы.',
+                title: tr(context, 'Сравните аптеки'),
+                text: tr(context, 'Посмотрите цены, наличие и часы работы.'),
               ),
-              const _Step(
+              _Step(
                 number: '03',
-                title: 'Выберите удобный маршрут',
-                text: 'Откройте аптеку на карте и постройте маршрут.',
+                title: tr(context, 'Выберите удобный маршрут'),
+                text: tr(context, 'Откройте аптеку на карте и постройте маршрут.'),
               ),
             ],
           ),
@@ -71,9 +72,9 @@ class IntroVideoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Semantics(
     button: true,
-    label: videoUrl.isEmpty
+    label: tr(context, videoUrl.isEmpty
         ? 'Как работает Аптека рядом'
-        : 'Смотреть ознакомительное видео',
+        : 'Смотреть ознакомительное видео'),
     child: GestureDetector(
       onTap: () => _open(context),
       child: Container(
@@ -135,7 +136,7 @@ class IntroVideoCard extends StatelessWidget {
                     vertical: 6,
                   ),
                   child: Text(
-                    videoUrl.isEmpty ? 'ЗНАКОМЬТЕСЬ' : 'ВИДЕОГИД',
+                    tr(context, videoUrl.isEmpty ? 'ЗНАКОМЬТЕСЬ' : 'ВИДЕОГИД'),
                     style: const TextStyle(
                       fontSize: 9,
                       letterSpacing: 1.7,
@@ -146,13 +147,13 @@ class IntroVideoCard extends StatelessWidget {
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               left: 20,
               top: 65,
               right: 80,
               child: Text(
-                'Ближе к вам.\nПроще для вас.',
-                style: TextStyle(
+                tr(context, 'Ближе к вам.\nПроще для вас.'),
+                style: const TextStyle(
                   fontSize: 27,
                   height: 1.05,
                   letterSpacing: -1.1,
@@ -196,9 +197,9 @@ class IntroVideoCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              videoUrl.isEmpty
+                              tr(context, videoUrl.isEmpty
                                   ? 'Как это работает'
-                                  : 'Смотреть знакомство',
+                                  : 'Смотреть знакомство'),
                               style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700,
@@ -206,8 +207,8 @@ class IntroVideoCard extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 3),
-                            const Text(
-                              'Найти · сравнить · добраться',
+                            Text(
+                              tr(context, 'Найти · сравнить · добраться'),
                               style: TextStyle(
                                 fontSize: 10,
                                 color: Color(0xFFD6EAE4),

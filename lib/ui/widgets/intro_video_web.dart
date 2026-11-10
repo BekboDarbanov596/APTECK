@@ -2,6 +2,7 @@ import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
+import '../../l10n/lang.dart';
 
 class IntroPlayer extends StatefulWidget {
   const IntroPlayer({super.key, required this.url});
@@ -28,13 +29,13 @@ class _IntroPlayerState extends State<IntroPlayer> {
 
   @override
   Widget build(BuildContext context) => _failed
-      ? const ColoredBox(
+      ? ColoredBox(
           color: Color(0xFF173E39),
           child: Center(
             child: Padding(
               padding: EdgeInsets.all(20),
               child: Text(
-                'Не удалось загрузить видео. Попробуйте открыть его позже.',
+                tr(context, 'Не удалось загрузить видео. Попробуйте открыть его позже.'),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white),
               ),

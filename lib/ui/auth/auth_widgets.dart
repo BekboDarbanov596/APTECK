@@ -5,6 +5,7 @@ import '../theme.dart';
 import '../three/mesh.dart';
 import '../three/object3d.dart';
 import '../widgets/motion.dart';
+import '../../l10n/lang.dart';
 
 /// Общий каркас экранов входа и регистрации: 3D-объект, заголовок, форма.
 class AuthScaffold extends StatelessWidget {
@@ -223,14 +224,14 @@ class GoogleButton extends StatelessWidget {
               dimension: 22,
               child: CircularProgressIndicator(strokeWidth: 2.5),
             )
-          : const Row(
+          : Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _GoogleMark(),
                 SizedBox(width: 12),
                 Flexible(
                   child: Text(
-                    'Продолжить с Google',
+                    tr(context, 'Продолжить с Google'),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -271,14 +272,14 @@ class OrDivider extends StatelessWidget {
   const OrDivider({super.key});
 
   @override
-  Widget build(BuildContext context) => const Padding(
+  Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.symmetric(vertical: 18),
         child: Row(
           children: [
             Expanded(child: Divider()),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Text('или', style: TextStyle(color: AppColors.textMuted)),
+              child: Text(tr(context, 'или'), style: TextStyle(color: AppColors.textMuted)),
             ),
             Expanded(child: Divider()),
           ],
@@ -289,7 +290,7 @@ class OrDivider extends StatelessWidget {
 /// Показать ошибку входа. Отмену человеком не показываем.
 void showAuthError(BuildContext context, Object error) {
   if (error is AuthCancelled) return;
-  final text = error is AuthFailure ? error.message : 'Что-то пошло не так. Попробуйте ещё раз.';
+  final text = error is AuthFailure ? error.message : tr(context, 'Что-то пошло не так. Попробуйте ещё раз.');
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(content: Text(text)));

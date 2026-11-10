@@ -6,6 +6,7 @@ import 'package:apteka_ryadom/state/route_state.dart';
 import 'package:apteka_ryadom/ui/theme.dart';
 import 'package:apteka_ryadom/ui/widgets/route_panel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -237,71 +238,97 @@ void main() {
     });
   });
 
-  testWidgets('Панель маршрута: время, шаги, переключение режима, закрытие', (
-    tester,
-  ) async {
-    await tester.binding.setSurfaceSize(const Size(360, 1400));
-    addTearDown(() => tester.binding.setSurfaceSize(null));
-    final route = RouteState(
-      RouteService(
-        client: MockClient(
-          (req) async =>
-              ok(osrmBody(duration: req.url.path.contains('car') ? 120 : 434)),
-        ),
-      ),
-    );
-    await route.buildTo(
-      pharmacy,
-      from: const LatLng(42.8766, 74.6036),
-      fromDevice: false,
-    );
-    var closed = false;
-
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: buildTheme(),
-        home: Scaffold(
-          body: ListenableBuilder(
-            listenable: route,
-            builder: (context, _) => SingleChildScrollView(
-              child: RoutePanel(route: route, onClose: () => closed = true),
+  testWidgets(
+    'Панель маршрута: время, копирование адреса, смена режима и закрытие',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(360, 1400));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final route = RouteState(
+        RouteService(
+          client: MockClient(
+            (req) async => ok(
+              osrmBody(duration: req.url.path.contains('car') ? 120 : 434),
             ),
           ),
         ),
-      ),
-    );
-    await tester.pump(const Duration(seconds: 1));
+      );
+      await route.buildTo(
+        pharmacy,
+        from: const LatLng(42.8766, 74.6036),
+        fromDevice: false,
+      );
+      var closed = false;
 
-    expect(find.text('Неман Фарм'), findsOneWidget);
-    expect(find.text('7 мин'), findsOneWidget);
-    expect(find.text('Поверните направо на улица Киевская'), findsOneWidget);
-    expect(find.textContaining('От площади Ала-Тоо'), findsOneWidget);
-
-    await tester.tap(find.text('На машине'));
-    await tester.pump();
-    await tester.pump(const Duration(seconds: 1));
-    expect(find.text('2 мин'), findsOneWidget);
-
-    await tester.tap(find.byTooltip('Закрыть маршрут'));
-    expect(closed, isTrue);
-    expect(tester.takeException(), isNull);
-  });
-
-  for (final width in [320.0, 412.0]) {
-    testWidgets('Панель маршрута помещается на экране шириной $width', (tester) async {
-      await tester.binding.setSurfaceSize(Size(width, 1600));
-      addTearDown(() => tester.binding.setSurfaceSize(null));
-      final route = RouteState(RouteService(client: MockClient((_) async => ok(osrmBody()))));
-      await route.buildTo(pharmacy, from: const LatLng(42.8766, 74.6036), fromDevice: true);
-      await tester.pumpWidget(MaterialApp(
-        theme: buildTheme(),
-        home: Scaffold(
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: RoutePanel(route: route, onClose: () {}),
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: buildTheme(),
+          home: Scaffold(
+            body: ListenableBuilder(
+              listenable: route,
+              builder: (context, _) => SingleChildScrollView(
+                child: RoutePanel(route: route, onClose: () => closed = true),
+              ),
+            ),
           ),
         ),
-      ));
+      );
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(find.text('Неман Фарм'), findsOneWidget);
+      expect(find.text('7 мин'), findsOneWidget);
+      final platform = tester.binding.defaultBinaryMessenger;
+      String? copied;
+      platform.setMockMethodCallHandler(SystemChannels.platform, (call) async {
+        if (call.method == 'Clipboard.setData') {
+          copied = (call.arguments as Map)['text'] as String;
+        }
+        return null;
+      });
+      addTearDown(
+        () => platform.setMockMethodCallHandler(SystemChannels.platform, null),
+      );
+      await tester.tap(find.byTooltip('Скопировать адрес'));
+      await tester.pump();
+      expect(copied, pharmacy.address);
+      expect(find.text('Адрес скопирован'), findsOneWidget);
+      expect(find.textContaining('От площади Ала-Тоо'), findsOneWidget);
+
+      await tester.tap(find.text('На машине'));
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
+      expect(find.text('2 мин'), findsOneWidget);
+
+      await tester.tap(find.byTooltip('Закрыть маршрут'));
+      expect(closed, isTrue);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  for (final width in [320.0, 412.0]) {
+    testWidgets('Панель маршрута помещается на экране шириной $width', (
+      tester,
+    ) async {
+      await tester.binding.setSurfaceSize(Size(width, 1600));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final route = RouteState(
+        RouteService(client: MockClient((_) async => ok(osrmBody()))),
+      );
+      await route.buildTo(
+        pharmacy,
+        from: const LatLng(42.8766, 74.6036),
+        fromDevice: true,
+      );
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: buildTheme(),
+          home: Scaffold(
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: RoutePanel(route: route, onClose: () {}),
+            ),
+          ),
+        ),
+      );
       await tester.pump(const Duration(seconds: 1));
       expect(tester.takeException(), isNull);
       await tester.pumpWidget(const SizedBox());

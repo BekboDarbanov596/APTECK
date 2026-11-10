@@ -7,6 +7,7 @@ import '../state/app_state.dart';
 import 'home_screen.dart' show popularDrugIds;
 import 'theme.dart';
 import 'widgets/common.dart';
+import '../l10n/lang.dart';
 
 /// Поиск лекарства: ввод текстом или голосом, подсказки по мере ввода.
 class SearchScreen extends StatefulWidget {
@@ -78,8 +79,8 @@ class _SearchScreenState extends State<SearchScreen> {
     }
     if (!mounted) return;
     if (!available) {
-      messenger.showSnackBar(const SnackBar(
-        content: Text('Голосовой ввод недоступен: разрешите доступ к микрофону'),
+      messenger.showSnackBar(SnackBar(
+        content: Text(tr(context, 'Голосовой ввод недоступен: разрешите доступ к микрофону')),
       ));
       return;
     }
@@ -142,12 +143,12 @@ class _SearchScreenState extends State<SearchScreen> {
           prefixIcon: const Icon(Icons.search),
           suffixIcon: _controller.text.isNotEmpty
               ? IconButton(
-                  tooltip: 'Очистить',
+                  tooltip: tr(context, 'Очистить'),
                   onPressed: _controller.clear,
                   icon: const Icon(Icons.close),
                 )
               : IconButton(
-                  tooltip: _listening ? 'Остановить' : 'Голосовой поиск',
+                  tooltip: tr(context, _listening ? 'Остановить' : 'Голосовой поиск'),
                   onPressed: _toggleVoice,
                   icon: Icon(
                     _listening ? Icons.stop_circle : Icons.mic,
@@ -199,10 +200,10 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget _buildResults(AppState state, Catalog catalog, String query) {
     final found = searchDrugs(catalog.drugs, query);
     if (found.isEmpty) {
-      return const SingleChildScrollView(
+      return SingleChildScrollView(
         child: MessageView(
           icon: Icons.search_off,
-          title: 'Ничего не нашли',
+          title: tr(context, 'Ничего не нашли'),
           text: 'Проверьте название. Можно искать по действующему веществу, '
               'например «ибупрофен».',
         ),

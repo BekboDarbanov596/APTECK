@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../auth/auth_service.dart';
 import '../data/models.dart';
+import '../l10n/lang.dart';
 import '../state/app_state.dart';
-import 'auth/account_card.dart';
+import 'auth/login_screen.dart';
 import 'theme.dart';
 import 'widgets/common.dart';
 import 'widgets/profile_preferences.dart';
 
-const _ink = Color(0xFF204C43);
-const _muted = Color(0xFF72827B);
-
+/// Профиль: аватар и карточка со счётчиками, призыв войти,
+/// затем чистые группы настроек (язык, геолокация, поиск, данные).
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key, this.onOpenFavorites, this.onDrugPicked});
   final VoidCallback? onOpenFavorites;
@@ -25,40 +26,32 @@ class ProfileScreen extends StatelessWidget {
         child: ListenableBuilder(
           listenable: state,
           builder: (context, _) => ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: MediaQuery.sizeOf(context).height * 0.7,
-            ),
+            constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.7),
             child: ListView(
               shrinkWrap: true,
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               children: [
-                const Text(
-                  'История поиска',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: -0.7,
-                  ),
+                Text(
+                  tr(context, 'История поиска'),
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.7),
                 ),
                 const SizedBox(height: 10),
                 if (state.recentDrugIds.isEmpty)
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24),
                     child: Text(
-                      'Здесь появятся лекарства, которые вы искали.',
-                      style: TextStyle(color: _muted),
+                      tr(context, 'Здесь появятся лекарства, которые вы искали.'),
+                      style: const TextStyle(color: AppColors.textMuted),
                     ),
                   ),
                 for (final id in state.recentDrugIds)
                   if (state.catalog?.drug(id) case final Drug drug)
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      leading: const Icon(Icons.history_rounded, color: _ink),
+                      leading: const Icon(Icons.history_rounded, color: AppColors.text),
                       title: Text(drug.title),
                       subtitle: Text(drug.subtitle),
-                      trailing: onDrugPicked == null
-                          ? null
-                          : const Icon(Icons.north_east_rounded, size: 17),
+                      trailing: onDrugPicked == null ? null : const Icon(Icons.north_east_rounded, size: 17),
                       onTap: onDrugPicked == null
                           ? null
                           : () {
@@ -70,11 +63,11 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   OutlinedButton.icon(
                     icon: const Icon(Icons.delete_outline_rounded, size: 18),
-                    label: const Text('Очистить историю поиска'),
+                    label: Text(tr(context, 'Очистить историю поиска')),
                     onPressed: () {
                       state.clearHistory();
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('История поиска очищена')),
+                        SnackBar(content: Text(tr(context, 'История поиска очищена'))),
                       );
                     },
                   ),
@@ -87,283 +80,328 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  void _about(BuildContext context) => showModalBottomSheet<void>(
-    context: context,
-    showDragHandle: true,
-    backgroundColor: AppColors.background,
-    builder: (context) => const SafeArea(
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(24, 0, 24, 28),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            LogoMark(size: 42),
-            SizedBox(height: 18),
-            Text(
-              'Аптека рядом',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Находите лекарства, сравнивайте цены и выбирайте удобную аптеку в Бишкеке.',
-              style: TextStyle(fontSize: 15, height: 1.5, color: _muted),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Версия 1.0.0 · Бишкек',
-              style: TextStyle(fontSize: 12, color: _muted),
-            ),
-          ],
+  void _language(BuildContext context) {
+    final controller = LangScope.maybeOf(context);
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: AppColors.background,
+      builder: (context) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 6, bottom: 14),
+                child: Text(
+                  tr(context, 'Язык интерфейса'),
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+                ),
+              ),
+              SettingsGroup(
+                children: [
+                  for (final l in AppLang.values)
+                    SettingsRow(
+                      icon: Icons.language_rounded,
+                      title: l.title,
+                      value: l.short,
+                      chevron: false,
+                      trailing: langOf(context) == l
+                          ? const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Icon(Icons.check_circle_rounded, color: AppColors.green),
+                            )
+                          : const SizedBox(width: 34),
+                      onTap: controller == null
+                          ? null
+                          : () {
+                              controller.set(l);
+                              Navigator.pop(context);
+                            },
+                    ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
+
+  void _about(BuildContext context) => showModalBottomSheet<void>(
+        context: context,
+        showDragHandle: true,
+        backgroundColor: AppColors.background,
+        builder: (context) => SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const LogoMark(size: 42),
+                const SizedBox(height: 18),
+                Text(
+                  tr(context, 'Аптека рядом'),
+                  style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  tr(context, 'Находите лекарства, сравнивайте цены и выбирайте удобную аптеку в Бишкеке.'),
+                  style: const TextStyle(fontSize: 15, height: 1.5, color: AppColors.textMuted),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  tr(context, 'Версия 1.0.0 · Бишкек'),
+                  style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+  void _dataSources(BuildContext context, bool? demo) {
+    if (demo == true) {
+      showDemoInfo(context);
+      return;
+    }
+    showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(tr(context, 'Источники данных')),
+        content: Text(tr(
+          context,
+          demo == null ? 'Каталог ещё загружается.' : 'Информация поступает из подключённых аптек.',
+        )),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(tr(context, 'Понятно'))),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
-    final saved =
-        state.favoriteDrugIds.length + state.favoritePharmacyIds.length;
+    final auth = AuthScope.maybeOf(context);
+    final user = auth?.user;
+    final saved = state.favoriteDrugIds.length + state.favoritePharmacyIds.length;
     final demo = state.catalog?.isDemo;
+    final pharmacies = state.catalog?.pharmacies.length ?? 0;
+
+    final location = switch (state.locationStatus) {
+      LocationStatus.device => 'Включена',
+      LocationStatus.loading => 'Определяем…',
+      LocationStatus.denied => 'Нет доступа',
+      LocationStatus.disabled => 'Выключена',
+      LocationStatus.failed => 'Недоступна',
+      LocationStatus.unknown => 'Не настроена',
+    };
+
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 560),
             child: ListView(
-              padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
+              padding: const EdgeInsets.fromLTRB(18, 12, 18, 32),
               children: [
+                // Заголовок и кнопка языка.
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'АПТЕКА РЯДОМ',
-                          style: TextStyle(
-                            fontSize: 9,
-                            letterSpacing: 2.2,
-                            color: _muted,
-                            fontWeight: FontWeight.w700,
-                          ),
+                    if (Navigator.of(context).canPop()) ...[
+                      _RoundIcon(
+                        icon: Icons.arrow_back_rounded,
+                        tooltip: tr(context, 'Назад'),
+                        onTap: () => Navigator.of(context).maybePop(),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                    Expanded(
+                      child: Text(
+                        tr(context, 'Профиль'),
+                        style: const TextStyle(
+                          fontFamily: 'Unbounded',
+                          fontVariations: [FontVariation('wght', 700)],
+                          fontSize: 28,
+                          letterSpacing: -0.8,
+                          color: AppColors.text,
                         ),
-                        SizedBox(height: 6),
-                        Text(
-                          'Профиль',
-                          style: TextStyle(
-                            fontSize: 30,
-                            height: 1.1,
-                            letterSpacing: -1.2,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
+                    _RoundIcon(
+                      icon: Icons.translate_rounded,
+                      tooltip: tr(context, 'Язык'),
+                      onTap: () => _language(context),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
+                // Аватар над карточкой.
+                Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.topCenter,
+                  children: [
                     Container(
-                      width: 46,
-                      height: 46,
+                      margin: const EdgeInsets.only(top: 50),
+                      padding: const EdgeInsets.fromLTRB(16, 58, 16, 16),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(17),
-                        border: Border.all(color: const Color(0xFFE4EAE6)),
+                        color: AppColors.surface,
+                        borderRadius: BorderRadius.circular(28),
+                        boxShadow: const [
+                          BoxShadow(color: Color(0x0F0E2A1C), blurRadius: 30, offset: Offset(0, 10)),
+                        ],
                       ),
-                      child: const Icon(
-                        Icons.person_outline_rounded,
-                        color: _ink,
-                        size: 24,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 22),
-                Container(
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(26),
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color(0xFFE3EDE4), Color(0xFFF0F0E6)],
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      const Positioned(
-                        right: -21,
-                        top: -28,
-                        width: 160,
-                        height: 200,
-                        child: CustomPaint(painter: _PrivacyLines()),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(21),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 9,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.6),
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              child: const Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    Icons.lock_outline_rounded,
-                                    size: 11,
-                                    color: _ink,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'БЕЗ АККАУНТА',
-                                    style: TextStyle(
-                                      fontSize: 8,
-                                      letterSpacing: 1.2,
-                                      fontWeight: FontWeight.w700,
-                                      color: _ink,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      user == null
+                                          ? tr(context, 'Гость')
+                                          : (user.name?.isNotEmpty == true ? user.name! : tr(context, 'Без имени')),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      user?.email ?? tr(context, 'Без аккаунта'),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(fontSize: 13, color: AppColors.textMuted),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            const Text(
-                              'Всё важное.\nПод рукой.',
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: -1.1,
-                                height: 1.08,
-                                color: _ink,
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                                decoration: BoxDecoration(
+                                  color: AppColors.text,
+                                  borderRadius: BorderRadius.circular(99),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(Icons.place_rounded, size: 14, color: Colors.white),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      tr(context, 'Бишкек'),
+                                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _Stat(
+                                  value: saved,
+                                  label: tr(context, 'В избранном'),
+                                  onTap: onOpenFavorites,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: _Stat(
+                                  value: state.recentDrugIds.length,
+                                  label: tr(context, 'Поиски'),
+                                  onTap: () => _history(context, state),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: _Stat(value: pharmacies, label: tr(context, 'Аптек')),
+                              ),
+                            ],
+                          ),
+                          if (auth != null) ...[
                             const SizedBox(height: 12),
-                            const Text(
-                              'Ваши сохранения и настройки',
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: Color(0xFF63796B),
-                              ),
-                            ),
+                            _AccountBar(auth: auth, user: user),
                           ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const AccountCard(),
-                const SizedBox(height: 12),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _CollectionCard(
-                        icon: Icons.favorite_border_rounded,
-                        count: saved,
-                        label: 'В избранном',
-                        onTap: onOpenFavorites,
+                        ],
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _CollectionCard(
-                        icon: Icons.history_rounded,
-                        count: state.recentDrugIds.length,
-                        label: 'Недавние поиски',
-                        onTap: () => _history(context, state),
-                      ),
+                    _Avatar(user: user),
+                  ],
+                ),
+                const SizedBox(height: 24),
+
+                // Общие настройки.
+                SettingsGroup(
+                  children: [
+                    SettingsRow(
+                      icon: Icons.favorite_border_rounded,
+                      title: tr(context, 'Избранное'),
+                      value: '$saved',
+                      onTap: onOpenFavorites,
+                    ),
+                    SettingsRow(
+                      icon: Icons.translate_rounded,
+                      title: tr(context, 'Язык'),
+                      value: langOf(context).title,
+                      onTap: () => _language(context),
+                    ),
+                    SettingsRow(
+                      icon: Icons.near_me_outlined,
+                      title: tr(context, 'Геолокация'),
+                      value: tr(context, location),
+                      onTap: state.locationStatus == LocationStatus.loading
+                          ? null
+                          : () {
+                              state.refreshLocation();
+                              if (state.locationStatus == LocationStatus.denied) {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text(tr(context, 'Разрешите геолокацию в настройках браузера или устройства.')),
+                                ));
+                              }
+                            },
+                    ),
+                    SettingsRow(
+                      icon: Icons.history_rounded,
+                      title: tr(context, 'Недавние поиски'),
+                      value: '${state.recentDrugIds.length}',
+                      onTap: () => _history(context, state),
                     ),
                   ],
                 ),
-                const SizedBox(height: 23),
-                const _SectionLabel('ПОИСК РЯДОМ'),
-                const SizedBox(height: 10),
-                _LocationCard(state: state),
-                const SizedBox(height: 23),
+                const SizedBox(height: 14),
                 ProfilePreferences(state: state),
-                const SizedBox(height: 23),
-                const _SectionLabel('О ПРИЛОЖЕНИИ'),
-                const SizedBox(height: 10),
-                Material(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(23),
-                  clipBehavior: Clip.antiAlias,
-                  child: Column(
-                    children: [
-                      _SettingsRow(
-                        icon: Icons.layers_outlined,
-                        title: 'Источники данных',
-                        subtitle: demo == null
-                            ? 'Загружаем каталог'
-                            : demo
-                            ? 'Демонстрационный каталог'
-                            : 'Данные из аптек',
-                        badge: demo == true ? 'ДЕМО' : null,
-                        onTap: () {
-                          if (demo == true) {
-                            showDemoInfo(context);
-                          } else {
-                            showDialog<void>(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: const Text('Источники данных'),
-                                content: Text(
-                                  demo == null ? 'Каталог ещё загружается.' : 'Информация поступает из подключённых аптек.',
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: const Text('Понятно'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 58, right: 17),
-                        child: Divider(height: 1, color: Color(0xFFEDF0ED)),
-                      ),
-                      _SettingsRow(
-                        icon: Icons.local_pharmacy_outlined,
-                        title: 'Аптека рядом',
-                        subtitle: 'Версия 1.0.0 · Бишкек',
-                        onTap: () => _about(context),
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 14),
+                SettingsGroup(
+                  children: [
+                    SettingsRow(
+                      icon: Icons.layers_outlined,
+                      title: tr(context, 'Источники данных'),
+                      value: demo == true ? 'Demo' : null,
+                      onTap: () => _dataSources(context, demo),
+                    ),
+                    SettingsRow(
+                      icon: Icons.info_outline_rounded,
+                      title: tr(context, 'О приложении'),
+                      value: '1.0.0',
+                      onTap: () => _about(context),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 22),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 7),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.shield_outlined,
-                        size: 17,
-                        color: Color(0xFF8D9D93),
-                      ),
-                      SizedBox(width: 9),
-                      Expanded(
-                        child: Text(
-                          'Избранное и история хранятся на этом устройстве. Вход в аккаунт не нужен.',
-                          style: TextStyle(
-                            fontSize: 11,
-                            height: 1.5,
-                            color: _muted,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 18),
+                Text(
+                  tr(context, 'Избранное и история хранятся на этом устройстве.'),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
                 ),
               ],
             ),
@@ -374,328 +412,190 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class _CollectionCard extends StatelessWidget {
-  const _CollectionCard({
-    required this.icon,
-    required this.count,
-    required this.label,
-    this.onTap,
-  });
+class _RoundIcon extends StatelessWidget {
+  const _RoundIcon({required this.icon, required this.tooltip, required this.onTap});
+
   final IconData icon;
-  final int count;
-  final String label;
-  final VoidCallback? onTap;
+  final String tooltip;
+  final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) => Material(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(22),
-    child: InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(22),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(icon, size: 19, color: _ink),
-                const Spacer(),
-                Text(
-                  '$count',
-                  style: const TextStyle(
-                    fontSize: 27,
-                    height: 1,
-                    letterSpacing: -1,
-                    fontWeight: FontWeight.w500,
-                    color: _ink,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 14),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    label,
-                    style: const TextStyle(fontSize: 11, color: _muted),
-                  ),
-                ),
-                if (onTap != null)
-                  const Icon(Icons.north_east_rounded, size: 12, color: _muted),
-              ],
-            ),
-          ],
+        color: AppColors.surface,
+        shape: const CircleBorder(),
+        child: IconButton(
+          tooltip: tooltip,
+          onPressed: onTap,
+          icon: Icon(icon, color: AppColors.text, size: 22),
+          style: IconButton.styleFrom(minimumSize: const Size.square(46)),
         ),
-      ),
-    ),
-  );
+      );
 }
 
-class _LocationCard extends StatelessWidget {
-  const _LocationCard({required this.state});
-  final AppState state;
+/// Круглый аватар с белой обводкой: фото, инициалы или силуэт.
+class _Avatar extends StatelessWidget {
+  const _Avatar({required this.user});
+
+  final AppUser? user;
+
   @override
   Widget build(BuildContext context) {
-    final active = state.hasDeviceLocation;
-    final loading = state.locationStatus == LocationStatus.loading;
-    final (badge, description) = switch (state.locationStatus) {
-      LocationStatus.device => (
-        'ВКЛЮЧЕНА',
-        'Расстояния до аптек считаются от вас.',
-      ),
-      LocationStatus.loading => ('ОПРЕДЕЛЯЕМ', 'Получаем ваше местоположение…'),
-      LocationStatus.denied => (
-        'НЕТ ДОСТУПА',
-        'Разрешите геолокацию в настройках браузера или устройства. Пока расстояния — от площади Ала-Тоо.',
-      ),
-      LocationStatus.disabled => (
-        'ВЫКЛЮЧЕНА',
-        'Включите геолокацию на устройстве. Пока расстояния — от площади Ала-Тоо.',
-      ),
-      LocationStatus.failed => (
-        'НЕДОСТУПНА',
-        'Попробуйте ещё раз. Пока расстояния — от площади Ала-Тоо.',
-      ),
-      LocationStatus.unknown => (
-        'НЕ НАСТРОЕНА',
-        'Разрешите доступ, чтобы видеть расстояния от вас.',
-      ),
-    };
+    final photo = user?.photoUrl;
     return Container(
-      padding: const EdgeInsets.all(19),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF214D42), Color(0xFF34665A)],
-        ),
+      width: 100,
+      height: 100,
+      padding: const EdgeInsets.all(5),
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppColors.surface,
+        boxShadow: [
+          BoxShadow(color: Color(0x1A0E2A1C), blurRadius: 24, offset: Offset(0, 8)),
+        ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.my_location_rounded,
-                color: Color(0xFFD1E8DC),
-                size: 22,
-              ),
-              const Spacer(),
-              Flexible(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 5,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.10),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Text(
-                    badge,
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFF6BC57E), AppColors.greenDark],
+          ),
+          image: photo == null ? null : DecorationImage(image: NetworkImage(photo), fit: BoxFit.cover),
+        ),
+        alignment: Alignment.center,
+        child: photo != null
+            ? null
+            : user == null
+                ? const Icon(Icons.person_rounded, color: Colors.white, size: 46)
+                : Text(
+                    user!.initials,
                     style: const TextStyle(
-                      fontSize: 8,
-                      letterSpacing: 1,
-                      color: Color(0xFFD2E9DC),
-                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Unbounded',
+                      fontVariations: [FontVariation('wght', 700)],
+                      fontSize: 28,
+                      color: Colors.white,
                     ),
                   ),
+      ),
+    );
+  }
+}
+
+/// Плитка-счётчик в карточке профиля.
+class _Stat extends StatelessWidget {
+  const _Stat({required this.value, required this.label, this.onTap});
+
+  final int value;
+  final String label;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppColors.background,
+      borderRadius: BorderRadius.circular(18),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(18),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 6),
+          child: Column(
+            children: [
+              Text(
+                '$value',
+                style: const TextStyle(
+                  fontFamily: 'Unbounded',
+                  fontVariations: [FontVariation('wght', 600)],
+                  fontSize: 22,
+                  height: 1,
+                  color: AppColors.text,
                 ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
               ),
             ],
           ),
-          const SizedBox(height: 14),
-          Text(
-            active ? 'Вы — точка отсчёта' : 'Найдём аптеки ближе',
-            style: const TextStyle(
-              fontSize: 19,
-              fontWeight: FontWeight.w500,
-              letterSpacing: -0.5,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            description,
-            style: const TextStyle(
-              fontSize: 12,
-              height: 1.4,
-              color: Color(0xFFC6DACF),
-            ),
-          ),
-          const SizedBox(height: 13),
-          SizedBox(
-            height: 35,
-            child: TextButton.icon(
-              onPressed: loading ? null : state.refreshLocation,
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                foregroundColor: _ink,
-                disabledForegroundColor: _ink.withValues(alpha: 0.7),
-                backgroundColor: const Color(0xFFE1EDE3),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(11),
-                ),
-              ),
-              icon: loading
-                  ? const SizedBox(
-                      width: 12,
-                      height: 12,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 1.5,
-                        color: _ink,
-                      ),
-                    )
-                  : const Icon(Icons.near_me_outlined, size: 14),
-              label: Text(
-                loading
-                    ? 'Определяем…'
-                    : active
-                    ? 'Обновить геопозицию'
-                    : 'Настроить геолокацию',
-                style: const TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 }
 
-class _SettingsRow extends StatelessWidget {
-  const _SettingsRow({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.onTap,
-    this.badge,
-  });
-  final IconData icon;
-  final String title, subtitle;
-  final String? badge;
-  final VoidCallback onTap;
+/// Тёмная плашка внизу карточки: «Войдите» или аккаунт с кнопкой «Выйти».
+class _AccountBar extends StatelessWidget {
+  const _AccountBar({required this.auth, required this.user});
+
+  final AuthService auth;
+  final AppUser? user;
+
   @override
-  Widget build(BuildContext context) => InkWell(
-    onTap: onTap,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
+  Widget build(BuildContext context) {
+    final signedIn = user != null;
+    return Container(
+      padding: const EdgeInsets.fromLTRB(14, 12, 10, 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF2B3A33), Color(0xFF17201B)],
+        ),
+      ),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: _ink),
-          const SizedBox(width: 13),
+          Icon(
+            signedIn ? Icons.verified_user_rounded : Icons.star_rounded,
+            color: Colors.white,
+            size: 22,
+          ),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  tr(context, signedIn ? 'Аккаунт' : 'Войдите в аккаунт'),
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 Text(
-                  subtitle,
-                  style: const TextStyle(fontSize: 10, color: _muted),
+                  tr(context, 'Избранное будет с вами на любом устройстве'),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontSize: 12, height: 1.25, color: Colors.white.withValues(alpha: 0.7)),
                 ),
               ],
             ),
           ),
-          if (badge != null)
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF5EDDD),
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Text(
-                badge!,
-                style: const TextStyle(
-                  fontSize: 7,
-                  letterSpacing: 0.6,
-                  color: Color(0xFF946D2D),
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+          const SizedBox(width: 8),
+          FilledButton(
+            onPressed: () async {
+              if (!signedIn) {
+                Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const LoginScreen()));
+                return;
+              }
+              final messenger = ScaffoldMessenger.of(context);
+              final text = tr(context, 'Вы вышли из аккаунта');
+              await auth.signOut();
+              messenger.showSnackBar(SnackBar(content: Text(text)));
+            },
+            style: FilledButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: AppColors.text,
+              minimumSize: const Size(0, 38),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              shape: const StadiumBorder(),
+              textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
             ),
-          const SizedBox(width: 7),
-          const Icon(
-            Icons.chevron_right_rounded,
-            size: 17,
-            color: Color(0xFF9DAAA3),
+            child: Text(tr(context, signedIn ? 'Выйти' : 'Войти')),
           ),
         ],
       ),
-    ),
-  );
-}
-
-class _SectionLabel extends StatelessWidget {
-  const _SectionLabel(this.text);
-  final String text;
-  @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(left: 4),
-    child: Text(
-      text,
-      style: const TextStyle(
-        fontSize: 9,
-        letterSpacing: 1.6,
-        fontWeight: FontWeight.w700,
-        color: _muted,
-      ),
-    ),
-  );
-}
-
-class _PrivacyLines extends CustomPainter {
-  const _PrivacyLines();
-  @override
-  void paint(Canvas canvas, Size size) {
-    final pen = Paint()
-      ..color = const Color(0xFF527865).withValues(alpha: 0.13)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-    for (var i = 0; i < 5; i++) {
-      canvas.drawCircle(
-        Offset(size.width * 0.68, size.height * 0.44),
-        32 + i * 16,
-        pen,
-      );
-    }
-    pen.color = const Color(0xFF527865).withValues(alpha: 0.30);
-    final center = Offset(size.width * 0.68, size.height * 0.44);
-    canvas.drawPath(
-      Path()
-        ..moveTo(center.dx, center.dy - 18)
-        ..lineTo(center.dx + 14, center.dy - 12)
-        ..lineTo(center.dx + 14, center.dy + 2)
-        ..quadraticBezierTo(
-          center.dx + 12,
-          center.dy + 15,
-          center.dx,
-          center.dy + 21,
-        )
-        ..quadraticBezierTo(
-          center.dx - 12,
-          center.dy + 15,
-          center.dx - 14,
-          center.dy + 2,
-        )
-        ..lineTo(center.dx - 14, center.dy - 12)
-        ..close(),
-      pen,
     );
   }
-
-  @override
-  bool shouldRepaint(_PrivacyLines oldDelegate) => false;
 }

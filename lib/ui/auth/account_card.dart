@@ -4,6 +4,7 @@ import '../../auth/auth_service.dart';
 import '../theme.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
+import '../../l10n/lang.dart';
 
 /// Карточка аккаунта для профиля: «Войти / Регистрация» или
 /// имя, почта и «Выйти».
@@ -38,10 +39,10 @@ class _SignedOut extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Аккаунт', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+          Text(tr(context, 'Аккаунт'), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
           const SizedBox(height: 4),
-          const Text(
-            'Войдите или создайте аккаунт — можно через Google.',
+          Text(
+            tr(context, 'Войдите или создайте аккаунт — можно через Google.'),
             style: TextStyle(fontSize: 14, color: AppColors.textMuted),
           ),
           const SizedBox(height: 14),
@@ -51,7 +52,7 @@ class _SignedOut extends StatelessWidget {
                 child: FilledButton(
                   onPressed: () => open(const LoginScreen()),
                   style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(48)),
-                  child: const Text('Войти'),
+                  child: Text(tr(context, 'Войти')),
                 ),
               ),
               const SizedBox(width: 10),
@@ -59,7 +60,7 @@ class _SignedOut extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: () => open(const RegisterScreen()),
                   style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
-                  child: const Text('Регистрация'),
+                  child: Text(tr(context, 'Регистрация')),
                 ),
               ),
             ],
@@ -122,11 +123,11 @@ class _SignedIn extends StatelessWidget {
               await auth.signOut();
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Вы вышли из аккаунта')),
+                  SnackBar(content: Text(tr(context, 'Вы вышли из аккаунта'))),
                 );
               }
             },
-            child: const Text('Выйти'),
+            child: Text(tr(context, 'Выйти')),
           ),
         ],
       ),

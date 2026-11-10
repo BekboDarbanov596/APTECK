@@ -1,26 +1,30 @@
 import 'dart:math' as math;
+import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
 import '../data/models.dart';
 import '../logic/geo.dart';
+import '../logic/opening_hours.dart';
 import '../logic/routing.dart';
 import '../logic/tips.dart';
 import '../state/app_state.dart';
 import '../state/route_state.dart';
 import 'assistant_screen.dart';
+import 'voice_call_screen.dart';
 import 'pharmacy_screen.dart';
 import 'theme.dart';
-import 'three/object3d.dart';
-import 'widgets/category_grid.dart';
 import 'widgets/intro_video_card.dart';
 import 'widgets/common.dart';
 import 'widgets/motion.dart';
 import 'widgets/pharmacy_map.dart';
+import 'widgets/promo_banners.dart';
 import 'widgets/route_panel.dart';
 import 'widgets/tips_carousel.dart';
+import '../l10n/lang.dart';
 
 /// Популярные запросы, пока лекарство не выбрано.
 const popularDrugIds = [
@@ -37,10 +41,13 @@ const popularDrugIds = [
 /// Главный экран: карта на весь экран, поверх — только поиск,
 /// кнопка фильтров и шторка со списком аптек.
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.onOpenSearch});
+  const HomeScreen({super.key, required this.onOpenSearch, this.onOpenProfile});
 
   /// Открыть поиск. voice — сразу включить микрофон.
   final void Function({bool voice}) onOpenSearch;
+
+  /// Открыть профиль (кнопка справа сверху).
+  final VoidCallback? onOpenProfile;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -48,7 +55,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   static const _sheetInitial = 0.3;
-  static const _sheetMin = 0.12;
   static const _sheetMax = 0.9;
 
   final _map = MapController();
@@ -99,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       CameraFit.coordinates(
         coordinates: points,
         maxZoom: 15,
-        padding: EdgeInsets.fromLTRB(48, 150, 48, _height * _sheetInitial + 40),
+        padding: EdgeInsets.fromLTRB(48, 190, 48, _height * _sheetInitial + 40),
       ),
     );
   }
@@ -115,9 +121,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (!mounted) return;
     if (!state.hasDeviceLocation) {
       messenger.showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'Геолокация недоступна. Расстояния считаем от площади Ала-Тоо.',
+            tr(context, 'Геолокация недоступна. Расстояния считаем от площади Ала-Тоо.'),
           ),
         ),
       );
@@ -168,8 +174,56 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
+  bool _routeWasActive = false;
+
+  /// Свёрнутая шторка: видна только ручка и строка поиска.
+  double get _sheetMin => (92 / _height).clamp(0.06, _sheetInitial - 0.01);
+
+  /// Нажали на карту — шторка уезжает вниз, остаётся только поиск.
+  void _collapseSheet() {
+    final route = RouteScope.read(context);
+    if ((route?.active ?? false) || !_sheet.isAttached) return;
+    _sheet.animateTo(
+      _sheetMin,
+      duration: const Duration(milliseconds: 320),
+      curve: Curves.easeOutCubic,
+    );
+  }
+
+  /// Высота карточки маршрута (меряется после отрисовки).
+  double _routePanelHeight = 300;
+
+  /// Высота шторки с карточкой маршрута: ровно под карточку (плюс ручка
+  /// и отступы), чтобы снизу не было пустоты, а карта оставалась видна.
+  double get _routeSheet =>
+      ((_routePanelHeight + 44) / _height).clamp(0.2, 0.75);
+
+  void _onRoutePanelHeight(double h) {
+    if ((h - _routePanelHeight).abs() < 1) return;
+    _routePanelHeight = h;
+    final route = RouteScope.read(context);
+    if ((route?.active ?? false) && _sheet.isAttached) {
+      _sheet.jumpTo(_routeSheet);
+    }
+  }
+
   /// Маршрут готов — показываем его целиком над шторкой.
   void _afterRouteChange(RouteState? route) {
+    // Маршрут закрыли — шторка возвращается в обычное положение.
+    final active = route?.active ?? false;
+    if (_routeWasActive && !active) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && _sheet.isAttached) {
+          _sheet.animateTo(
+            _sheetInitial,
+            duration: const Duration(milliseconds: 350),
+            curve: Curves.easeOutCubic,
+          );
+        }
+      });
+    }
+    _routeWasActive = active;
+
     final result = route?.result;
     if (identical(result, _lastRoute)) return;
     _lastRoute = result;
@@ -178,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       if (!_mapReady || !mounted) return;
       if (_sheet.isAttached) {
         _sheet.animateTo(
-          _sheetMax,
+          _routeSheet,
           duration: const Duration(milliseconds: 400),
           curve: Curves.easeOutCubic,
         );
@@ -187,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         CameraFit.coordinates(
           coordinates: result.points,
           maxZoom: 17,
-          padding: EdgeInsets.fromLTRB(48, 150, 72, _height * 0.45 + 30),
+          padding: EdgeInsets.fromLTRB(48, 190, 72, _height * _routeSheet + 24),
         ),
       );
     });
@@ -196,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void _showRouteOnMap(RouteState route) {
     if (_sheet.isAttached) {
       _sheet.animateTo(
-        _sheetInitial,
+        _routeSheet,
         duration: const Duration(milliseconds: 350),
         curve: Curves.easeOutCubic,
       );
@@ -209,9 +263,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           maxZoom: 17,
           padding: EdgeInsets.fromLTRB(
             32,
-            115,
+            190,
             48,
-            _height * _sheetInitial + 24,
+            _height * _routeSheet + 24,
           ),
         ),
       );
@@ -253,7 +307,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       '${state.selectedDrug?.id}|${state.onlyOpen}|${state.chainFilter.length}',
                   onMarkerTap: (r) => _onMarkerTap(state, r),
                   onPopupTap: _openPharmacy,
-                  onMapTap: () => state.highlightPharmacy(null),
+                  onMapTap: () {
+                    state.highlightPharmacy(null);
+                    _collapseSheet();
+                  },
                   route: route?.result,
                   routeTargetId: route?.target?.id,
                   onRouteTap: route == null
@@ -261,28 +318,62 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       : (r) => _startRoute(r.pharmacy),
                 ),
               ),
-              // Мягкое осветление сверху, чтобы поиск читался на любой карте.
-              const Positioned(
-                left: 0,
-                right: 0,
-                top: 0,
-                height: 140,
-                child: IgnorePointer(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Color(0xCCF3F7F5), Color(0x00F3F7F5)],
+              // Верх: стеклянная панель (профиль, приветствие, ассистент)
+              // и строка быстрых фильтров.
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 10, 14, 0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _TopPanel(
+                        onProfile: widget.onOpenProfile,
+                        onAssistant: _openAssistant,
+                        onCall: () => Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            fullscreenDialog: true,
+                            builder: (_) => const VoiceCallScreen(),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),
-              SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
-                  child: Row(
+              // «Где я» — справа над шторкой, едет вместе с ней.
+              AnimatedBuilder(
+                animation: _sheet,
+                builder: (context, child) {
+                  final size = _sheet.isAttached ? _sheet.size : _sheetInitial;
+                  final fade = (1 - (size - 0.45) / 0.15).clamp(0.0, 1.0);
+                  return Positioned(
+                    right: 14,
+                    bottom: _height * size + 12,
+                    child: IgnorePointer(
+                      ignoring: fade < 0.5,
+                      child: Opacity(opacity: fade, child: child),
+                    ),
+                  );
+                },
+                child: _RoundButton(
+                  icon: state.locationStatus == LocationStatus.loading
+                      ? Icons.more_horiz
+                      : Icons.near_me_outlined,
+                  tooltip: tr(context, 'Где я'),
+                  onTap: () => _onLocate(state),
+                ),
+              ),
+              DraggableScrollableSheet(
+                controller: _sheet,
+                initialChildSize: _sheetInitial,
+                minChildSize: _sheetMin,
+                maxChildSize: _sheetMax,
+                snap: true,
+                snapSizes: const [_sheetInitial],
+                builder: (context, scroll) => _Sheet(
+                  controller: scroll,
+                  searchBar: Row(
                     children: [
                       Expanded(
                         child: _SearchPill(
@@ -295,69 +386,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       const SizedBox(width: 10),
                       _RoundButton(
                         icon: Icons.tune,
-                        tooltip: 'Фильтры',
+                        tooltip: tr(context, 'Фильтры'),
                         badge: state.activeFilterCount,
                         onTap: () => showFiltersSheet(context),
                       ),
                     ],
                   ),
-                ),
-              ),
-              // Кнопки справа едут вместе со шторкой и исчезают, когда она открыта.
-              AnimatedBuilder(
-                animation: _sheet,
-                builder: (context, child) {
-                  final size = _sheet.isAttached ? _sheet.size : _sheetInitial;
-                  final fade = (1 - (size - 0.4) / 0.2).clamp(0.0, 1.0);
-                  return Positioned(
-                    right: 8,
-                    bottom: _height * size + 4,
-                    child: IgnorePointer(
-                      ignoring: fade < 0.5,
-                      child: Opacity(opacity: fade, child: child),
-                    ),
-                  );
-                },
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Tooltip(
-                      message: 'Ассистент',
-                      child: GestureDetector(
-                        onTap: _openAssistant,
-                        child: const PulseRing(
-                          size: 52,
-                          color: AppColors.green,
-                          child: _AssistantOrb(),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 22, bottom: 8),
-                      child: _RoundButton(
-                        icon: state.locationStatus == LocationStatus.loading
-                            ? Icons.more_horiz
-                            : Icons.near_me_outlined,
-                        tooltip: 'Где я',
-                        onTap: () => _onLocate(state),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              DraggableScrollableSheet(
-                controller: _sheet,
-                initialChildSize: _sheetInitial,
-                minChildSize: _sheetMin,
-                maxChildSize: _sheetMax,
-                snap: true,
-                snapSizes: const [_sheetInitial],
-                builder: (context, scroll) => _Sheet(
-                  controller: scroll,
                   onOpenPharmacy: _openPharmacy,
                   onTipAction: (a) => _onTipAction(state, a),
                   route: route,
+                  onRoutePanelHeight: _onRoutePanelHeight,
                   onShowRouteMap: route == null
                       ? null
                       : () => _showRouteOnMap(route),
@@ -411,14 +449,13 @@ class _SearchPill extends StatelessWidget {
     final d = drug;
     return Material(
       color: AppColors.surface,
-      elevation: 6,
-      shadowColor: const Color(0x26000000),
-      borderRadius: BorderRadius.circular(100),
+      elevation: 0,
+      shape: const StadiumBorder(side: BorderSide(color: AppColors.border)),
       child: InkWell(
         borderRadius: BorderRadius.circular(100),
         onTap: onTap,
         child: SizedBox(
-          height: 56,
+          height: 52,
           child: Row(
             children: [
               const SizedBox(width: 14),
@@ -429,7 +466,7 @@ class _SearchPill extends StatelessWidget {
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
                   child: Text(
-                    d == null ? 'Найти лекарство' : d.title,
+                    d == null ? tr(context, 'Найти лекарство') : d.title,
                     key: ValueKey(d?.id),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -442,7 +479,7 @@ class _SearchPill extends StatelessWidget {
                 ),
               ),
               IconButton(
-                tooltip: d == null ? 'Голосовой поиск' : 'Сбросить',
+                tooltip: tr(context, d == null ? 'Голосовой поиск' : 'Сбросить'),
                 onPressed: d == null ? onVoice : onClear,
                 icon: Icon(
                   d == null ? Icons.mic_none : Icons.close,
@@ -534,6 +571,8 @@ class _Sheet extends StatefulWidget {
     required this.onTipAction,
     this.route,
     this.onShowRouteMap,
+    this.onRoutePanelHeight,
+    this.searchBar,
   });
 
   final ScrollController controller;
@@ -543,6 +582,10 @@ class _Sheet extends StatefulWidget {
   /// Активный маршрут — тогда в шторке панель маршрута.
   final RouteState? route;
   final VoidCallback? onShowRouteMap;
+  final ValueChanged<double>? onRoutePanelHeight;
+
+  /// Строка поиска с фильтрами — первая в шторке (как в 2ГИС).
+  final Widget? searchBar;
 
   @override
   State<_Sheet> createState() => _SheetState();
@@ -557,27 +600,9 @@ class _SheetState extends State<_Sheet> {
     final state = AppScope.of(context);
     final route = widget.route;
     final showingRoute = route?.active ?? false;
-    final walking = route?.mode == TravelMode.walk;
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.background,
-        gradient: !showingRoute
-            ? null
-            : LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: walking
-                    ? const [
-                        Color(0xFFCFEADB),
-                        Color(0xFFF0F8F3),
-                        Color(0xFFEAF4EE),
-                      ]
-                    : const [
-                        Color(0xFFCFE4F9),
-                        Color(0xFFF1F7FD),
-                        Color(0xFFE8F2FC),
-                      ],
-              ),
+        color: showingRoute ? AppColors.surface : AppColors.background,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
         boxShadow: const [
           BoxShadow(
@@ -590,33 +615,39 @@ class _SheetState extends State<_Sheet> {
       child: ListView(
         controller: widget.controller,
         padding: showingRoute
-            ? const EdgeInsets.fromLTRB(14, 7, 14, 14)
+            ? const EdgeInsets.fromLTRB(18, 10, 18, 16)
             : const EdgeInsets.fromLTRB(20, 10, 20, 24),
         children: [
           Center(
             child: Container(
               width: 40,
               height: 5,
-              margin: EdgeInsets.only(bottom: showingRoute ? 5 : 16),
+              margin: EdgeInsets.only(bottom: showingRoute ? 12 : 16),
               decoration: BoxDecoration(
-                color: showingRoute
-                    ? const Color(0xFF8DA5BD)
-                    : const Color(0xFFCCD5CF),
+                color: const Color(0xFFCCD5CF),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
           ),
           if (showingRoute)
-            RoutePanel(
-              route: route!,
-              onClose: route.clear,
-              onShowMap: widget.onShowRouteMap,
-              isFavorite: state.isFavoritePharmacy(route.target!.id),
-              onToggleFavorite: () =>
-                  state.toggleFavoritePharmacy(route.target!.id),
+            _MeasureHeight(
+              onChange: (h) => widget.onRoutePanelHeight?.call(h),
+              child: RoutePanel(
+                route: route!,
+                onClose: route.clear,
+                onShowMap: widget.onShowRouteMap,
+                isFavorite: state.isFavoritePharmacy(route.target!.id),
+                onToggleFavorite: () =>
+                    state.toggleFavoritePharmacy(route.target!.id),
+              ),
             )
-          else
+          else ...[
+            if (widget.searchBar != null) ...[
+              widget.searchBar!,
+              const SizedBox(height: 14),
+            ],
             ..._content(context, state),
+          ],
         ],
       ),
     );
@@ -627,9 +658,9 @@ class _SheetState extends State<_Sheet> {
       return [
         MessageView(
           icon: Icons.wifi_off,
-          title: 'Не удалось загрузить данные',
-          text: 'Проверьте подключение к интернету.',
-          actionLabel: 'Повторить',
+          title: tr(context, 'Не удалось загрузить данные'),
+          text: tr(context, 'Проверьте подключение к интернету.'),
+          actionLabel: tr(context, 'Повторить'),
           onAction: state.retry,
         ),
       ];
@@ -665,14 +696,15 @@ class _SheetState extends State<_Sheet> {
               userLat: state.userLat,
               userLng: state.userLng,
               now: state.now,
+              lang: langOf(context).name,
             ),
             onAction: widget.onTipAction,
           ),
         )
         ..add(const SizedBox(height: 22))
-        ..add(const _Caption('КАТАЛОГ'))
+        ..add(_Caption(tr(context, 'ПОЛЕЗНОЕ РЯДОМ')))
         ..add(
-          CategoryGrid(catalog: state.catalog!, onDrugPicked: state.selectDrug),
+          PromoBanners(catalog: state.catalog!, onDrugPicked: state.selectDrug),
         )
         ..add(const SizedBox(height: 22))
         ..add(
@@ -702,7 +734,7 @@ class _SheetState extends State<_Sheet> {
             if (_showAll && !filtered)
               TextButton(
                 onPressed: () => setState(() => _showAll = false),
-                child: const Text('Советы'),
+                child: Text(tr(context, 'Советы')),
               ),
           ],
         ),
@@ -713,15 +745,15 @@ class _SheetState extends State<_Sheet> {
       final soldSomewhere = drug != null && state.availabilityCount(drug) > 0;
       widgets.add(
         drug != null && !soldSomewhere
-            ? const MessageView(
+            ? MessageView(
                 icon: Icons.medication_outlined,
-                title: 'Сейчас нет ни в одной аптеке',
-                text: 'Попробуйте аналог — спросите ассистента.',
+                title: tr(context, 'Сейчас нет ни в одной аптеке'),
+                text: tr(context, 'Попробуйте аналог — спросите ассистента.'),
               )
             : MessageView(
                 icon: Icons.filter_alt_off_outlined,
-                title: 'Нет аптек по фильтрам',
-                actionLabel: 'Сбросить',
+                title: tr(context, 'Нет аптек по фильтрам'),
+                actionLabel: tr(context, 'Сбросить'),
                 onAction: () => state.setFilters(onlyOpen: false, chains: {}),
               ),
       );
@@ -782,7 +814,7 @@ class _AllPharmaciesButton extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'Все аптеки рядом',
+                tr(context, 'Все аптеки рядом'),
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -838,13 +870,21 @@ class _DrugHeader extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Объект раздела, к которому относится лекарство.
-            Object3D(
-              key: ValueKey(drug.id),
-              shape: shapeForCategory(drug.category),
-              size: 68,
+            // Плитка с иконкой раздела, к которому относится лекарство.
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: colorForCategory(drug.category).withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Icon(
+                iconForCategory(drug.category),
+                size: 28,
+                color: colorForCategory(drug.category),
+              ),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 14),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -984,11 +1024,6 @@ class _Popular extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Что ищем?',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
-        ),
-        const SizedBox(height: 12),
         SizedBox(
           height: 40,
           child: ListView.separated(
@@ -1154,80 +1189,369 @@ Future<void> showFiltersSheet(BuildContext context) {
   final chains = {...state.chainFilter};
   return showModalBottomSheet<void>(
     context: context,
-    showDragHandle: true,
     isScrollControlled: true,
-    backgroundColor: AppColors.background,
+    backgroundColor: Colors.transparent,
     builder: (context) => StatefulBuilder(
-      builder: (context, setSheet) => SafeArea(
+      builder: (context, setSheet) {
+        final changes = (onlyOpen ? 1 : 0) + chains.length;
+        return Container(
+          decoration: const BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+          ),
+          child: SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Container(
+                      width: 40,
+                      height: 5,
+                      margin: const EdgeInsets.only(bottom: 14),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFCCD5CF),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          tr(context, 'Фильтры'),
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+                        ),
+                      ),
+                      if (changes > 0)
+                        TextButton(
+                          onPressed: () => setSheet(() {
+                            onlyOpen = false;
+                            chains.clear();
+                          }),
+                          child: Text(tr(context, 'Сбросить')),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  // «Открыто сейчас» — карточка с переключателем.
+                  Material(
+                    color: onlyOpen ? AppColors.greenSoft : AppColors.background,
+                    borderRadius: BorderRadius.circular(18),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(18),
+                      onTap: () => setSheet(() => onlyOpen = !onlyOpen),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 12, 8, 12),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: AppColors.surface,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                Icons.schedule_rounded,
+                                color: onlyOpen ? AppColors.green : AppColors.textMuted,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    tr(context, 'Только открытые сейчас'),
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(height: 2),
+                                  Text(
+                                    tr(context, 'Скрыть закрытые аптеки'),
+                                    style: TextStyle(fontSize: 13, color: AppColors.textMuted),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Switch(
+                              value: onlyOpen,
+                              activeTrackColor: AppColors.green,
+                              onChanged: (v) => setSheet(() => onlyOpen = v),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  _Caption(tr(context, 'АПТЕЧНЫЕ СЕТИ')),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      for (final c in state.chains)
+                        _ChainChip(
+                          label: c,
+                          selected: chains.contains(c),
+                          onTap: () => setSheet(
+                            () => chains.contains(c) ? chains.remove(c) : chains.add(c),
+                          ),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 22),
+                  FilledButton(
+                    onPressed: () {
+                      state.setFilters(onlyOpen: onlyOpen, chains: chains);
+                      Navigator.pop(context);
+                    },
+                    style: FilledButton.styleFrom(
+                      minimumSize: const Size.fromHeight(52),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    ),
+                    child: Text(tr(context, changes == 0 ? 'Показать все аптеки' : 'Показать')),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    ),
+  );
+}
+
+class _ChainChip extends StatelessWidget {
+  const _ChainChip({required this.label, required this.selected, required this.onTap});
+
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: selected ? AppColors.greenSoft : AppColors.surface,
+      shape: StadiumBorder(
+        side: BorderSide(color: selected ? AppColors.green : AppColors.border, width: 1.2),
+      ),
+      child: InkWell(
+        customBorder: const StadiumBorder(),
+        onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
-          child: Column(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+          child: Row(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Фильтры',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 180),
+                child: selected
+                    ? const Padding(
+                        key: ValueKey(true),
+                        padding: EdgeInsets.only(right: 6),
+                        child: Icon(Icons.check_rounded, size: 18, color: AppColors.green),
+                      )
+                    : const SizedBox.shrink(key: ValueKey(false)),
               ),
-              const SizedBox(height: 8),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text(
-                  'Только открытые сейчас',
-                  style: TextStyle(fontSize: 16),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                  color: selected ? AppColors.greenDark : AppColors.text,
                 ),
-                value: onlyOpen,
-                onChanged: (v) => setSheet(() => onlyOpen = v),
-              ),
-              const SizedBox(height: 8),
-              const _Caption('АПТЕЧНЫЕ СЕТИ'),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  for (final c in state.chains)
-                    FilterChip(
-                      label: Text(c),
-                      selected: chains.contains(c),
-                      showCheckmark: false,
-                      shape: const StadiumBorder(),
-                      side: BorderSide.none,
-                      backgroundColor: AppColors.surface,
-                      selectedColor: AppColors.greenSoft,
-                      onSelected: (v) =>
-                          setSheet(() => v ? chains.add(c) : chains.remove(c)),
-                    ),
-                ],
-              ),
-              const SizedBox(height: 24),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () => setSheet(() {
-                        onlyOpen = false;
-                        chains.clear();
-                      }),
-                      child: const Text('Сбросить'),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    flex: 2,
-                    child: FilledButton(
-                      onPressed: () {
-                        state.setFilters(onlyOpen: onlyOpen, chains: chains);
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Показать'),
-                    ),
-                  ),
-                ],
               ),
             ],
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
+}
+
+/// Сообщает высоту ребёнка после каждой раскладки.
+class _MeasureHeight extends SingleChildRenderObjectWidget {
+  const _MeasureHeight({required this.onChange, required super.child});
+
+  final ValueChanged<double> onChange;
+
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderMeasureHeight(onChange);
+
+  @override
+  void updateRenderObject(
+    BuildContext context,
+    _RenderMeasureHeight renderObject,
+  ) {
+    renderObject.onChange = onChange;
+  }
+}
+
+class _RenderMeasureHeight extends RenderProxyBox {
+  _RenderMeasureHeight(this.onChange);
+
+  ValueChanged<double> onChange;
+  double? _last;
+
+  @override
+  void performLayout() {
+    super.performLayout();
+    final h = size.height;
+    if (h == _last) return;
+    _last = h;
+    WidgetsBinding.instance.addPostFrameCallback((_) => onChange(h));
+  }
+}
+
+
+/// Стеклянная панель сверху: профиль, приветствие с городом, ассистент.
+class _TopPanel extends StatelessWidget {
+  const _TopPanel({required this.onProfile, required this.onAssistant, required this.onCall});
+
+  final VoidCallback? onProfile;
+  final VoidCallback onAssistant;
+
+  /// Голосовой «звонок» ассистенту.
+  final VoidCallback onCall;
+
+  String _greeting(DateTime now) {
+    final h = now.hour;
+    if (h >= 5 && h < 12) return 'Доброе утро';
+    if (h >= 12 && h < 18) return 'Добрый день';
+    if (h >= 18 && h < 23) return 'Добрый вечер';
+    return 'Доброй ночи';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = AppScope.of(context);
+    final pharmacies = state.catalog?.pharmacies ?? const <Pharmacy>[];
+    final open = pharmacies.where((p) => isOpenAt(p, state.now)).length;
+    final subtitle = tr(context, 'Открыто {open} из {total}',
+        {'open': open, 'total': pharmacies.length});
+    const radius = BorderRadius.all(Radius.circular(26));
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        borderRadius: radius,
+        boxShadow: [BoxShadow(color: Color(0x1F0E2A1C), blurRadius: 24, offset: Offset(0, 8))],
+      ),
+      child: ClipRRect(
+        borderRadius: radius,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+            decoration: BoxDecoration(
+              borderRadius: radius,
+              color: Colors.white.withValues(alpha: 0.78),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.9)),
+            ),
+            child: Row(
+              children: [
+                Tooltip(
+                  message: tr(context, 'Профиль'),
+                  child: GestureDetector(
+                    onTap: onProfile,
+                    child: Container(
+                      width: 46,
+                      height: 46,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Color(0xFF6BC57E), AppColors.greenDark],
+                        ),
+                      ),
+                      child: const Icon(Icons.person_rounded, color: Colors.white, size: 26),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        tr(context, _greeting(state.now)),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontFamily: 'Unbounded',
+                          fontVariations: [FontVariation('wght', 700)],
+                          fontSize: 15,
+                          letterSpacing: -0.3,
+                          color: AppColors.text,
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      Row(
+                        children: [
+                          Container(
+                            width: 7,
+                            height: 7,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.green,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Flexible(
+                            child: Text(
+                              subtitle,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontSize: 12.5, color: AppColors.textMuted),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Tooltip(
+                  message: tr(context, 'Позвонить ассистенту'),
+                  child: Material(
+                    color: AppColors.greenSoft,
+                    shape: const CircleBorder(),
+                    child: InkWell(
+                      customBorder: const CircleBorder(),
+                      onTap: onCall,
+                      child: const SizedBox.square(
+                        dimension: 46,
+                        child: Icon(Icons.call_rounded, color: AppColors.greenDark, size: 22),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Tooltip(
+                  message: tr(context, 'Ассистент'),
+                  child: GestureDetector(
+                    onTap: onAssistant,
+                    child: const PulseRing(
+                      size: 46,
+                      color: AppColors.green,
+                      child: SizedBox.square(
+                        dimension: 46,
+                        child: FittedBox(child: _AssistantOrb()),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
