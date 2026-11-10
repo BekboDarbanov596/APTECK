@@ -8,6 +8,7 @@ import 'home_screen.dart' show flipRoute;
 import 'pharmacy_screen.dart';
 import 'theme.dart';
 import 'widgets/common.dart';
+import '../l10n/lang.dart';
 
 export 'profile_screen.dart';
 
@@ -27,14 +28,14 @@ class FavoritesScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Избранное')),
+      appBar: AppBar(title: Text(tr(context, 'Избранное'))),
       body: drugs.isEmpty && pharmacies.isEmpty
-          ? const Center(
+          ? Center(
               child: SingleChildScrollView(
                 child: MessageView(
                   icon: Icons.favorite_border,
-                  title: 'Здесь пока пусто',
-                  text: 'Нажмите ♡ у лекарства или аптеки, чтобы быстро находить их здесь.',
+                  title: tr(context, 'Здесь пока пусто'),
+                  text: tr(context, 'Нажмите ♡ у лекарства или аптеки, чтобы быстро находить их здесь.'),
                 ),
               ),
             )
@@ -42,7 +43,7 @@ class FavoritesScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
               children: [
                 if (drugs.isNotEmpty) ...[
-                  const _Title('Лекарства'),
+                  _Title(tr(context, 'Лекарства')),
                   for (final d in drugs)
                     _Tile(
                       icon: Icons.medication_outlined,
@@ -53,7 +54,7 @@ class FavoritesScreen extends StatelessWidget {
                     ),
                 ],
                 if (pharmacies.isNotEmpty) ...[
-                  const _Title('Аптеки'),
+                  _Title(tr(context, 'Аптеки')),
                   for (final p in pharmacies)
                     _Tile(
                       icon: Icons.local_pharmacy_outlined,
@@ -115,7 +116,7 @@ class _Tile extends StatelessWidget {
         subtitle: Text(subtitle),
         onTap: onTap,
         trailing: IconButton(
-          tooltip: 'Убрать из избранного',
+          tooltip: tr(context, 'Убрать из избранного'),
           onPressed: onRemove,
           icon: const Icon(Icons.favorite, color: AppColors.green),
         ),

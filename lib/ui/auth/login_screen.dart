@@ -6,6 +6,7 @@ import '../theme.dart';
 import '../three/mesh.dart';
 import 'auth_widgets.dart';
 import 'register_screen.dart';
+import '../../l10n/lang.dart';
 
 /// Экран входа: почта и пароль или Google.
 class LoginScreen extends StatefulWidget {
@@ -56,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final error = validateEmail(_email.text);
     if (error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Введите почту — пришлём ссылку для сброса пароля')),
+        SnackBar(content: Text(tr(context, 'Введите почту — пришлём ссылку для сброса пароля'))),
       );
       return;
     }
@@ -77,8 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
     final busy = _loading || _googleLoading;
     return AuthScaffold(
       shape: Shape3D.capsule,
-      title: 'С возвращением',
-      subtitle: 'Войдите, чтобы пользоваться аккаунтом',
+      title: tr(context, 'С возвращением'),
+      subtitle: tr(context, 'Войдите, чтобы пользоваться аккаунтом'),
       children: [
         Form(
           key: _form,
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 AuthField(
                   controller: _email,
-                  label: 'Почта',
+                  label: tr(context, 'Почта'),
                   icon: Icons.alternate_email,
                   keyboardType: TextInputType.emailAddress,
                   autofillHints: const [AutofillHints.email],
@@ -96,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 AuthField(
                   controller: _password,
-                  label: 'Пароль',
+                  label: tr(context, 'Пароль'),
                   icon: Icons.lock_outline,
                   obscure: true,
                   textInputAction: TextInputAction.done,
@@ -113,12 +114,12 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerRight,
           child: TextButton(
             onPressed: busy ? null : _forgotPassword,
-            child: const Text('Забыли пароль?'),
+            child: Text(tr(context, 'Забыли пароль?')),
           ),
         ),
         const SizedBox(height: 8),
         AuthPrimaryButton(
-          label: 'Войти',
+          label: tr(context, 'Войти'),
           loading: _loading,
           onPressed: busy ? null : _submit,
         ),
@@ -132,14 +133,14 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: WrapAlignment.center,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            const Text('Нет аккаунта?', style: TextStyle(color: AppColors.textMuted)),
+            Text(tr(context, 'Нет аккаунта?'), style: TextStyle(color: AppColors.textMuted)),
             TextButton(
               onPressed: busy
                   ? null
                   : () => Navigator.of(context).pushReplacement(
                         MaterialPageRoute<void>(builder: (_) => const RegisterScreen()),
                       ),
-              child: const Text('Зарегистрироваться'),
+              child: Text(tr(context, 'Зарегистрироваться')),
             ),
           ],
         ),

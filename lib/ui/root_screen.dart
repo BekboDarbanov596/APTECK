@@ -7,8 +7,9 @@ import 'home_screen.dart';
 import 'search_screen.dart';
 import 'tabs.dart';
 
-/// Нижнее меню из трёх вкладок: Карта, Избранное, Профиль.
-/// Поиск открывается из строки поиска на карте.
+/// Главный экран — карта без нижнего меню (как в 2ГИС).
+/// Профиль открывается кнопкой справа сверху, избранное — из профиля,
+/// поиск — из строки поиска в шторке.
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
 
@@ -17,12 +18,12 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
-  int _tab = 0;
+  void _backToMap() => Navigator.of(context).popUntil((r) => r.isFirst);
 
   /// Выбрали лекарство где угодно — показываем аптеки на карте.
   void _showDrug(Drug drug) {
     AppScope.read(context).selectDrug(drug);
-    setState(() => _tab = 0);
+    _backToMap();
   }
 
   void _openSearch({bool voice = false}) {
@@ -41,55 +42,25 @@ class _RootScreenState extends State<RootScreen> {
     );
   }
 
+  void _openFavorites() {
+    Navigator.of(context).push(flipRoute(FavoritesScreen(onDrugPicked: _showDrug)));
+  }
+
+  void _openProfile() {
+    Navigator.of(context).push(
+      flipRoute(ProfileScreen(onOpenFavorites: _openFavorites, onDrugPicked: _showDrug)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Маршрут запросили с другой вкладки (например, из избранного) — показываем карту.
+    // Маршрут запросили с другого экрана (избранное, аптека) — возвращаемся к карте.
     final route = RouteScope.maybeOf(context);
-    if (route != null &&
-        route.active &&
-        route.takeShowMapRequest() &&
-        _tab != 0) {
+    if (route != null && route.active && route.takeShowMapRequest()) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) setState(() => _tab = 0);
+        if (mounted) _backToMap();
       });
     }
-    return Scaffold(
-      body: IndexedStack(
-        index: _tab,
-        children: [
-          HomeScreen(onOpenSearch: _openSearch),
-          FavoritesScreen(onDrugPicked: _showDrug),
-          ProfileScreen(
-            onOpenFavorites: () => setState(() => _tab = 1),
-            onDrugPicked: _showDrug,
-          ),
-        ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _tab,
-        height: 64,
-        labelBehavior: route?.active == true && _tab == 0
-            ? NavigationDestinationLabelBehavior.alwaysShow
-            : NavigationDestinationLabelBehavior.onlyShowSelected,
-        onDestinationSelected: (i) => setState(() => _tab = i),
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.map_outlined),
-            selectedIcon: Icon(Icons.map),
-            label: 'Карта',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.favorite_border),
-            selectedIcon: Icon(Icons.favorite),
-            label: 'Избранное',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Профиль',
-          ),
-        ],
-      ),
-    );
+    return HomeScreen(onOpenSearch: _openSearch, onOpenProfile: _openProfile);
   }
 }

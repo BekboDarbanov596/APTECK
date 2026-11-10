@@ -202,10 +202,11 @@ void main() {
       expect(ask('амоксициллин').text, contains('по рецепту'));
     });
 
-    test('не советует лечение по симптомам', () {
+    test('по симптомам советует безрецептурное из каталога', () {
       final r = ask('что выпить, болит голова');
       expect(r.drug, isNull);
-      expect(r.text, contains('не подбираю'));
+      expect(r.suggestions.map((d) => d.id), contains('paracetamol-500'));
+      expect(r.suggestions.any((d) => d.rx), isFalse);
     });
   });
 
@@ -231,6 +232,22 @@ void main() {
       final night = tipsAt(noon).firstWhere((t) => t.kind == TipKind.nightPharmacy);
       final id = (night.action! as OpenPharmacyAction).pharmacyId;
       expect(catalog.pharmacy(id)!.isAroundTheClock, isTrue);
+    });
+
+    test('советы переводятся на кыргызский и английский', () {
+      List<Tip> tipsIn(String lang) => buildTips(
+            catalog: catalog,
+            userLat: bishkekCenterLat,
+            userLng: bishkekCenterLng,
+            now: noon,
+            lang: lang,
+          );
+      final en = tipsIn('en');
+      final ky = tipsIn('ky');
+      expect(en.firstWhere((t) => t.kind == TipKind.homeKit).title, 'Home first-aid kit');
+      expect(ky.firstWhere((t) => t.kind == TipKind.homeKit).title, 'Үй дарылыгы');
+      expect(en.firstWhere((t) => t.kind == TipKind.nightPharmacy).text, contains(' from you'));
+      expect(en.map((t) => t.kind), tipsIn('ru').map((t) => t.kind));
     });
 
     test('совет про льготные рецепты исчезает в 2027 году', () {

@@ -6,6 +6,7 @@ import '../theme.dart';
 import '../three/mesh.dart';
 import 'auth_widgets.dart';
 import 'login_screen.dart';
+import '../../l10n/lang.dart';
 
 /// Экран регистрации: имя, почта, пароль или Google.
 class RegisterScreen extends StatefulWidget {
@@ -39,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       await action();
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Аккаунт создан. Добро пожаловать!')),
+        SnackBar(content: Text(tr(context, 'Аккаунт создан. Добро пожаловать!'))),
       );
       Navigator.of(context).popUntil((r) => r.isFirst);
     } catch (e) {
@@ -61,8 +62,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final busy = _loading || _googleLoading;
     return AuthScaffold(
       shape: Shape3D.heart,
-      title: 'Создать аккаунт',
-      subtitle: 'Это займёт меньше минуты',
+      title: tr(context, 'Создать аккаунт'),
+      subtitle: tr(context, 'Это займёт меньше минуты'),
       children: [
         GoogleButton(
           loading: _googleLoading,
@@ -76,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 AuthField(
                   controller: _name,
-                  label: 'Имя',
+                  label: tr(context, 'Имя'),
                   icon: Icons.person_outline,
                   autofillHints: const [AutofillHints.name],
                   validator: validateName,
@@ -84,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 AuthField(
                   controller: _email,
-                  label: 'Почта',
+                  label: tr(context, 'Почта'),
                   icon: Icons.alternate_email,
                   keyboardType: TextInputType.emailAddress,
                   autofillHints: const [AutofillHints.email],
@@ -93,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 AuthField(
                   controller: _password,
-                  label: 'Пароль',
+                  label: tr(context, 'Пароль'),
                   icon: Icons.lock_outline,
                   obscure: true,
                   autofillHints: const [AutofillHints.newPassword],
@@ -102,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 AuthField(
                   controller: _repeat,
-                  label: 'Повторите пароль',
+                  label: tr(context, 'Повторите пароль'),
                   icon: Icons.lock_reset_outlined,
                   obscure: true,
                   textInputAction: TextInputAction.done,
@@ -114,15 +115,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(bottom: 16, left: 4),
           child: Text(
-            'Минимум 8 символов, буквы и цифры.',
+            tr(context, 'Минимум 8 символов, буквы и цифры.'),
             style: TextStyle(fontSize: 13, color: AppColors.textMuted),
           ),
         ),
         AuthPrimaryButton(
-          label: 'Создать аккаунт',
+          label: tr(context, 'Создать аккаунт'),
           loading: _loading,
           onPressed: busy ? null : _submit,
         ),
@@ -131,14 +132,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           alignment: WrapAlignment.center,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            const Text('Уже есть аккаунт?', style: TextStyle(color: AppColors.textMuted)),
+            Text(tr(context, 'Уже есть аккаунт?'), style: TextStyle(color: AppColors.textMuted)),
             TextButton(
               onPressed: busy
                   ? null
                   : () => Navigator.of(context).pushReplacement(
                         MaterialPageRoute<void>(builder: (_) => const LoginScreen()),
                       ),
-              child: const Text('Войти'),
+              child: Text(tr(context, 'Войти')),
             ),
           ],
         ),

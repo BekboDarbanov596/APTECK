@@ -9,6 +9,7 @@ import '../state/route_state.dart';
 import 'actions.dart';
 import 'theme.dart';
 import 'widgets/common.dart';
+import '../l10n/lang.dart';
 
 /// Карточка аптеки: адрес, часы, телефон, выбранное лекарство и ассортимент.
 class PharmacyScreen extends StatelessWidget {
@@ -24,7 +25,7 @@ class PharmacyScreen extends StatelessWidget {
     if (p == null) {
       return Scaffold(
         appBar: AppBar(),
-        body: const MessageView(icon: Icons.error_outline, title: 'Аптека не найдена'),
+        body: MessageView(icon: Icons.error_outline, title: tr(context, 'Аптека не найдена')),
       );
     }
 
@@ -60,7 +61,7 @@ class PharmacyScreen extends StatelessWidget {
                 child: FilledButton.icon(
                   onPressed: () => callPharmacy(context, p),
                   icon: const Icon(Icons.call),
-                  label: const Text('Позвонить'),
+                  label: Text(tr(context, 'Позвонить')),
                 ),
               ),
               const SizedBox(width: 12),
@@ -82,7 +83,7 @@ class PharmacyScreen extends StatelessWidget {
                     Navigator.of(context).popUntil((r) => r.isFirst);
                   },
                   icon: const Icon(Icons.directions),
-                  label: const Text('Маршрут'),
+                  label: Text(tr(context, 'Маршрут')),
                 ),
               ),
             ],
@@ -141,11 +142,11 @@ class PharmacyScreen extends StatelessWidget {
                       if (selectedOffer != null) ...[
                         Text(formatPrice(selectedOffer.price),
                             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
-                        const Text('Есть в наличии',
+                        Text(tr(context, 'Есть в наличии'),
                             style: TextStyle(
                                 color: AppColors.greenDark, fontWeight: FontWeight.w600)),
                       ] else
-                        const Text('Нет в наличии',
+                        Text(tr(context, 'Нет в наличии'),
                             style: TextStyle(
                                 color: AppColors.textMuted, fontWeight: FontWeight.w600)),
                     ],
@@ -158,15 +159,15 @@ class PharmacyScreen extends StatelessWidget {
           _Card(
             child: Column(
               children: [
-                _InfoRow(icon: Icons.schedule, title: 'Часы работы', value: scheduleText(p)),
+                _InfoRow(icon: Icons.schedule, title: tr(context, 'Часы работы'), value: scheduleText(p)),
                 const Divider(height: 24),
                 _InfoRow(
                   icon: Icons.call_outlined,
-                  title: 'Телефон',
+                  title: tr(context, 'Телефон'),
                   value: p.phone ?? 'Появится после подключения аптеки',
                 ),
                 const Divider(height: 24),
-                _InfoRow(icon: Icons.place_outlined, title: 'Адрес', value: 'Бишкек, ${p.address}'),
+                _InfoRow(icon: Icons.place_outlined, title: tr(context, 'Адрес'), value: 'Бишкек, ${p.address}'),
               ],
             ),
           ),
@@ -219,8 +220,8 @@ class PharmacyScreen extends StatelessWidget {
           ),
           if (catalog.isDemo) ...[
             const SizedBox(height: 12),
-            const Text(
-              'Демо-данные: цены и наличие примерные. Уточняйте в аптеке.',
+            Text(
+              tr(context, 'Демо-данные: цены и наличие примерные. Уточняйте в аптеке.'),
               style: TextStyle(fontSize: 13, color: AppColors.textMuted),
             ),
           ],

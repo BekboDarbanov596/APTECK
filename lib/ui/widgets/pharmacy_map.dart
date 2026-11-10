@@ -9,6 +9,7 @@ import '../../state/app_state.dart';
 import '../theme.dart';
 import 'common.dart';
 import 'motion.dart';
+import '../../l10n/lang.dart';
 
 /// Карта на весь экран: аптеки «падают» на карту с 3D-переворотом,
 /// выбранная поднимается, над ней всплывает подсказка с ценой.
@@ -138,8 +139,8 @@ class PharmacyMap extends StatelessWidget {
               ),
           ],
         ),
-        const SimpleAttributionWidget(
-          source: Text('участники OpenStreetMap'),
+        SimpleAttributionWidget(
+          source: Text(tr(context, 'участники OpenStreetMap')),
           alignment: Alignment.bottomLeft,
           backgroundColor: Color(0x00000000),
         ),
@@ -367,7 +368,7 @@ class _Popup extends StatelessWidget {
                 if (onRoute != null) ...[
                   const SizedBox(width: 6),
                   Tooltip(
-                    message: 'Маршрут',
+                    message: tr(context, 'Маршрут'),
                     child: Material(
                       color: AppColors.green,
                       shape: const CircleBorder(),

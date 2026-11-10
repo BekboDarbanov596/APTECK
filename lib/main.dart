@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'auth/auth_service.dart';
 import 'data/catalog_repository.dart';
+import 'l10n/lang.dart';
 import 'logic/routing.dart';
 import 'state/app_state.dart';
 import 'state/route_state.dart';
@@ -16,19 +17,29 @@ void main() {
   // а экраны входа сообщают, что вход ещё не подключён.
   final auth = AuthService(FirebaseAuthBackend())..init();
   final route = RouteState(RouteService());
-  runApp(AptekaApp(state: state, auth: auth, route: route));
+  final lang = LangController()..load();
+  runApp(AptekaApp(state: state, auth: auth, route: route, lang: lang));
 }
 
 class AptekaApp extends StatelessWidget {
-  const AptekaApp({super.key, required this.state, required this.auth, required this.route});
+  const AptekaApp({
+    super.key,
+    required this.state,
+    required this.auth,
+    required this.route,
+    this.lang,
+  });
 
   final AppState state;
   final AuthService auth;
   final RouteState route;
 
+  /// Язык интерфейса; без него — русский.
+  final LangController? lang;
+
   @override
   Widget build(BuildContext context) {
-    return AuthScope(
+    final app = AuthScope(
       auth: auth,
       child: AppScope(
         state: state,
@@ -47,5 +58,7 @@ class AptekaApp extends StatelessWidget {
         ),
       ),
     );
+    final l = lang;
+    return l == null ? app : LangScope(controller: l, child: app);
   }
 }

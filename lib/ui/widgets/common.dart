@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
+import '../../l10n/lang.dart';
 
 /// Зелёный крест — логотип приложения.
 class LogoMark extends StatelessWidget {
@@ -70,7 +71,7 @@ class Pill extends StatelessWidget {
         foreground: AppColors.textMuted,
       );
 
-  factory Pill.rx() => const Pill(
+  factory Pill.rx() => Pill(
         label: 'Нужен рецепт',
         icon: Icons.description_outlined,
         background: AppColors.orangeSoft,
@@ -122,7 +123,7 @@ class DemoBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Pill(
-      label: 'Демо-данные',
+      label: tr(context, 'Демо-данные'),
       icon: Icons.info_outline,
       background: AppColors.orangeSoft,
       foreground: AppColors.orange,
@@ -136,7 +137,7 @@ void showDemoInfo(BuildContext context) {
   showDialog<void>(
     context: context,
     builder: (context) => AlertDialog(
-      title: const Text('Демо-данные'),
+      title: Text(tr(context, 'Демо-данные')),
       content: const Text(
         'Названия лекарств и аптечных сетей настоящие, но цены и наличие '
         'сейчас примерные, а координаты аптек приблизительные.\n\n'
@@ -146,7 +147,7 @@ void showDemoInfo(BuildContext context) {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Понятно'),
+          child: Text(tr(context, 'Понятно')),
         ),
       ],
     ),
