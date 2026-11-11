@@ -1,26 +1,42 @@
 import 'package:flutter/material.dart';
 
-/// Цвета из макета «Аптека рядом».
+/// Цвета из макета «Аптека рядом». Две палитры: светлая и тёмная
+/// (ночная, как в 2ГИС). Какая сейчас — решает [AppColors.dark].
 abstract final class AppColors {
-  static const green = Color(0xFF2E9F46);
-  static const greenDark = Color(0xFF217A35);
-  static const greenSoft = Color(0xFFE3F4E6);
-  static const background = Color(0xFFF3F7F5);
-  static const surface = Colors.white;
-  static const text = Color(0xFF17201B);
-  static const textMuted = Color(0xFF5F6B64);
-  static const border = Color(0xFFE4EAE6);
-  static const orange = Color(0xFFB86A00);
-  static const orangeSoft = Color(0xFFFFEFD3);
-  static const greySoft = Color(0xFFE9ECEA);
-  static const userDot = Color(0xFF2F7CF6);
+  /// Тёмная тема включена. Меняет [ThemeController] на корне приложения.
+  static bool dark = false;
+
+  static Color _p(int light, int night) => Color(dark ? night : light);
+
+  static Color get green => _p(0xFF2E9F46, 0xFF3DB65A);
+  static Color get greenDark => _p(0xFF217A35, 0xFF7FD493);
+  /// Тёмно-зелёная заливка кнопок под белый текст (в обеих темах).
+  static Color get greenFill => _p(0xFF217A35, 0xFF2A8C3F);
+  static Color get greenSoft => _p(0xFFE3F4E6, 0xFF1D3526);
+  static Color get background => _p(0xFFF3F7F5, 0xFF111614);
+  static Color get surface => _p(0xFFFFFFFF, 0xFF1B2220);
+  static Color get text => _p(0xFF17201B, 0xFFE7EEEA);
+  static Color get textMuted => _p(0xFF5F6B64, 0xFF9AA8A1);
+  static Color get border => _p(0xFFE4EAE6, 0xFF2B3531);
+  static Color get orange => _p(0xFFB86A00, 0xFFF0A63F);
+  static Color get orangeSoft => _p(0xFFFFEFD3, 0xFF3A2C15);
+  static Color get greySoft => _p(0xFFE9ECEA, 0xFF29312E);
+  static Color get userDot => const Color(0xFF2F7CF6);
+
+  /// Белые «стеклянные» поверхности в светлой теме, тёмные — в ночной.
+  static Color glass([double opacity = 1]) => (dark
+          ? const Color(0xFF1B2220)
+          : Colors.white)
+      .withValues(alpha: opacity);
 }
 
 ThemeData buildTheme() {
   final scheme = ColorScheme.fromSeed(
     seedColor: AppColors.green,
+    brightness: AppColors.dark ? Brightness.dark : Brightness.light,
     primary: AppColors.green,
     surface: AppColors.surface,
+    onSurface: AppColors.text,
   );
   final base = ThemeData(useMaterial3: true, colorScheme: scheme);
   return base.copyWith(
@@ -29,7 +45,7 @@ ThemeData buildTheme() {
       bodyColor: AppColors.text,
       displayColor: AppColors.text,
     ),
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: AppColors.background,
       foregroundColor: AppColors.text,
       elevation: 0,
@@ -77,7 +93,7 @@ ThemeData buildTheme() {
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.green,
         minimumSize: const Size(48, 52),
-        side: const BorderSide(color: AppColors.green, width: 1.5),
+        side: BorderSide(color: AppColors.green, width: 1.5),
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),

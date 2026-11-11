@@ -32,7 +32,8 @@ const assistantGreeting =
 String showOnMapLabel(AssistantLang lang) =>
     _t(lang, 'Показать на карте', 'Картадан көрсөтүү', 'Show on map');
 
-String _t(AssistantLang lang, String ru, String ky, String en) => switch (lang) {
+String _t(AssistantLang lang, String ru, String ky, String en) =>
+    switch (lang) {
       AssistantLang.ru => ru,
       AssistantLang.ky => ky,
       AssistantLang.en => en,
@@ -50,18 +51,83 @@ String _norm(String s) => s
     .trim();
 
 const _kyWords = {
-  'салам', 'саламатсызбы', 'кайда', 'барбы', 'жок', 'дары', 'дарыкана', 'дарыканада',
-  'керек', 'канча', 'турат', 'арзан', 'арзаныраак', 'рахмат', 'жакшы', 'мен', 'менин',
-  'мага', 'эмне', 'кантип', 'жедим', 'жеп', 'ичтим', 'ооруйт', 'ооруп', 'башым',
-  'курсагым', 'ууландым', 'ууланып', 'тамагым', 'мурунум', 'жөтөл', 'суук', 'тумоо',
-  'балам', 'ысык', 'кычышат', 'тиш', 'белим', 'жыгылдым', 'сатып', 'алсам', 'болот',
-  'кийин', 'үчүн', 'жана', 'эмес', 'бар',
+  'салам',
+  'саламатсызбы',
+  'кайда',
+  'барбы',
+  'жок',
+  'дары',
+  'дарыкана',
+  'дарыканада',
+  'керек',
+  'канча',
+  'турат',
+  'арзан',
+  'арзаныраак',
+  'рахмат',
+  'жакшы',
+  'мен',
+  'менин',
+  'мага',
+  'эмне',
+  'кантип',
+  'жедим',
+  'жеп',
+  'ичтим',
+  'ооруйт',
+  'ооруп',
+  'башым',
+  'курсагым',
+  'ууландым',
+  'ууланып',
+  'тамагым',
+  'мурунум',
+  'жөтөл',
+  'суук',
+  'тумоо',
+  'балам',
+  'ысык',
+  'кычышат',
+  'тиш',
+  'белим',
+  'жыгылдым',
+  'сатып',
+  'алсам',
+  'болот',
+  'кийин',
+  'үчүн',
+  'жана',
+  'эмес',
+  'бар',
 };
 
 const _enWords = {
-  'where', 'what', 'how', 'can', 'buy', 'is', 'the', 'have', 'need', 'my', 'i', 'it',
-  'hello', 'hi', 'hey', 'thanks', 'thank', 'price', 'cheap', 'cheapest', 'pharmacy',
-  'medicine', 'ate', 'hurts', 'pain', 'help',
+  'where',
+  'what',
+  'how',
+  'can',
+  'buy',
+  'is',
+  'the',
+  'have',
+  'need',
+  'my',
+  'i',
+  'it',
+  'hello',
+  'hi',
+  'hey',
+  'thanks',
+  'thank',
+  'price',
+  'cheap',
+  'cheapest',
+  'pharmacy',
+  'medicine',
+  'ate',
+  'hurts',
+  'pain',
+  'help',
 };
 
 AssistantLang detectLang(String message) {
@@ -112,12 +178,37 @@ const _topics = <_Topic>[
     id: 'emergency',
     emergency: true,
     keys: [
-      'без сознан', 'потерял сознан', 'не дышит', 'задыха', 'боль в груди', 'болит в груди',
-      'инфаркт', 'инсульт', 'судорог', 'передозир', 'суицид', 'покончить с собой',
-      'отек горла', 'отекло горло', 'сильное кровотеч', 'кровь не останавлива',
-      'эс учун жогот', 'дем ала албай', 'көкүрөгүм ооруп', 'тырышып',
-      'unconscious', 'not breathing', 'can t breathe', 'cannot breathe', 'chest pain',
-      'heart attack', 'stroke', 'seizure', 'overdose', 'suicid', 'kill myself',
+      'без сознан',
+      'потерял сознан',
+      'не дышит',
+      'задыха',
+      'боль в груди',
+      'болит в груди',
+      'инфаркт',
+      'инсульт',
+      'судорог',
+      'передозир',
+      'суицид',
+      'покончить с собой',
+      'отек горла',
+      'отекло горло',
+      'сильное кровотеч',
+      'кровь не останавлива',
+      'эс учун жогот',
+      'дем ала албай',
+      'көкүрөгүм ооруп',
+      'тырышып',
+      'unconscious',
+      'not breathing',
+      'can t breathe',
+      'cannot breathe',
+      'chest pain',
+      'heart attack',
+      'stroke',
+      'seizure',
+      'overdose',
+      'suicid',
+      'kill myself',
       'heavy bleeding',
     ],
     intro: [
@@ -132,9 +223,16 @@ const _topics = <_Topic>[
   _Topic(
     id: 'heartburn',
     keys: [
-      'изжог', 'переел', 'отрыжк', 'жирн',
-      'көкүрөгүм күй', 'ашказан',
-      'heartburn', 'reflux', 'acid', 'overate',
+      'изжог',
+      'переел',
+      'отрыжк',
+      'жирн',
+      'көкүрөгүм күй',
+      'ашказан',
+      'heartburn',
+      'reflux',
+      'acid',
+      'overate',
     ],
     drugIds: ['omeprazol-20'],
     intro: [
@@ -157,10 +255,26 @@ const _topics = <_Topic>[
   _Topic(
     id: 'hangover',
     keys: [
-      'похмел', 'перепил', 'алкогол', 'пиво', 'пива', 'водк', 'вино', 'вина', 'коньяк',
-      'бухал', 'выпил',
-      'арак', 'сыра', 'мас болуп',
-      'hangover', 'alcohol', 'beer', 'vodka', 'wine', 'drunk',
+      'похмел',
+      'перепил',
+      'алкогол',
+      'пиво',
+      'пива',
+      'водк',
+      'вино',
+      'вина',
+      'коньяк',
+      'бухал',
+      'выпил',
+      'арак',
+      'сыра',
+      'мас болуп',
+      'hangover',
+      'alcohol',
+      'beer',
+      'vodka',
+      'wine',
+      'drunk',
     ],
     drugIds: ['activated-carbon', 'smecta-3'],
     intro: [
@@ -182,13 +296,59 @@ const _topics = <_Topic>[
   _Topic(
     id: 'food',
     keys: [
-      'самс', 'шаурм', 'шаверм', 'беляш', 'чебурек', 'пирожк', 'плов', 'манты', 'лагман',
-      'шашлык', 'бургер', 'пицц', 'суши', 'фастфуд', 'хот дог', 'майонез', 'еда', 'еды',
-      'съел', 'поел', 'покушал', 'отрав', 'понос', 'диаре', 'рвот', 'тошн', 'живот',
-      'самса', 'тамак', 'жедим', 'жеп', 'уулан', 'ич өт', 'курсагым', 'кустум', 'кусуп',
+      'самс',
+      'шаурм',
+      'шаверм',
+      'беляш',
+      'чебурек',
+      'пирожк',
+      'плов',
+      'манты',
+      'лагман',
+      'шашлык',
+      'бургер',
+      'пицц',
+      'суши',
+      'фастфуд',
+      'хот дог',
+      'майонез',
+      'еда',
+      'еды',
+      'съел',
+      'поел',
+      'покушал',
+      'отрав',
+      'понос',
+      'диаре',
+      'рвот',
+      'тошн',
+      'живот',
+      'самса',
+      'тамак',
+      'жедим',
+      'жеп',
+      'уулан',
+      'ич өт',
+      'курсагым',
+      'кустум',
+      'кусуп',
       'жүрөгүм айн',
-      'samsa', 'shawarma', 'kebab', 'burger', 'pizza', 'sushi', 'fast food', 'ate',
-      'food', 'poison', 'diarrh', 'vomit', 'nause', 'stomach', 'belly', 'tummy',
+      'samsa',
+      'shawarma',
+      'kebab',
+      'burger',
+      'pizza',
+      'sushi',
+      'fast food',
+      'ate',
+      'food',
+      'poison',
+      'diarrh',
+      'vomit',
+      'nause',
+      'stomach',
+      'belly',
+      'tummy',
     ],
     drugIds: ['smecta-3', 'activated-carbon', 'loperamid-2'],
     intro: [
@@ -219,10 +379,27 @@ const _topics = <_Topic>[
   _Topic(
     id: 'allergy',
     keys: [
-      'аллерг', 'чихаю', 'чихан', 'зуд', 'чешет', 'чешется', 'сыпь', 'крапивниц', 'пыльц',
-      'цветен', 'шерст',
-      'кычыш', 'исиркек', 'чүчкүр',
-      'allerg', 'sneez', 'itch', 'rash', 'hives', 'pollen', 'hay fever',
+      'аллерг',
+      'чихаю',
+      'чихан',
+      'зуд',
+      'чешет',
+      'чешется',
+      'сыпь',
+      'крапивниц',
+      'пыльц',
+      'цветен',
+      'шерст',
+      'кычыш',
+      'исиркек',
+      'чүчкүр',
+      'allerg',
+      'sneez',
+      'itch',
+      'rash',
+      'hives',
+      'pollen',
+      'hay fever',
     ],
     drugIds: ['loratadin-10', 'suprastin-25'],
     intro: [
@@ -245,10 +422,38 @@ const _topics = <_Topic>[
   _Topic(
     id: 'cold',
     keys: [
-      'простуд', 'простыл', 'насморк', 'сопл', 'заложен', 'грипп', 'орви', 'кашел', 'кашл',
-      'горло', 'горла', 'замерз', 'холод', 'мороз', 'снег', 'дожд', '=нос',
-      'тумоо', 'мурун', 'жөтөл', 'тамагым', 'суук', 'үшүп',
-      'cold', 'flu', 'runny', 'nose', 'cough', 'throat', 'freez', 'snow', 'rain',
+      'простуд',
+      'простыл',
+      'насморк',
+      'сопл',
+      'заложен',
+      'грипп',
+      'орви',
+      'кашел',
+      'кашл',
+      'горло',
+      'горла',
+      'замерз',
+      'холод',
+      'мороз',
+      'снег',
+      'дожд',
+      '=нос',
+      'тумоо',
+      'мурун',
+      'жөтөл',
+      'тамагым',
+      'суук',
+      'үшүп',
+      'cold',
+      'flu',
+      'runny',
+      'nose',
+      'cough',
+      'throat',
+      'freez',
+      'snow',
+      'rain',
     ],
     drugIds: ['theraflu', 'nazivin-005', 'paracetamol-500'],
     intro: [
@@ -276,9 +481,19 @@ const _topics = <_Topic>[
   _Topic(
     id: 'heat',
     keys: [
-      '=жара', '=жаре', '=жару', 'жарк', 'солнц', 'перегрел', 'загар', 'пляж',
-      'аптап', 'күн өт',
-      'sun', 'heat', 'beach',
+      '=жара',
+      '=жаре',
+      '=жару',
+      'жарк',
+      'солнц',
+      'перегрел',
+      'загар',
+      'пляж',
+      'аптап',
+      'күн өт',
+      'sun',
+      'heat',
+      'beach',
     ],
     drugIds: ['paracetamol-500'],
     intro: [
@@ -305,9 +520,16 @@ const _topics = <_Topic>[
   _Topic(
     id: 'spasm',
     keys: [
-      'спазм', 'месячн', 'менструа', 'колик', 'колет',
+      'спазм',
+      'месячн',
+      'менструа',
+      'колик',
+      'колет',
       'айыз',
-      'cramp', 'period', 'spasm', 'menstrua',
+      'cramp',
+      'period',
+      'spasm',
+      'menstrua',
     ],
     drugIds: ['drotaverin-40', 'no-spa-40', 'ibuprofen-200'],
     intro: [
@@ -331,11 +553,35 @@ const _topics = <_Topic>[
   _Topic(
     id: 'muscle',
     keys: [
-      'спин', 'поясниц', 'мышц', 'сустав', 'колен', 'ушиб', 'ударил', 'растяж', 'спорт',
-      'трениров', 'футбол', 'спортзал', 'упал',
-      'белим', 'булчуң', 'муун', 'жыгыл', 'урун',
-      'back', 'muscle', 'joint', 'knee', 'bruise', 'sprain', 'gym', 'workout', 'football',
-      'sport', 'fell',
+      'спин',
+      'поясниц',
+      'мышц',
+      'сустав',
+      'колен',
+      'ушиб',
+      'ударил',
+      'растяж',
+      'спорт',
+      'трениров',
+      'футбол',
+      'спортзал',
+      'упал',
+      'белим',
+      'булчуң',
+      'муун',
+      'жыгыл',
+      'урун',
+      'back',
+      'muscle',
+      'joint',
+      'knee',
+      'bruise',
+      'sprain',
+      'gym',
+      'workout',
+      'football',
+      'sport',
+      'fell',
     ],
     drugIds: ['ibuprofen-200', 'diclofenac-50'],
     intro: [
@@ -361,10 +607,31 @@ const _topics = <_Topic>[
   _Topic(
     id: 'wound',
     keys: [
-      'порез', 'порезал', '=рана', '=раны', '=рану', 'ранк', 'царап', 'ссадин', 'ожог',
-      'обжег', 'нарыв', 'прыщ', 'гноя', 'гной',
-      'жаракат', 'кесип', 'кесилди', 'сыдырыл', 'ириң',
-      'cut', 'wound', 'scratch', 'burn', 'scrape', 'pimple',
+      'порез',
+      'порезал',
+      '=рана',
+      '=раны',
+      '=рану',
+      'ранк',
+      'царап',
+      'ссадин',
+      'ожог',
+      'обжег',
+      'нарыв',
+      'прыщ',
+      'гноя',
+      'гной',
+      'жаракат',
+      'кесип',
+      'кесилди',
+      'сыдырыл',
+      'ириң',
+      'cut',
+      'wound',
+      'scratch',
+      'burn',
+      'scrape',
+      'pimple',
     ],
     drugIds: ['levomekol-40'],
     intro: [
@@ -389,9 +656,20 @@ const _topics = <_Topic>[
   _Topic(
     id: 'heart',
     keys: [
-      'давлен', 'сердц', 'сердеч', 'пульс', 'гипертон', 'тахикард',
-      'кан басым', 'жүрөк', 'жүрөгүм',
-      'blood pressure', 'pressure', 'heart', 'pulse', 'hypertension',
+      'давлен',
+      'сердц',
+      'сердеч',
+      'пульс',
+      'гипертон',
+      'тахикард',
+      'кан басым',
+      'жүрөк',
+      'жүрөгүм',
+      'blood pressure',
+      'pressure',
+      'heart',
+      'pulse',
+      'hypertension',
     ],
     intro: [
       'Лекарства от давления и для сердца в нашем каталоге (Эналаприл, Амлодипин) '
@@ -413,9 +691,29 @@ const _topics = <_Topic>[
   _Topic(
     id: 'pain',
     keys: [
-      'голов', 'температур', '=жар', 'знобит', 'мигрен', 'зуб', 'болит', 'боль', 'ломит',
-      'башым', 'баш оор', 'ысык', 'тиш', 'ооруйт', 'ооруп',
-      'headache', 'head', 'fever', 'temperature', 'migraine', 'tooth', 'pain', 'ache',
+      'голов',
+      'температур',
+      '=жар',
+      'знобит',
+      'мигрен',
+      'зуб',
+      'болит',
+      'боль',
+      'ломит',
+      'башым',
+      'баш оор',
+      'ысык',
+      'тиш',
+      'ооруйт',
+      'ооруп',
+      'headache',
+      'head',
+      'fever',
+      'temperature',
+      'migraine',
+      'tooth',
+      'pain',
+      'ache',
       'hurt',
     ],
     drugIds: ['paracetamol-500', 'ibuprofen-200', 'citramon-p'],
@@ -445,9 +743,15 @@ const _topics = <_Topic>[
   _Topic(
     id: 'prescription',
     keys: [
-      'антибиот', 'диабет', 'сахар в крови', 'уколы',
-      'антибиотик', 'кант диабет',
-      'antibiotic', 'diabet', 'insulin',
+      'антибиот',
+      'диабет',
+      'сахар в крови',
+      'уколы',
+      'антибиотик',
+      'кант диабет',
+      'antibiotic',
+      'diabet',
+      'insulin',
     ],
     intro: [
       'Антибиотики и лекарства от диабета продаются только по рецепту — их назначает врач, '
@@ -463,10 +767,24 @@ const _topics = <_Topic>[
   _Topic(
     id: 'stress',
     keys: [
-      'стресс', 'нерв', 'бессонниц', 'не могу уснуть', 'не сплю', 'тревог', 'экзамен',
+      'стресс',
+      'нерв',
+      'бессонниц',
+      'не могу уснуть',
+      'не сплю',
+      'тревог',
+      'экзамен',
       'депресс',
-      'уйку', 'уктай албай', 'тынчсыз',
-      'stress', 'anxiety', 'anxious', 'insomnia', 'can t sleep', 'exam', 'depress',
+      'уйку',
+      'уктай албай',
+      'тынчсыз',
+      'stress',
+      'anxiety',
+      'anxious',
+      'insomnia',
+      'can t sleep',
+      'exam',
+      'depress',
     ],
     intro: [
       'Стресс и плохой сон лучше обсудить с врачом: успокоительные из нашего каталога '
@@ -492,32 +810,99 @@ const _topics = <_Topic>[
 
 /// Дети, беременность, кормление — дозы другие.
 const _specialGroupKeys = [
-  'ребен', 'ребён', 'детск', 'дет', 'малыш', 'сын', 'дочь', 'дочк', 'беремен', 'кормлю грудью',
-  'бала', 'балам', 'наристе', 'кош бойлуу', 'эмизем',
-  'child', 'kid', 'baby', 'son', 'daughter', 'pregnan', 'breastfeed',
+  'ребен',
+  'ребён',
+  'детск',
+  'дет',
+  'малыш',
+  'сын',
+  'дочь',
+  'дочк',
+  'беремен',
+  'кормлю грудью',
+  'бала',
+  'балам',
+  'наристе',
+  'кош бойлуу',
+  'эмизем',
+  'child',
+  'kid',
+  'baby',
+  'son',
+  'daughter',
+  'pregnan',
+  'breastfeed',
 ];
 
 const _greetingKeys = [
-  '=привет', '=прив', '=приветик', '=здрасте', 'здравств', 'добрый день', 'добрый вечер', 'доброе утро',
-  '=салам', 'саламатсыз', 'кандайсыз',
-  '=hello', '=hi', '=hey', 'good morning', 'good evening',
+  '=привет',
+  '=прив',
+  '=приветик',
+  '=здрасте',
+  'здравств',
+  'добрый день',
+  'добрый вечер',
+  'доброе утро',
+  '=салам',
+  'саламатсыз',
+  'кандайсыз',
+  '=hello',
+  '=hi',
+  '=hey',
+  'good morning',
+  'good evening',
 ];
 
 /// Светская беседа: «как дела», «кто ты».
 const _smallTalkKeys = [
-  'как дела', 'как ты', 'как жизнь', 'как поживаешь', 'как настроение', 'что делаешь',
-  'кто ты', 'ты кто', 'что ты умеешь',
-  'кандайсыз', 'кандайсың', 'иштер кандай', 'эмне кыласың', 'сен кимсиң',
-  'how are you', 'how r u', 'what s up', 'whats up', 'who are you', 'what can you do',
+  'как дела',
+  'как ты',
+  'как жизнь',
+  'как поживаешь',
+  'как настроение',
+  'что делаешь',
+  'кто ты',
+  'ты кто',
+  'что ты умеешь',
+  'кандайсыз',
+  'кандайсың',
+  'иштер кандай',
+  'эмне кыласың',
+  'сен кимсиң',
+  'how are you',
+  'how r u',
+  'what s up',
+  'whats up',
+  'who are you',
+  'what can you do',
 ];
 
 const _thanksKeys = ['спасибо', 'благодар', 'рахмат', 'thank', '=thx'];
 
 /// Слова, по которым понятно, что спрашивают про конкретное лекарство.
 const _drugIntentKeys = [
-  'где', 'купить', 'аналог', 'цена', 'стоит', 'лекарств', 'таблетк', 'препарат', 'налич',
-  'кайда', 'дары', 'канча', 'сатып',
-  'where', 'buy', 'price', 'cost', 'analog', 'medicine', 'pill', 'tablet', 'drug',
+  'где',
+  'купить',
+  'аналог',
+  'цена',
+  'стоит',
+  'лекарств',
+  'таблетк',
+  'препарат',
+  'налич',
+  'кайда',
+  'дары',
+  'канча',
+  'сатып',
+  'where',
+  'buy',
+  'price',
+  'cost',
+  'analog',
+  'medicine',
+  'pill',
+  'tablet',
+  'drug',
 ];
 
 bool _hasKey(String text, List<String> tokens, String key) {
@@ -533,7 +918,9 @@ bool _hasAny(String text, List<String> tokens, List<String> keys) =>
 bool _isTopicWord(String token) {
   for (final topic in _topics) {
     for (final k in topic.keys) {
-      if (k.startsWith('=') ? token == k.substring(1) : (!k.contains(' ') && token.startsWith(k))) {
+      if (k.startsWith('=')
+          ? token == k.substring(1)
+          : (!k.contains(' ') && token.startsWith(k))) {
         return true;
       }
     }
@@ -547,19 +934,121 @@ bool _isTopicWord(String token) {
 
 /// Слова, которые не являются названием лекарства (ru / ky / en).
 const _stopWords = {
-  'где', 'есть', 'купить', 'найти', 'найди', 'нужен', 'нужна', 'нужно', 'мне',
-  'а', 'и', 'в', 'на', 'по', 'для', 'аптека', 'аптеке', 'аптеки', 'рядом',
-  'ближайшая', 'ближайшую', 'дешевле', 'дешевый', 'дешевая', 'аналог', 'аналоги',
-  'аналогов', 'цена', 'цену', 'сколько', 'стоит', 'наличие', 'наличии', 'ли',
-  'какие', 'какой', 'подскажи', 'подскажите', 'пожалуйста', 'можно', 'хочу',
-  'лекарство', 'таблетки', 'препарат', 'у', 'вас', 'есть?', 'привет', 'здравствуйте',
-  'я', 'что', 'выпить', 'принять', 'от', 'после', 'чем', 'это', 'мой', 'моя', 'меня',
-  'кайда', 'бар', 'барбы', 'керек', 'канча', 'турат', 'арзан', 'аналогу', 'аналогдору',
-  'дарыкана', 'дарыканада', 'жакын', 'мага', 'сатып', 'алам', 'алсам', 'болот', 'дары',
-  'салам', 'рахмат', 'мен', 'менин',
-  'where', 'is', 'can', 'i', 'buy', 'find', 'need', 'the', 'a', 'an', 'do', 'you', 'have',
-  'price', 'cheap', 'cheaper', 'cheapest', 'analog', 'analogs', 'pharmacy', 'near', 'me',
-  'how', 'much', 'of', 'for', 'to', 'get', 'please', 'what', 'my', 'some', 'any',
+  'где',
+  'есть',
+  'купить',
+  'найти',
+  'найди',
+  'нужен',
+  'нужна',
+  'нужно',
+  'мне',
+  'а',
+  'и',
+  'в',
+  'на',
+  'по',
+  'для',
+  'аптека',
+  'аптеке',
+  'аптеки',
+  'рядом',
+  'ближайшая',
+  'ближайшую',
+  'дешевле',
+  'дешевый',
+  'дешевая',
+  'аналог',
+  'аналоги',
+  'аналогов',
+  'цена',
+  'цену',
+  'сколько',
+  'стоит',
+  'наличие',
+  'наличии',
+  'ли',
+  'какие',
+  'какой',
+  'подскажи',
+  'подскажите',
+  'пожалуйста',
+  'можно',
+  'хочу',
+  'лекарство',
+  'таблетки',
+  'препарат',
+  'у',
+  'вас',
+  'есть?',
+  'привет',
+  'здравствуйте',
+  'я',
+  'что',
+  'выпить',
+  'принять',
+  'от',
+  'после',
+  'чем',
+  'это',
+  'мой',
+  'моя',
+  'меня',
+  'кайда',
+  'бар',
+  'барбы',
+  'керек',
+  'канча',
+  'турат',
+  'арзан',
+  'аналогу',
+  'аналогдору',
+  'дарыкана',
+  'дарыканада',
+  'жакын',
+  'мага',
+  'сатып',
+  'алам',
+  'алсам',
+  'болот',
+  'дары',
+  'салам',
+  'рахмат',
+  'мен',
+  'менин',
+  'where',
+  'is',
+  'can',
+  'i',
+  'buy',
+  'find',
+  'need',
+  'the',
+  'a',
+  'an',
+  'do',
+  'you',
+  'have',
+  'price',
+  'cheap',
+  'cheaper',
+  'cheapest',
+  'analog',
+  'analogs',
+  'pharmacy',
+  'near',
+  'me',
+  'how',
+  'much',
+  'of',
+  'for',
+  'to',
+  'get',
+  'please',
+  'what',
+  'my',
+  'some',
+  'any',
 };
 
 /// Ответ на сообщение пользователя. Говорит на русском, кыргызском и английском,
@@ -579,9 +1068,9 @@ AssistantReply assistantReply({
   final ctx = _Ctx(catalog, userLat, userLng, now, lang);
 
   final topic = _topics.cast<_Topic?>().firstWhere(
-        (t) => _hasAny(text, tokens, t!.keys),
-        orElse: () => null,
-      );
+    (t) => _hasAny(text, tokens, t!.keys),
+    orElse: () => null,
+  );
 
   // Опасные симптомы — раньше всего остального.
   if (topic != null && topic.emergency) {
@@ -599,7 +1088,11 @@ AssistantReply assistantReply({
   }
 
   if (topic != null) {
-    return _topicReply(ctx, topic, special: _hasAny(text, tokens, _specialGroupKeys));
+    return _topicReply(
+      ctx,
+      topic,
+      special: _hasAny(text, tokens, _specialGroupKeys),
+    );
   }
 
   if (_hasAny(text, tokens, _smallTalkKeys)) {
@@ -621,8 +1114,12 @@ AssistantReply assistantReply({
   }
   if (_hasAny(text, tokens, _thanksKeys)) {
     return AssistantReply(
-      _t(lang, 'Пожалуйста! Будьте здоровы.', 'Эч нерсе эмес! Ден соолугуңуз чың болсун.',
-          "You're welcome! Stay healthy."),
+      _t(
+        lang,
+        'Пожалуйста! Будьте здоровы.',
+        'Эч нерсе эмес! Ден соолугуңуз чың болсун.',
+        "You're welcome! Stay healthy.",
+      ),
       lang: lang,
     );
   }
@@ -696,15 +1193,21 @@ class _Ctx {
   String distance(Offer o) {
     final s = formatDistance(dist(o));
     if (lang != AssistantLang.en) return s;
-    return s.replaceAll(',', '.').replaceAll(' км', ' km').replaceAll(' м', ' m');
+    return s
+        .replaceAll(',', '.')
+        .replaceAll(' км', ' km')
+        .replaceAll(' м', ' m');
   }
 
-  String som(int price) => lang == AssistantLang.en ? '$price som' : '$price сом';
+  String som(int price) =>
+      lang == AssistantLang.en ? '$price som' : '$price сом';
 
   /// Открытые сейчас предложения, а если таких нет — все.
   (List<Offer> pool, int openCount) offers(Drug d) {
     final all = catalog.offersForDrug(d.id);
-    final open = all.where((o) => isOpenAt(catalog.pharmacy(o.pharmacyId)!, now)).toList();
+    final open = all
+        .where((o) => isOpenAt(catalog.pharmacy(o.pharmacyId)!, now))
+        .toList();
     return (open.isNotEmpty ? open : all, open.length);
   }
 
@@ -729,18 +1232,32 @@ class _Ctx {
 AssistantReply _drugReply(_Ctx c, Drug drug) {
   final lang = c.lang;
   final catalog = c.catalog;
-  final buf = StringBuffer(lang == AssistantLang.en
-      ? '${c.name(drug)}.\n'
-      : '${drug.title} (${drug.subtitle.toLowerCase()}).\n');
+  final buf = StringBuffer(
+    lang == AssistantLang.en
+        ? '${c.name(drug)}.\n'
+        : '${drug.title} (${drug.subtitle.toLowerCase()}).\n',
+  );
   if (drug.rx) {
-    buf.writeln(_t(lang, 'Отпускается только по рецепту врача.',
-        'Дарыгердин рецепти менен гана берилет.', 'Prescription only.'));
+    buf.writeln(
+      _t(
+        lang,
+        'Отпускается только по рецепту врача.',
+        'Дарыгердин рецепти менен гана берилет.',
+        'Prescription only.',
+      ),
+    );
   }
 
   final all = catalog.offersForDrug(drug.id);
   if (all.isEmpty) {
-    buf.writeln(_t(lang, 'Сейчас нет ни в одной аптеке.', 'Азыр эч бир дарыканада жок.',
-        'Not available in any pharmacy right now.'));
+    buf.writeln(
+      _t(
+        lang,
+        'Сейчас нет ни в одной аптеке.',
+        'Азыр эч бир дарыканада жок.',
+        'Not available in any pharmacy right now.',
+      ),
+    );
   } else {
     final (pool, openCount) = c.offers(drug);
     final nearest = pool.reduce((a, b) => c.dist(a) <= c.dist(b) ? a : b);
@@ -752,35 +1269,60 @@ AssistantReply _drugReply(_Ctx c, Drug drug) {
     }
 
     final n = all.length;
-    buf.writeln(openCount == 0
-        ? _t(lang, 'Есть в $n аптеках (сейчас все закрыты).',
-            '$n дарыканада бар (азыр баары жабык).', 'Available in $n pharmacies (all closed now).')
-        : _t(lang, 'Есть в $n аптеках, открыто сейчас: $openCount.',
-            '$n дарыканада бар, азыр ачык: $openCount.',
-            'Available in $n pharmacies, open now: $openCount.'));
-    buf.writeln('${_t(lang, 'Ближайшая', 'Эң жакыны', 'Nearest')}: ${describe(nearest)}.');
+    buf.writeln(
+      openCount == 0
+          ? _t(
+              lang,
+              'Есть в $n аптеках (сейчас все закрыты).',
+              '$n дарыканада бар (азыр баары жабык).',
+              'Available in $n pharmacies (all closed now).',
+            )
+          : _t(
+              lang,
+              'Есть в $n аптеках, открыто сейчас: $openCount.',
+              '$n дарыканада бар, азыр ачык: $openCount.',
+              'Available in $n pharmacies, open now: $openCount.',
+            ),
+    );
+    buf.writeln(
+      '${_t(lang, 'Ближайшая', 'Эң жакыны', 'Nearest')}: ${describe(nearest)}.',
+    );
     if (cheapest.pharmacyId != nearest.pharmacyId) {
-      buf.writeln('${_t(lang, 'Дешевле всего', 'Эң арзаны', 'Cheapest')}: ${describe(cheapest)}.');
+      buf.writeln(
+        '${_t(lang, 'Дешевле всего', 'Эң арзаны', 'Cheapest')}: ${describe(cheapest)}.',
+      );
     }
   }
 
   final analogs = catalog.analogs(drug);
   if (analogs.isNotEmpty) {
-    buf.write(_t(
-      lang,
-      'Аналоги с тем же действующим веществом (${drug.inn}): ',
-      'Ошол эле таасир берүүчү заты бар аналогдор (${drug.inn}): ',
-      'Analogs with the same active ingredient: ',
-    ));
-    buf.write(analogs.map((a) {
-      final min = catalog.minPrice(a.id);
-      if (min == null) return '${c.name(a)} — ${_t(lang, 'нет в наличии', 'жок', 'out of stock')}';
-      return '${c.name(a)} — ${_t(lang, 'от ${c.som(min)}', '${c.som(min)}дан баштап', 'from ${c.som(min)}')}';
-    }).join('; '));
+    buf.write(
+      _t(
+        lang,
+        'Аналоги с тем же действующим веществом (${drug.inn}): ',
+        'Ошол эле таасир берүүчү заты бар аналогдор (${drug.inn}): ',
+        'Analogs with the same active ingredient: ',
+      ),
+    );
+    buf.write(
+      analogs
+          .map((a) {
+            final min = catalog.minPrice(a.id);
+            if (min == null)
+              return '${c.name(a)} — ${_t(lang, 'нет в наличии', 'жок', 'out of stock')}';
+            return '${c.name(a)} — ${_t(lang, 'от ${c.som(min)}', '${c.som(min)}дан баштап', 'from ${c.som(min)}')}';
+          })
+          .join('; '),
+    );
     buf.writeln('.');
-    buf.write(_t(lang, 'Перед заменой посоветуйтесь с врачом или фармацевтом.',
+    buf.write(
+      _t(
+        lang,
+        'Перед заменой посоветуйтесь с врачом или фармацевтом.',
         'Алмаштыруудан мурун дарыгер же фармацевт менен кеңешиңиз.',
-        'Check with a doctor or pharmacist before switching.'));
+        'Check with a doctor or pharmacist before switching.',
+      ),
+    );
   }
 
   return AssistantReply(buf.toString().trim(), drug: drug, lang: lang);
@@ -798,41 +1340,39 @@ AssistantReply _topicReply(_Ctx c, _Topic topic, {required bool special}) {
     final (pool, _) = c.offers(d);
     buf.write('\n• ${c.name(d)}');
     if (pool.isEmpty) {
-      buf.write(' — ${_t(lang, 'сейчас нет в наличии', 'азыр жок', 'out of stock now')}');
+      buf.write(
+        ' — ${_t(lang, 'сейчас нет в наличии', 'азыр жок', 'out of stock now')}',
+      );
       continue;
     }
     final cheapest = pool.map((o) => o.price).reduce((a, b) => a < b ? a : b);
     final nearest = pool.reduce((a, b) => c.dist(a) <= c.dist(b) ? a : b);
     final p = c.catalog.pharmacy(nearest.pharmacyId)!;
-    buf.write(_t(
-      lang,
-      ' — от ${c.som(cheapest)}, ближе всего: ${p.chain} (${c.distance(nearest)})',
-      ' — ${c.som(cheapest)}дан баштап, эң жакыны: ${p.chain} (${c.distance(nearest)})',
-      ' — from ${c.som(cheapest)}, nearest: ${p.chain} (${c.distance(nearest)})',
-    ));
+    buf.write(
+      _t(
+        lang,
+        ' — от ${c.som(cheapest)}, ближе всего: ${p.chain} (${c.distance(nearest)})',
+        ' — ${c.som(cheapest)}дан баштап, эң жакыны: ${p.chain} (${c.distance(nearest)})',
+        ' — from ${c.som(cheapest)}, nearest: ${p.chain} (${c.distance(nearest)})',
+      ),
+    );
   }
 
   if (topic.advice != null) buf.write('\n\n${_pick(lang, topic.advice!)}');
   if (special) {
-    buf.write('\n\n${_t(
-      lang,
-      'Для детей, беременных и кормящих дозы и препараты другие — сначала уточните '
-          'у врача или фармацевта.',
-      'Балдар, кош бойлуу жана эмизген аялдар үчүн дозалар жана дарылар башкача — '
-          'адегенде дарыгерден же фармацевттен сураңыз.',
-      'For children, pregnant or breastfeeding women doses and medicines differ — '
-          'check with a doctor or pharmacist first.',
-    )}');
+    buf.write(
+      '\n\n${_t(lang, 'Для детей, беременных и кормящих дозы и препараты другие — сначала уточните '
+          'у врача или фармацевта.', 'Балдар, кош бойлуу жана эмизген аялдар үчүн дозалар жана дарылар башкача — '
+          'адегенде дарыгерден же фармацевттен сураңыз.', 'For children, pregnant or breastfeeding women doses and medicines differ — '
+          'check with a doctor or pharmacist first.')}',
+    );
   }
   if (topic.warning != null) buf.write('\n\n⚠️ ${_pick(lang, topic.warning!)}');
   if (suggested.isNotEmpty) {
-    buf.write('\n\n${_t(
-      lang,
-      'Принимайте строго по инструкции. Это справка, а не назначение врача.',
-      'Нускамага так ылайык ичиңиз. Бул маалымат гана, дарыгердин дайындамасы эмес.',
-      "Follow the package instructions. This is general information, not a doctor's "
-          'prescription.',
-    )}');
+    buf.write(
+      '\n\n${_t(lang, 'Принимайте строго по инструкции. Это справка, а не назначение врача.', 'Нускамага так ылайык ичиңиз. Бул маалымат гана, дарыгердин дайындамасы эмес.', "Follow the package instructions. This is general information, not a doctor's "
+          'prescription.')}',
+    );
   }
 
   return AssistantReply(buf.toString(), suggestions: suggested, lang: lang);
@@ -840,10 +1380,9 @@ AssistantReply _topicReply(_Ctx c, _Topic topic, {required bool special}) {
 
 /// Название препарата действительно есть в сообщении (с учётом окончаний).
 bool _namedExplicitly(Drug drug, List<String> words) {
-  final names = normalize([drug.name, drug.inn, ...drug.aliases].join(' '))
-      .split(' ')
-      .where((t) => t.length >= 4)
-      .toList();
+  final names = normalize(
+    [drug.name, drug.inn, ...drug.aliases].join(' '),
+  ).split(' ').where((t) => t.length >= 4).toList();
   final joined = [
     ...words,
     for (var i = 0; i + 1 < words.length; i++) words[i] + words[i + 1],
@@ -863,7 +1402,11 @@ Drug? _findDrug(Catalog catalog, List<String> words) {
   if (whole.isNotEmpty) return whole.first;
   // «но шпы» — название было через дефис, normalize его разделил.
   for (var i = 0; i + 1 < words.length; i++) {
-    final joined = searchDrugs(catalog.drugs, words[i] + words[i + 1], limit: 1);
+    final joined = searchDrugs(
+      catalog.drugs,
+      words[i] + words[i + 1],
+      limit: 1,
+    );
     if (joined.isNotEmpty) return joined.first;
   }
   for (final w in words) {

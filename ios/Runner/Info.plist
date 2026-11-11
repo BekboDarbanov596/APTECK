@@ -12,6 +12,7 @@
 	<array>
 		<string>tel</string>
 		<string>https</string>
+		<string>dgis</string>
 	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>

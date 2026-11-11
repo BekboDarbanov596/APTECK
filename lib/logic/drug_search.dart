@@ -58,9 +58,8 @@ String normalize(String s) => s
     .replaceAll(RegExp(r'[^a-zа-я0-9]+'), ' ')
     .trim();
 
-List<String> _tokens(Drug d) => normalize(
-      [d.name, d.inn, ...d.aliases].join(' '),
-    ).split(' ');
+List<String> _tokens(Drug d) =>
+    normalize([d.name, d.inn, ...d.aliases].join(' ')).split(' ');
 
 int _score(Drug drug, String q, List<String> queryTokens) {
   final name = normalize(drug.name);
@@ -69,8 +68,9 @@ int _score(Drug drug, String q, List<String> queryTokens) {
   if (drug.aliases.any((a) => normalize(a).startsWith(q))) return 70;
 
   final tokens = _tokens(drug);
-  final allMatch =
-      queryTokens.every((qt) => tokens.any((t) => t.startsWith(qt)));
+  final allMatch = queryTokens.every(
+    (qt) => tokens.any((t) => t.startsWith(qt)),
+  );
   if (!allMatch) return 0;
   // Совпало по действующему веществу — чуть ниже, чем по названию.
   return name.split(' ').any((t) => t.startsWith(queryTokens.first)) ? 60 : 40;
@@ -98,8 +98,11 @@ int levenshtein(String a, String b) {
     cur[0] = i;
     for (var j = 1; j <= b.length; j++) {
       final cost = a[i - 1] == b[j - 1] ? 0 : 1;
-      cur[j] = [prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost]
-          .reduce((x, y) => x < y ? x : y);
+      cur[j] = [
+        prev[j] + 1,
+        cur[j - 1] + 1,
+        prev[j - 1] + cost,
+      ].reduce((x, y) => x < y ? x : y);
     }
     prev = cur;
   }

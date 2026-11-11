@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Язык интерфейса: перевод и перестройка при смене', (tester) async {
+  testWidgets('Язык интерфейса: перевод и перестройка при смене', (
+    tester,
+  ) async {
     final lang = LangController(persist: false);
     await tester.pumpWidget(
       LangScope(
         controller: lang,
         child: MaterialApp(
-          home: Builder(builder: (context) => Text(tr(context, 'Профиль') + tr(context, 'Карта'))),
+          home: Builder(
+            builder: (context) =>
+                Text(tr(context, 'Профиль') + tr(context, 'Карта')),
+          ),
         ),
       ),
     );
@@ -25,10 +30,16 @@ void main() {
     expect(find.text('ProfileMap'), findsNothing);
   });
 
-  testWidgets('Без LangScope — русский, неизвестная строка — как есть', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Builder(builder: (context) => Text(tr(context, 'Строка без перевода'))),
-    ));
+  testWidgets('Без LangScope — русский, неизвестная строка — как есть', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Builder(
+          builder: (context) => Text(tr(context, 'Строка без перевода')),
+        ),
+      ),
+    );
     expect(find.text('Строка без перевода'), findsOneWidget);
   });
 }

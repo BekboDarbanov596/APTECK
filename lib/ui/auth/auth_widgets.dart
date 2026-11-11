@@ -48,11 +48,11 @@ class AuthScaffold extends StatelessWidget {
                 Text(
                   subtitle,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 15, color: AppColors.textMuted),
+                  style: TextStyle(fontSize: 15, color: AppColors.textMuted),
                 ),
                 const SizedBox(height: 24),
                 if (auth.status == AuthStatus.notConfigured) ...[
-                  const _NotConfiguredBanner(),
+                  const AuthNotConfiguredBanner(),
                   const SizedBox(height: 16),
                 ],
                 ...children,
@@ -65,30 +65,17 @@ class AuthScaffold extends StatelessWidget {
   }
 }
 
-class _NotConfiguredBanner extends StatelessWidget {
-  const _NotConfiguredBanner();
+class AuthNotConfiguredBanner extends StatelessWidget {
+  const AuthNotConfiguredBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: AppColors.orangeSoft,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: const Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(Icons.info_outline, color: AppColors.orange, size: 20),
-          SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              'Вход пока не подключён: Firebase-проект ещё не настроен. '
-              'Экран работает, но войти сейчас нельзя.',
-              style: TextStyle(fontSize: 13.5, color: AppColors.orange, height: 1.3),
-            ),
-          ),
-        ],
+    final theme = Theme.of(context);
+    return Text(
+      tr(context, 'Вход пока недоступен. Firebase-проект ещё не настроен.'),
+      style: theme.textTheme.bodySmall?.copyWith(
+        color: theme.colorScheme.onSurfaceVariant,
+        height: 1.4,
       ),
     );
   }
@@ -130,8 +117,10 @@ class _AuthFieldState extends State<AuthField> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final dark = theme.brightness == Brightness.dark;
     OutlineInputBorder border(Color c, [double w = 1]) => OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(dark ? 10 : 16),
           borderSide: BorderSide(color: c, width: w),
         );
     return Padding(
@@ -151,15 +140,15 @@ class _AuthFieldState extends State<AuthField> {
           labelText: widget.label,
           prefixIcon: Icon(widget.icon),
           filled: true,
-          fillColor: AppColors.surface,
+          fillColor: dark ? const Color(0xFF2C3121) : AppColors.surface,
           border: border(Colors.transparent),
-          enabledBorder: border(Colors.transparent),
-          focusedBorder: border(AppColors.green, 1.5),
+          enabledBorder: border(dark ? theme.colorScheme.outline : Colors.transparent),
+          focusedBorder: border(dark ? theme.colorScheme.primary : AppColors.green, 1.5),
           errorBorder: border(Colors.red.shade300),
           focusedErrorBorder: border(Colors.red.shade400, 1.5),
           suffixIcon: widget.obscure
               ? IconButton(
-                  tooltip: _hidden ? 'Показать пароль' : 'Скрыть пароль',
+                  tooltip: tr(context, _hidden ? 'Показать пароль' : 'Скрыть пароль'),
                   onPressed: () => setState(() => _hidden = !_hidden),
                   icon: Icon(_hidden ? Icons.visibility_outlined : Icons.visibility_off_outlined),
                 )
@@ -194,7 +183,7 @@ class AuthPrimaryButton extends StatelessWidget {
             ? const SizedBox.square(
                 key: ValueKey('loading'),
                 dimension: 22,
-                child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white),
+              child: CircularProgressIndicator(strokeWidth: 2.5),
               )
             : Text(label, key: const ValueKey('label')),
       ),
@@ -211,13 +200,15 @@ class GoogleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final dark = theme.brightness == Brightness.dark;
     return OutlinedButton(
       onPressed: loading ? null : onPressed,
       style: OutlinedButton.styleFrom(
         minimumSize: const Size.fromHeight(56),
-        backgroundColor: AppColors.surface,
-        foregroundColor: AppColors.text,
-        side: const BorderSide(color: AppColors.border),
+        backgroundColor: dark ? Colors.transparent : AppColors.surface,
+        foregroundColor: dark ? theme.colorScheme.onSurface : AppColors.text,
+        side: BorderSide(color: dark ? theme.colorScheme.outline : AppColors.border),
       ),
       child: loading
           ? const SizedBox.square(
@@ -279,7 +270,10 @@ class OrDivider extends StatelessWidget {
             Expanded(child: Divider()),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Text(tr(context, 'или'), style: TextStyle(color: AppColors.textMuted)),
+              child: Text(
+                tr(context, 'или'),
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
+              ),
             ),
             Expanded(child: Divider()),
           ],
@@ -290,7 +284,7 @@ class OrDivider extends StatelessWidget {
 /// Показать ошибку входа. Отмену человеком не показываем.
 void showAuthError(BuildContext context, Object error) {
   if (error is AuthCancelled) return;
-  final text = error is AuthFailure ? error.message : tr(context, 'Что-то пошло не так. Попробуйте ещё раз.');
+  final text = error is AuthFailure ? tr(context, error.message) : tr(context, 'Что-то пошло не так. Попробуйте ещё раз.');
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(content: Text(text)));

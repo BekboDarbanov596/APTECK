@@ -94,7 +94,7 @@ class _SignedIn extends StatelessWidget {
             foregroundImage: photo == null ? null : NetworkImage(photo),
             child: Text(
               user.initials,
-              style: const TextStyle(fontWeight: FontWeight.w800, color: AppColors.greenDark),
+              style: TextStyle(fontWeight: FontWeight.w800, color: AppColors.greenDark),
             ),
           ),
           const SizedBox(width: 14),
@@ -113,7 +113,7 @@ class _SignedIn extends StatelessWidget {
                     user.email!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 14, color: AppColors.textMuted),
+                    style: TextStyle(fontSize: 14, color: AppColors.textMuted),
                   ),
               ],
             ),

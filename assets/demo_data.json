@@ -1,8 +1,8 @@
 {
   "meta": {
     "demo": true,
-    "note": "Демо-данные: цены и наличие примерные, координаты аптек приблизительные.",
-    "generatedAt": "2026-11-08"
+    "note": "Аптеки и координаты — OpenStreetMap (2026-11-11, © участники OpenStreetMap, ODbL); цены и наличие — демо.",
+    "generatedAt": "2026-11-11"
   },
   "drugs": [
     {
@@ -375,8 +375,8 @@
       "id": "neman-chuy-125",
       "chain": "Неман Фарм",
       "address": "просп. Чуй, 125",
-      "lat": 42.8762,
-      "lng": 74.6097,
+      "lat": 42.8754516,
+      "lng": 74.6242515,
       "opensAt": "08:00",
       "closesAt": "22:00",
       "phone": null
@@ -384,19 +384,19 @@
     {
       "id": "neman-kievskaya-98",
       "chain": "Неман Фарм",
-      "address": "ул. Киевская, 98",
-      "lat": 42.8737,
-      "lng": 74.598,
-      "opensAt": "08:00",
-      "closesAt": "21:00",
+      "address": "ул. Тоголок Молдо, 14",
+      "lat": 42.8723114,
+      "lng": 74.5954365,
+      "opensAt": null,
+      "closesAt": null,
       "phone": null
     },
     {
       "id": "neman-dzhal-23",
       "chain": "Неман Фарм",
-      "address": "мкр Джал, 23",
-      "lat": 42.8352,
-      "lng": 74.5878,
+      "address": "ул. Чынгыза Айтматова, 97/4",
+      "lat": 42.8299441,
+      "lng": 74.582727,
       "opensAt": "09:00",
       "closesAt": "21:00",
       "phone": null
@@ -404,9 +404,9 @@
     {
       "id": "aibolit-bokonbaeva-144",
       "chain": "Айболит",
-      "address": "ул. Боконбаева, 144",
-      "lat": 42.8688,
-      "lng": 74.6002,
+      "address": "ул. Абдрахманова",
+      "lat": 42.8502228,
+      "lng": 74.6098117,
       "opensAt": "08:00",
       "closesAt": "22:00",
       "phone": null
@@ -414,9 +414,9 @@
     {
       "id": "aibolit-vostok5-12",
       "chain": "Айболит",
-      "address": "мкр Восток-5, 12",
-      "lat": 42.8512,
-      "lng": 74.6648,
+      "address": "ул. Курманжан датка",
+      "lat": 42.8848178,
+      "lng": 74.636518,
       "opensAt": "09:00",
       "closesAt": "20:00",
       "phone": null
@@ -424,9 +424,9 @@
     {
       "id": "aibolit-manasa-67",
       "chain": "Айболит",
-      "address": "просп. Манаса, 67",
-      "lat": 42.8652,
-      "lng": 74.5882,
+      "address": "просп. Дэн Сяопина, 4",
+      "lat": 42.8776721,
+      "lng": 74.5607774,
       "opensAt": "08:00",
       "closesAt": "23:00",
       "phone": null
@@ -435,8 +435,8 @@
       "id": "farmamir-moskovskaya-134",
       "chain": "ФармаМир",
       "address": "ул. Московская, 134",
-      "lat": 42.8706,
-      "lng": 74.5992,
+      "lat": 42.869385,
+      "lng": 74.5984878,
       "opensAt": "08:00",
       "closesAt": "22:00",
       "phone": null
@@ -445,8 +445,8 @@
       "id": "farmamir-toktogula-93",
       "chain": "ФармаМир",
       "address": "ул. Токтогула, 93",
-      "lat": 42.8722,
-      "lng": 74.6052,
+      "lat": 42.8723164,
+      "lng": 74.6083138,
       "opensAt": "09:00",
       "closesAt": "21:00",
       "phone": null
@@ -455,8 +455,8 @@
       "id": "farmamir-tunguch-64",
       "chain": "ФармаМир",
       "address": "мкр Тунгуч, 64",
-      "lat": 42.8312,
-      "lng": 74.6262,
+      "lat": 42.8543365,
+      "lng": 74.6879418,
       "opensAt": "09:00",
       "closesAt": "20:00",
       "phone": null
@@ -465,8 +465,8 @@
       "id": "elaman-logvinenko-30",
       "chain": "Эл Аман",
       "address": "ул. Логвиненко, 30/1",
-      "lat": 42.869,
-      "lng": 74.596,
+      "lat": 42.8822083,
+      "lng": 74.5985607,
       "opensAt": "08:00",
       "closesAt": "18:00",
       "phone": null
@@ -485,8 +485,8 @@
       "id": "elaman-fuchika-15",
       "chain": "Эл Аман",
       "address": "ул. Фучика, 15",
-      "lat": 42.8875,
-      "lng": 74.587,
+      "lat": 42.8848906,
+      "lng": 74.5539974,
       "opensAt": "08:00",
       "closesAt": "18:00",
       "phone": null
@@ -495,8 +495,8 @@
       "id": "farmservis-ahunbaeva-131",
       "chain": "Фарм-Сервис",
       "address": "ул. Ахунбаева, 131",
-      "lat": 42.8445,
-      "lng": 74.603,
+      "lat": 42.8435498,
+      "lng": 74.5962469,
       "opensAt": null,
       "closesAt": null,
       "phone": null
@@ -505,8 +505,8 @@
       "id": "farmservis-beishenalievoi-29",
       "chain": "Фарм-Сервис",
       "address": "ул. Бейшеналиевой, 29",
-      "lat": 42.8815,
-      "lng": 74.62,
+      "lat": 42.8751396,
+      "lng": 74.5718633,
       "opensAt": "08:00",
       "closesAt": "21:00",
       "phone": null
@@ -514,21 +514,461 @@
     {
       "id": "farvater-ibraimova-115",
       "chain": "Фарватер",
-      "address": "ул. Ибраимова, 115",
-      "lat": 42.878,
-      "lng": 74.615,
+      "address": "ул. Койбагарова, 17/1",
+      "lat": 42.8396868,
+      "lng": 74.6299096,
       "opensAt": "09:00",
       "closesAt": "21:00",
       "phone": null
     },
     {
-      "id": "zdorovie-zhibek-zholu-45",
-      "chain": "Аптека «Здоровье»",
-      "address": "ул. Жибек Жолу, 45",
-      "lat": 42.887,
-      "lng": 74.6,
+      "id": "osm-way1560006888",
+      "chain": "Неман Фарм",
+      "address": "ул. Гоголя, 113/2",
+      "lat": 42.8742721,
+      "lng": 74.6204054,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node4148327634",
+      "chain": "Неман Фарм",
+      "address": "просп. Чынгыза Айтматова, 49",
+      "lat": 42.8439825,
+      "lng": 74.585614,
+      "opensAt": null,
+      "closesAt": null,
+      "phone": null
+    },
+    {
+      "id": "osm-node2918324163",
+      "chain": "Неман Фарм",
+      "address": "просп. Чуй, 161",
+      "lat": 42.8760871,
+      "lng": 74.5458205,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node5479304022",
+      "chain": "Неман Фарм",
+      "address": "ул. Лев Толстой, 59",
+      "lat": 42.8651819,
+      "lng": 74.5542916,
+      "opensAt": null,
+      "closesAt": null,
+      "phone": null
+    },
+    {
+      "id": "osm-node6000965935",
+      "chain": "Неман Фарм",
+      "address": "просп. Аалы Токомбаева",
+      "lat": 42.8292438,
+      "lng": 74.5619532,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node10127026409",
+      "chain": "Неман Фарм",
+      "address": "ул. Боконбаева, 136",
+      "lat": 42.8665149,
+      "lng": 74.6107572,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node13201640908",
+      "chain": "Неман Фарм",
+      "address": "ул. Абдрахманова, 272",
+      "lat": 42.9229727,
+      "lng": 74.6117079,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node1813385669",
+      "chain": "Неман Фарм",
+      "address": "просп. Жайыл баатыра",
+      "lat": 42.8142445,
+      "lng": 74.6305781,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node1675856165",
+      "chain": "Неман Фарм",
+      "address": "ул. Карыбека Тыналиева",
+      "lat": 42.8419552,
+      "lng": 74.5672781,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node10182502502",
+      "chain": "Неман Фарм",
+      "address": "ул. Осмонкула",
+      "lat": 42.8872563,
+      "lng": 74.6288185,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node2918357795",
+      "chain": "Неман Фарм",
+      "address": "ул. Манаса",
+      "lat": 42.8770487,
+      "lng": 74.5622448,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node1913699350",
+      "chain": "Неман Фарм",
+      "address": "ул. Абдрахманова",
+      "lat": 42.8480273,
+      "lng": 74.6095854,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node1482515903",
+      "chain": "Неман Фарм",
+      "address": "ул. Токтогула",
+      "lat": 42.8728189,
+      "lng": 74.584247,
+      "opensAt": null,
+      "closesAt": null,
+      "phone": null
+    },
+    {
+      "id": "osm-node3404945078",
+      "chain": "Неман Фарм",
+      "address": "ул. Абдрахманова",
+      "lat": 42.8852823,
+      "lng": 74.6115109,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node2064054490",
+      "chain": "Неман Фарм",
+      "address": "ул. Кольбаева",
+      "lat": 42.8771303,
+      "lng": 74.6750677,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node2405688805",
+      "chain": "Неман Фарм",
+      "address": "ул. Ауэзов",
+      "lat": 42.8775625,
+      "lng": 74.6908949,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node8171449522",
+      "chain": "Неман Фарм",
+      "address": "пер. Геологический",
+      "lat": 42.8579203,
+      "lng": 74.6105928,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node2563991263",
+      "chain": "Неман Фарм",
+      "address": "ул. Боконбаева, 61",
+      "lat": 42.8668076,
+      "lng": 74.6139202,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node14196653635",
+      "chain": "Неман Фарм",
+      "address": "ул. Чолпон-Атинская",
+      "lat": 42.8773966,
+      "lng": 74.6788214,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node2062013987",
+      "chain": "Неман Фарм",
+      "address": "ул. Калык Акиев",
+      "lat": 42.8713884,
+      "lng": 74.5774534,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node7994144286",
+      "chain": "Неман Фарм",
+      "address": "просп. Жибек Жолу",
+      "lat": 42.883501,
+      "lng": 74.5988213,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node5871733540",
+      "chain": "Неман Фарм",
+      "address": "ул. Абдрахманова, 6",
+      "lat": 42.836144,
+      "lng": 74.6076956,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node13121825331",
+      "chain": "Неман Фарм",
+      "address": "просп. Чуй, 37",
+      "lat": 42.8745371,
+      "lng": 74.5081562,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node13140415307",
+      "chain": "Неман Фарм",
+      "address": "просп. Жибек Жолу",
+      "lat": 42.8708641,
+      "lng": 74.7278594,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node1221541533",
+      "chain": "Айболит",
+      "address": "ул. Юнусалиева Болота",
+      "lat": 42.8397246,
+      "lng": 74.6228373,
+      "opensAt": null,
+      "closesAt": null,
+      "phone": null
+    },
+    {
+      "id": "osm-node4215726367",
+      "chain": "Айболит",
+      "address": "ул. Тоголок Молдо",
+      "lat": 42.891803,
+      "lng": 74.596988,
       "opensAt": "09:00",
-      "closesAt": "19:00",
+      "closesAt": "21:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node7047562236",
+      "chain": "ФармаМир",
+      "address": "мкр 8, 44",
+      "lat": 42.8296583,
+      "lng": 74.6095509,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node2688453768",
+      "chain": "ФармаМир",
+      "address": "ул. Абдрахманова",
+      "lat": 42.8298097,
+      "lng": 74.6070018,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node6326753506",
+      "chain": "ФармаМир",
+      "address": "ул. Гоголя",
+      "lat": 42.8737862,
+      "lng": 74.6198434,
+      "opensAt": null,
+      "closesAt": null,
+      "phone": null
+    },
+    {
+      "id": "osm-node13116485701",
+      "chain": "ФармаМир",
+      "address": "ул. Чуй, 92",
+      "lat": 42.8748271,
+      "lng": 74.6148715,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node14280054745",
+      "chain": "ФармаМир",
+      "address": "просп. Жибек-Жолу",
+      "lat": 42.8883005,
+      "lng": 74.6422223,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node660731882",
+      "chain": "ФармаМир",
+      "address": "ул. Чуй",
+      "lat": 42.8754634,
+      "lng": 74.6239993,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node2918358310",
+      "chain": "ФармаМир",
+      "address": "просп. Дэн Сяопина, 4",
+      "lat": 42.8776504,
+      "lng": 74.5605259,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node3608638864",
+      "chain": "ФармаМир",
+      "address": "ул. Ауэзов",
+      "lat": 42.876335,
+      "lng": 74.690687,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node5971277408",
+      "chain": "ФармаМир",
+      "address": "ул. Карыбека Тыналиева, 3/3",
+      "lat": 42.8345016,
+      "lng": 74.5686259,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node10090076410",
+      "chain": "ФармаМир",
+      "address": "ул. Саякбай Каралаев, 42",
+      "lat": 42.8311814,
+      "lng": 74.6311534,
+      "opensAt": null,
+      "closesAt": null,
+      "phone": null
+    },
+    {
+      "id": "osm-node10823527472",
+      "chain": "ФармаМир",
+      "address": "ул. Абдрахманова, 150",
+      "lat": 42.8683342,
+      "lng": 74.6108712,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node12146262224",
+      "chain": "ФармаМир",
+      "address": "ул. Юнусалиева Болота",
+      "lat": 42.8315588,
+      "lng": 74.6214723,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node2327962343",
+      "chain": "ФармаМир",
+      "address": "ул. Чалдыбар",
+      "lat": 42.8354588,
+      "lng": 74.6083685,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node5838176109",
+      "chain": "ФармаМир",
+      "address": "просп. Аалы Токомбаева",
+      "lat": 42.8236331,
+      "lng": 74.6161302,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node5281766622",
+      "chain": "ФармаМир",
+      "address": "ул. Ахунбаева Исы",
+      "lat": 42.8435584,
+      "lng": 74.5939407,
+      "opensAt": "08:00",
+      "closesAt": "22:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node5838049214",
+      "chain": "Фарм-Сервис",
+      "address": "просп. Аалы Токомбаева, 53/2",
+      "lat": 42.8244576,
+      "lng": 74.615774,
+      "opensAt": "09:00",
+      "closesAt": "21:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node4148279586",
+      "chain": "Фарм-Сервис",
+      "address": "ул. Карыбека Тыналиева",
+      "lat": 42.8345129,
+      "lng": 74.5686228,
+      "opensAt": "09:00",
+      "closesAt": "21:00",
+      "phone": null
+    },
+    {
+      "id": "osm-node2469008480",
+      "chain": "Фарватер",
+      "address": "ул. Ахунбаева Исы",
+      "lat": 42.8433543,
+      "lng": 74.5868394,
+      "opensAt": null,
+      "closesAt": null,
+      "phone": null
+    },
+    {
+      "id": "osm-node1872257328",
+      "chain": "Эл Аман",
+      "address": "пер. Львовский",
+      "lat": 42.9233524,
+      "lng": 74.6117837,
+      "opensAt": "09:00",
+      "closesAt": "21:00",
       "phone": null
     }
   ],
@@ -2119,119 +2559,4859 @@
       "price": 41
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "panadol-500",
-      "price": 212
+      "price": 186
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "ibuprofen-200",
-      "price": 112
+      "price": 107
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "nurofen-200",
-      "price": 247
+      "price": 217
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "citramon-p",
-      "price": 27
+      "price": 28
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
-      "drugId": "no-spa-40",
-      "price": 278
+      "pharmacyId": "osm-way1560006888",
+      "drugId": "drotaverin-40",
+      "price": 47
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "suprastin-25",
-      "price": 275
+      "price": 250
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "loratadin-10",
-      "price": 45
+      "price": 41
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "amoxicillin-500",
-      "price": 137
+      "price": 133
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
+      "drugId": "azithromycin-250",
+      "price": 160
+    },
+    {
+      "pharmacyId": "osm-way1560006888",
       "drugId": "augmentin-875",
-      "price": 758
+      "price": 673
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "ceftriaxone-1g",
-      "price": 64
+      "price": 65
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
-      "drugId": "omeprazol-20",
-      "price": 104
-    },
-    {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "smecta-3",
-      "price": 373
+      "price": 337
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "activated-carbon",
       "price": 13
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "loperamid-2",
-      "price": 58
+      "price": 54
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
       "drugId": "enalapril-10",
-      "price": 51
+      "price": 47
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-way1560006888",
+      "drugId": "metformin-850",
+      "price": 179
+    },
+    {
+      "pharmacyId": "osm-way1560006888",
+      "drugId": "validol-60",
+      "price": 32
+    },
+    {
+      "pharmacyId": "osm-way1560006888",
+      "drugId": "corvalol-25",
+      "price": 68
+    },
+    {
+      "pharmacyId": "osm-way1560006888",
+      "drugId": "nazivin-005",
+      "price": 280
+    },
+    {
+      "pharmacyId": "osm-way1560006888",
+      "drugId": "diclofenac-50",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "paracetamol-500",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "panadol-500",
+      "price": 194
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "ibuprofen-200",
+      "price": 105
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "no-spa-40",
+      "price": 290
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "drotaverin-40",
+      "price": 47
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "suprastin-25",
+      "price": 251
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "loratadin-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "amoxicillin-500",
+      "price": 126
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "azithromycin-250",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "augmentin-875",
+      "price": 672
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "ceftriaxone-1g",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "omeprazol-20",
+      "price": 91
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "smecta-3",
+      "price": 356
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "loperamid-2",
+      "price": 50
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "enalapril-10",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "aspirin-cardio-100",
+      "price": 293
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "theraflu",
+      "price": 492
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "levomekol-40",
+      "price": 153
+    },
+    {
+      "pharmacyId": "osm-node4148327634",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "panadol-500",
+      "price": 193
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "ibuprofen-200",
+      "price": 96
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "suprastin-25",
+      "price": 241
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "amoxicillin-500",
+      "price": 131
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "azithromycin-250",
+      "price": 157
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "augmentin-875",
+      "price": 714
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "ceftriaxone-1g",
+      "price": 66
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "omeprazol-20",
+      "price": 92
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "smecta-3",
+      "price": 374
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "loperamid-2",
+      "price": 55
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "enalapril-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
       "drugId": "amlodipin-5",
+      "price": 80
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "metformin-850",
+      "price": 160
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "aspirin-cardio-100",
+      "price": 316
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "validol-60",
+      "price": 32
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "corvalol-25",
+      "price": 60
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "nazivin-005",
+      "price": 279
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "theraflu",
+      "price": 503
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "levomekol-40",
+      "price": 169
+    },
+    {
+      "pharmacyId": "osm-node2918324163",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "paracetamol-500",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "panadol-500",
+      "price": 202
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "ibuprofen-200",
+      "price": 95
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "no-spa-40",
+      "price": 259
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "loratadin-10",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "amoxicillin-500",
+      "price": 130
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "azithromycin-250",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "augmentin-875",
+      "price": 710
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "ceftriaxone-1g",
+      "price": 60
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "omeprazol-20",
+      "price": 91
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "smecta-3",
+      "price": 350
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "loperamid-2",
+      "price": 55
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "enalapril-10",
+      "price": 47
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "amlodipin-5",
+      "price": 85
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "metformin-850",
+      "price": 162
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "aspirin-cardio-100",
+      "price": 293
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "validol-60",
+      "price": 32
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "corvalol-25",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "nazivin-005",
+      "price": 259
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "theraflu",
+      "price": 490
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "levomekol-40",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node5479304022",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "panadol-500",
+      "price": 193
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "ibuprofen-200",
+      "price": 101
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "nurofen-200",
+      "price": 218
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "no-spa-40",
+      "price": 260
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "drotaverin-40",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "suprastin-25",
+      "price": 245
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "loratadin-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "amoxicillin-500",
+      "price": 127
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "augmentin-875",
+      "price": 716
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "ceftriaxone-1g",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "smecta-3",
+      "price": 372
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "loperamid-2",
+      "price": 55
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "amlodipin-5",
+      "price": 85
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "metformin-850",
+      "price": 168
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "validol-60",
+      "price": 31
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "corvalol-25",
+      "price": 67
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "nazivin-005",
+      "price": 273
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "theraflu",
+      "price": 499
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "levomekol-40",
+      "price": 154
+    },
+    {
+      "pharmacyId": "osm-node6000965935",
+      "drugId": "diclofenac-50",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "nurofen-200",
+      "price": 217
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "no-spa-40",
+      "price": 280
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "drotaverin-40",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "azithromycin-250",
+      "price": 165
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "augmentin-875",
+      "price": 725
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "ceftriaxone-1g",
+      "price": 68
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "omeprazol-20",
+      "price": 89
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "smecta-3",
+      "price": 327
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "loperamid-2",
+      "price": 52
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "enalapril-10",
+      "price": 50
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "amlodipin-5",
+      "price": 81
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "validol-60",
+      "price": 31
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "corvalol-25",
+      "price": 64
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "nazivin-005",
+      "price": 275
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "theraflu",
+      "price": 473
+    },
+    {
+      "pharmacyId": "osm-node10127026409",
+      "drugId": "levomekol-40",
+      "price": 165
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "panadol-500",
+      "price": 189
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "nurofen-200",
+      "price": 233
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "no-spa-40",
+      "price": 283
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "suprastin-25",
+      "price": 238
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "loratadin-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "azithromycin-250",
+      "price": 169
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "ceftriaxone-1g",
+      "price": 63
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "loperamid-2",
+      "price": 56
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "enalapril-10",
+      "price": 47
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "amlodipin-5",
+      "price": 79
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "metformin-850",
+      "price": 173
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "aspirin-cardio-100",
+      "price": 317
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "validol-60",
+      "price": 30
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "corvalol-25",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "nazivin-005",
+      "price": 272
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "theraflu",
+      "price": 494
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "levomekol-40",
+      "price": 158
+    },
+    {
+      "pharmacyId": "osm-node13201640908",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "ibuprofen-200",
+      "price": 99
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "nurofen-200",
+      "price": 210
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "no-spa-40",
+      "price": 261
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "drotaverin-40",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "suprastin-25",
+      "price": 240
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "amoxicillin-500",
+      "price": 127
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "azithromycin-250",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "augmentin-875",
+      "price": 675
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "ceftriaxone-1g",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "omeprazol-20",
       "price": 93
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "smecta-3",
+      "price": 369
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "amlodipin-5",
+      "price": 90
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
       "drugId": "metformin-850",
-      "price": 180
+      "price": 163
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "validol-60",
+      "price": 31
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "corvalol-25",
+      "price": 59
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "nazivin-005",
+      "price": 273
+    },
+    {
+      "pharmacyId": "osm-node1813385669",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "nurofen-200",
+      "price": 209
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "drotaverin-40",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "suprastin-25",
+      "price": 234
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "loratadin-10",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "amoxicillin-500",
+      "price": 127
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "azithromycin-250",
+      "price": 169
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "augmentin-875",
+      "price": 659
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "omeprazol-20",
+      "price": 98
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "smecta-3",
+      "price": 332
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "loperamid-2",
+      "price": 56
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "amlodipin-5",
+      "price": 82
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
       "drugId": "aspirin-cardio-100",
-      "price": 339
+      "price": 289
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "corvalol-25",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "nazivin-005",
+      "price": 274
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "theraflu",
+      "price": 464
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "levomekol-40",
+      "price": 157
+    },
+    {
+      "pharmacyId": "osm-node1675856165",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "panadol-500",
+      "price": 181
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "ibuprofen-200",
+      "price": 103
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "nurofen-200",
+      "price": 228
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "no-spa-40",
+      "price": 275
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "suprastin-25",
+      "price": 230
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "loratadin-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "amoxicillin-500",
+      "price": 128
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "azithromycin-250",
+      "price": 167
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "augmentin-875",
+      "price": 669
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "ceftriaxone-1g",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "smecta-3",
+      "price": 356
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "loperamid-2",
+      "price": 52
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "enalapril-10",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "amlodipin-5",
+      "price": 83
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "corvalol-25",
+      "price": 59
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "nazivin-005",
+      "price": 281
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "theraflu",
+      "price": 478
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "levomekol-40",
+      "price": 148
+    },
+    {
+      "pharmacyId": "osm-node10182502502",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "panadol-500",
+      "price": 178
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "nurofen-200",
+      "price": 236
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "suprastin-25",
+      "price": 259
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "loratadin-10",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "amoxicillin-500",
+      "price": 128
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "azithromycin-250",
+      "price": 163
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "augmentin-875",
+      "price": 643
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "omeprazol-20",
+      "price": 89
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "smecta-3",
+      "price": 370
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "amlodipin-5",
+      "price": 82
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "metformin-850",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
       "drugId": "validol-60",
       "price": 34
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-node2918357795",
       "drugId": "corvalol-25",
-      "price": 71
+      "price": 61
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "nazivin-005",
+      "price": 272
+    },
+    {
+      "pharmacyId": "osm-node2918357795",
       "drugId": "theraflu",
-      "price": 520
+      "price": 495
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-node2918357795",
+      "drugId": "levomekol-40",
+      "price": 155
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "panadol-500",
+      "price": 181
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "ibuprofen-200",
+      "price": 103
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "nurofen-200",
+      "price": 231
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "citramon-p",
+      "price": 27
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "no-spa-40",
+      "price": 278
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "drotaverin-40",
+      "price": 47
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "suprastin-25",
+      "price": 245
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "amoxicillin-500",
+      "price": 134
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "azithromycin-250",
+      "price": 160
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "augmentin-875",
+      "price": 712
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "omeprazol-20",
+      "price": 96
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "smecta-3",
+      "price": 326
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "metformin-850",
+      "price": 163
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "aspirin-cardio-100",
+      "price": 292
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "nazivin-005",
+      "price": 256
+    },
+    {
+      "pharmacyId": "osm-node1913699350",
+      "drugId": "levomekol-40",
+      "price": 156
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "panadol-500",
+      "price": 204
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "no-spa-40",
+      "price": 294
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "suprastin-25",
+      "price": 255
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "loratadin-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "amoxicillin-500",
+      "price": 122
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "azithromycin-250",
+      "price": 166
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "augmentin-875",
+      "price": 703
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "ceftriaxone-1g",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "omeprazol-20",
+      "price": 96
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "smecta-3",
+      "price": 341
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "amlodipin-5",
+      "price": 89
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "metformin-850",
+      "price": 175
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "validol-60",
+      "price": 32
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "corvalol-25",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "nazivin-005",
+      "price": 257
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "theraflu",
+      "price": 464
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "levomekol-40",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node1482515903",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "paracetamol-500",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "panadol-500",
+      "price": 201
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "ibuprofen-200",
+      "price": 99
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "nurofen-200",
+      "price": 232
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "no-spa-40",
+      "price": 257
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "drotaverin-40",
+      "price": 50
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "suprastin-25",
+      "price": 247
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "loratadin-10",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "amoxicillin-500",
+      "price": 135
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "azithromycin-250",
+      "price": 167
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "augmentin-875",
+      "price": 642
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "ceftriaxone-1g",
+      "price": 66
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "omeprazol-20",
+      "price": 89
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "enalapril-10",
+      "price": 47
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "amlodipin-5",
+      "price": 83
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "metformin-850",
+      "price": 168
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "validol-60",
+      "price": 30
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "nazivin-005",
+      "price": 259
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "levomekol-40",
+      "price": 153
+    },
+    {
+      "pharmacyId": "osm-node3404945078",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "panadol-500",
+      "price": 181
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "ibuprofen-200",
+      "price": 99
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "nurofen-200",
+      "price": 213
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "no-spa-40",
+      "price": 274
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "drotaverin-40",
+      "price": 50
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "suprastin-25",
+      "price": 228
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "augmentin-875",
+      "price": 729
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "omeprazol-20",
+      "price": 93
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "enalapril-10",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "metformin-850",
+      "price": 173
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "aspirin-cardio-100",
+      "price": 318
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "validol-60",
+      "price": 34
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "corvalol-25",
+      "price": 64
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "nazivin-005",
+      "price": 264
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "theraflu",
+      "price": 488
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "levomekol-40",
+      "price": 163
+    },
+    {
+      "pharmacyId": "osm-node2064054490",
+      "drugId": "diclofenac-50",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "panadol-500",
+      "price": 203
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "ibuprofen-200",
+      "price": 107
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "citramon-p",
+      "price": 28
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "no-spa-40",
+      "price": 260
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "drotaverin-40",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "suprastin-25",
+      "price": 229
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "amoxicillin-500",
+      "price": 126
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "augmentin-875",
+      "price": 667
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "ceftriaxone-1g",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "omeprazol-20",
+      "price": 89
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "loperamid-2",
+      "price": 52
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "amlodipin-5",
+      "price": 80
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "aspirin-cardio-100",
+      "price": 310
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "validol-60",
+      "price": 31
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "corvalol-25",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "nazivin-005",
+      "price": 254
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
+      "drugId": "theraflu",
+      "price": 485
+    },
+    {
+      "pharmacyId": "osm-node2405688805",
       "drugId": "levomekol-40",
       "price": 170
     },
     {
-      "pharmacyId": "zdorovie-zhibek-zholu-45",
+      "pharmacyId": "osm-node2405688805",
       "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "panadol-500",
+      "price": 179
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "ibuprofen-200",
+      "price": 98
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "nurofen-200",
+      "price": 228
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "no-spa-40",
+      "price": 285
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "suprastin-25",
+      "price": 246
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "amoxicillin-500",
+      "price": 119
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "augmentin-875",
+      "price": 659
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "ceftriaxone-1g",
+      "price": 63
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "omeprazol-20",
+      "price": 102
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "smecta-3",
+      "price": 357
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "loperamid-2",
+      "price": 53
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "enalapril-10",
       "price": 48
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "amlodipin-5",
+      "price": 89
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "metformin-850",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "nazivin-005",
+      "price": 252
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "theraflu",
+      "price": 486
+    },
+    {
+      "pharmacyId": "osm-node8171449522",
+      "drugId": "levomekol-40",
+      "price": 149
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "paracetamol-500",
+      "price": 24
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "nurofen-200",
+      "price": 235
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "citramon-p",
+      "price": 28
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "no-spa-40",
+      "price": 269
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "loratadin-10",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "amoxicillin-500",
+      "price": 123
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "azithromycin-250",
+      "price": 149
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "augmentin-875",
+      "price": 723
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "ceftriaxone-1g",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "omeprazol-20",
+      "price": 93
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "smecta-3",
+      "price": 330
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "loperamid-2",
+      "price": 55
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "enalapril-10",
+      "price": 47
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "amlodipin-5",
+      "price": 87
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "metformin-850",
+      "price": 171
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "aspirin-cardio-100",
+      "price": 299
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "corvalol-25",
+      "price": 67
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "nazivin-005",
+      "price": 252
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "theraflu",
+      "price": 465
+    },
+    {
+      "pharmacyId": "osm-node2563991263",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "panadol-500",
+      "price": 187
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "ibuprofen-200",
+      "price": 102
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "nurofen-200",
+      "price": 236
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "no-spa-40",
+      "price": 261
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "amoxicillin-500",
+      "price": 133
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "azithromycin-250",
+      "price": 164
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "augmentin-875",
+      "price": 644
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "ceftriaxone-1g",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "omeprazol-20",
+      "price": 100
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "smecta-3",
+      "price": 363
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "loperamid-2",
+      "price": 55
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "enalapril-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "metformin-850",
+      "price": 160
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "validol-60",
+      "price": 30
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "corvalol-25",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node14196653635",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "ibuprofen-200",
+      "price": 107
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "nurofen-200",
+      "price": 220
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "no-spa-40",
+      "price": 261
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "drotaverin-40",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "suprastin-25",
+      "price": 250
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "loratadin-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "amoxicillin-500",
+      "price": 128
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "augmentin-875",
+      "price": 672
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "ceftriaxone-1g",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "smecta-3",
+      "price": 358
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "loperamid-2",
+      "price": 52
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "enalapril-10",
+      "price": 50
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "amlodipin-5",
+      "price": 81
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "aspirin-cardio-100",
+      "price": 305
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "corvalol-25",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "nazivin-005",
+      "price": 260
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "theraflu",
+      "price": 449
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "levomekol-40",
+      "price": 165
+    },
+    {
+      "pharmacyId": "osm-node2062013987",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "panadol-500",
+      "price": 191
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "ibuprofen-200",
+      "price": 97
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "nurofen-200",
+      "price": 237
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "no-spa-40",
+      "price": 279
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "drotaverin-40",
+      "price": 51
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "suprastin-25",
+      "price": 253
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "loratadin-10",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "amoxicillin-500",
+      "price": 127
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "azithromycin-250",
+      "price": 150
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "augmentin-875",
+      "price": 732
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "ceftriaxone-1g",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "smecta-3",
+      "price": 332
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "loperamid-2",
+      "price": 56
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "enalapril-10",
+      "price": 50
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "amlodipin-5",
+      "price": 86
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "metformin-850",
+      "price": 167
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "aspirin-cardio-100",
+      "price": 296
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "corvalol-25",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "nazivin-005",
+      "price": 275
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "theraflu",
+      "price": 459
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "levomekol-40",
+      "price": 164
+    },
+    {
+      "pharmacyId": "osm-node7994144286",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "panadol-500",
+      "price": 187
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "ibuprofen-200",
+      "price": 102
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "nurofen-200",
+      "price": 222
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "citramon-p",
+      "price": 27
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "no-spa-40",
+      "price": 258
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "drotaverin-40",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "suprastin-25",
+      "price": 239
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "loratadin-10",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "amoxicillin-500",
+      "price": 130
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "azithromycin-250",
+      "price": 161
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "augmentin-875",
+      "price": 702
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "ceftriaxone-1g",
+      "price": 66
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "omeprazol-20",
+      "price": 93
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "smecta-3",
+      "price": 339
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "loperamid-2",
+      "price": 52
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "enalapril-10",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "amlodipin-5",
+      "price": 87
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "aspirin-cardio-100",
+      "price": 298
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "corvalol-25",
+      "price": 67
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "nazivin-005",
+      "price": 271
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "theraflu",
+      "price": 507
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "levomekol-40",
+      "price": 153
+    },
+    {
+      "pharmacyId": "osm-node5871733540",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "panadol-500",
+      "price": 181
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "ibuprofen-200",
+      "price": 107
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "nurofen-200",
+      "price": 214
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "citramon-p",
+      "price": 28
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "no-spa-40",
+      "price": 269
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "suprastin-25",
+      "price": 259
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "loratadin-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "amoxicillin-500",
+      "price": 119
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "azithromycin-250",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "augmentin-875",
+      "price": 685
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "ceftriaxone-1g",
+      "price": 64
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "omeprazol-20",
+      "price": 95
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "smecta-3",
+      "price": 353
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "loperamid-2",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "enalapril-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "amlodipin-5",
+      "price": 83
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "metformin-850",
+      "price": 171
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "aspirin-cardio-100",
+      "price": 299
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "corvalol-25",
+      "price": 63
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "levomekol-40",
+      "price": 158
+    },
+    {
+      "pharmacyId": "osm-node13121825331",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "paracetamol-500",
+      "price": 24
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "panadol-500",
+      "price": 199
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "ibuprofen-200",
+      "price": 103
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "nurofen-200",
+      "price": 235
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "citramon-p",
+      "price": 27
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "no-spa-40",
+      "price": 277
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "suprastin-25",
+      "price": 230
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "azithromycin-250",
+      "price": 165
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "augmentin-875",
+      "price": 734
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "ceftriaxone-1g",
+      "price": 64
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "smecta-3",
+      "price": 367
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "loperamid-2",
+      "price": 55
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "enalapril-10",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "amlodipin-5",
+      "price": 83
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "metformin-850",
+      "price": 158
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "aspirin-cardio-100",
+      "price": 327
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "validol-60",
+      "price": 31
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "nazivin-005",
+      "price": 269
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "theraflu",
+      "price": 444
+    },
+    {
+      "pharmacyId": "osm-node13140415307",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "paracetamol-500",
+      "price": 21
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "panadol-500",
+      "price": 176
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "nurofen-200",
+      "price": 205
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "suprastin-25",
+      "price": 239
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "loratadin-10",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "amoxicillin-500",
+      "price": 120
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "azithromycin-250",
+      "price": 149
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "augmentin-875",
+      "price": 699
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "ceftriaxone-1g",
+      "price": 60
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "omeprazol-20",
+      "price": 90
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "loperamid-2",
+      "price": 51
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "enalapril-10",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "amlodipin-5",
+      "price": 84
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "aspirin-cardio-100",
+      "price": 304
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "validol-60",
+      "price": 29
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "theraflu",
+      "price": 485
+    },
+    {
+      "pharmacyId": "osm-node1221541533",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "panadol-500",
+      "price": 175
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "ibuprofen-200",
+      "price": 100
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "nurofen-200",
+      "price": 212
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "citramon-p",
+      "price": 24
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "no-spa-40",
+      "price": 271
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "drotaverin-40",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "suprastin-25",
+      "price": 226
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "loratadin-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "amoxicillin-500",
+      "price": 125
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "azithromycin-250",
+      "price": 155
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "augmentin-875",
+      "price": 690
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "ceftriaxone-1g",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "omeprazol-20",
+      "price": 90
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "amlodipin-5",
+      "price": 78
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "metformin-850",
+      "price": 168
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "aspirin-cardio-100",
+      "price": 289
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "corvalol-25",
+      "price": 60
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "nazivin-005",
+      "price": 265
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "theraflu",
+      "price": 431
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "levomekol-40",
+      "price": 161
+    },
+    {
+      "pharmacyId": "osm-node4215726367",
+      "drugId": "diclofenac-50",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "paracetamol-500",
+      "price": 24
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "panadol-500",
+      "price": 175
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "ibuprofen-200",
+      "price": 98
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "nurofen-200",
+      "price": 225
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "suprastin-25",
+      "price": 245
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "loratadin-10",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "amoxicillin-500",
+      "price": 119
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "azithromycin-250",
+      "price": 163
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "augmentin-875",
+      "price": 647
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "ceftriaxone-1g",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "omeprazol-20",
+      "price": 89
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "smecta-3",
+      "price": 329
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "loperamid-2",
+      "price": 52
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "amlodipin-5",
+      "price": 88
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "aspirin-cardio-100",
+      "price": 288
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "corvalol-25",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "nazivin-005",
+      "price": 247
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "theraflu",
+      "price": 467
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "levomekol-40",
+      "price": 155
+    },
+    {
+      "pharmacyId": "osm-node7047562236",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "panadol-500",
+      "price": 190
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "ibuprofen-200",
+      "price": 94
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "no-spa-40",
+      "price": 272
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "suprastin-25",
+      "price": 246
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "loratadin-10",
+      "price": 39
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "amoxicillin-500",
+      "price": 119
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "azithromycin-250",
+      "price": 167
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "augmentin-875",
+      "price": 703
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "ceftriaxone-1g",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "smecta-3",
+      "price": 337
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "metformin-850",
+      "price": 170
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "corvalol-25",
+      "price": 66
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "nazivin-005",
+      "price": 278
+    },
+    {
+      "pharmacyId": "osm-node2688453768",
+      "drugId": "theraflu",
+      "price": 454
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "paracetamol-500",
+      "price": 21
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "panadol-500",
+      "price": 190
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "ibuprofen-200",
+      "price": 93
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "nurofen-200",
+      "price": 219
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "no-spa-40",
+      "price": 254
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "drotaverin-40",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "suprastin-25",
+      "price": 227
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "loratadin-10",
+      "price": 39
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "amoxicillin-500",
+      "price": 125
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "augmentin-875",
+      "price": 634
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "ceftriaxone-1g",
+      "price": 59
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "omeprazol-20",
+      "price": 88
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "smecta-3",
+      "price": 330
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "amlodipin-5",
+      "price": 78
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "metformin-850",
+      "price": 163
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "aspirin-cardio-100",
+      "price": 304
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "validol-60",
+      "price": 29
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "corvalol-25",
+      "price": 59
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "nazivin-005",
+      "price": 263
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "theraflu",
+      "price": 487
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "levomekol-40",
+      "price": 166
+    },
+    {
+      "pharmacyId": "osm-node6326753506",
+      "drugId": "diclofenac-50",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "ibuprofen-200",
+      "price": 100
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "no-spa-40",
+      "price": 270
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "suprastin-25",
+      "price": 225
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "amoxicillin-500",
+      "price": 125
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "augmentin-875",
+      "price": 632
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "ceftriaxone-1g",
+      "price": 58
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "omeprazol-20",
+      "price": 88
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "smecta-3",
+      "price": 339
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "enalapril-10",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "amlodipin-5",
+      "price": 83
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "metformin-850",
+      "price": 178
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "aspirin-cardio-100",
+      "price": 314
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "validol-60",
+      "price": 33
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "corvalol-25",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "nazivin-005",
+      "price": 257
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "theraflu",
+      "price": 473
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "levomekol-40",
+      "price": 162
+    },
+    {
+      "pharmacyId": "osm-node13116485701",
+      "drugId": "diclofenac-50",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "paracetamol-500",
+      "price": 24
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "panadol-500",
+      "price": 192
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "nurofen-200",
+      "price": 208
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "citramon-p",
+      "price": 24
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "no-spa-40",
+      "price": 256
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "drotaverin-40",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "suprastin-25",
+      "price": 225
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "loratadin-10",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "amoxicillin-500",
+      "price": 119
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "azithromycin-250",
+      "price": 161
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "augmentin-875",
+      "price": 695
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "omeprazol-20",
+      "price": 92
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "smecta-3",
+      "price": 331
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "loperamid-2",
+      "price": 51
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "enalapril-10",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "amlodipin-5",
+      "price": 79
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "metformin-850",
+      "price": 168
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "aspirin-cardio-100",
+      "price": 286
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "validol-60",
+      "price": 30
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "nazivin-005",
+      "price": 247
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "levomekol-40",
+      "price": 152
+    },
+    {
+      "pharmacyId": "osm-node14280054745",
+      "drugId": "diclofenac-50",
+      "price": 39
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "panadol-500",
+      "price": 200
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "ibuprofen-200",
+      "price": 93
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "nurofen-200",
+      "price": 217
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "citramon-p",
+      "price": 27
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "no-spa-40",
+      "price": 266
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "drotaverin-40",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "suprastin-25",
+      "price": 242
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "amoxicillin-500",
+      "price": 132
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "azithromycin-250",
+      "price": 149
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "ceftriaxone-1g",
+      "price": 63
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "smecta-3",
+      "price": 330
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "loperamid-2",
+      "price": 51
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "enalapril-10",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "metformin-850",
+      "price": 176
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "aspirin-cardio-100",
+      "price": 320
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "corvalol-25",
+      "price": 63
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "nazivin-005",
+      "price": 254
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "theraflu",
+      "price": 476
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "levomekol-40",
+      "price": 162
+    },
+    {
+      "pharmacyId": "osm-node660731882",
+      "drugId": "diclofenac-50",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "panadol-500",
+      "price": 194
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "ibuprofen-200",
+      "price": 103
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "nurofen-200",
+      "price": 215
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "citramon-p",
+      "price": 27
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "no-spa-40",
+      "price": 259
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "drotaverin-40",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "suprastin-25",
+      "price": 228
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "loratadin-10",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "azithromycin-250",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "ceftriaxone-1g",
+      "price": 64
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "smecta-3",
+      "price": 330
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "enalapril-10",
+      "price": 47
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "amlodipin-5",
+      "price": 82
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "metformin-850",
+      "price": 161
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "validol-60",
+      "price": 30
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "corvalol-25",
+      "price": 64
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "nazivin-005",
+      "price": 273
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "theraflu",
+      "price": 451
+    },
+    {
+      "pharmacyId": "osm-node2918358310",
+      "drugId": "levomekol-40",
+      "price": 155
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "ibuprofen-200",
+      "price": 97
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "nurofen-200",
+      "price": 214
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "no-spa-40",
+      "price": 267
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "drotaverin-40",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "suprastin-25",
+      "price": 250
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "loratadin-10",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "amoxicillin-500",
+      "price": 119
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "azithromycin-250",
+      "price": 155
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "ceftriaxone-1g",
+      "price": 60
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "omeprazol-20",
+      "price": 98
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "smecta-3",
+      "price": 339
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "metformin-850",
+      "price": 178
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "aspirin-cardio-100",
+      "price": 287
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "validol-60",
+      "price": 31
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "corvalol-25",
+      "price": 66
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "nazivin-005",
+      "price": 275
+    },
+    {
+      "pharmacyId": "osm-node3608638864",
+      "drugId": "levomekol-40",
+      "price": 162
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "paracetamol-500",
+      "price": 24
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "panadol-500",
+      "price": 178
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "ibuprofen-200",
+      "price": 105
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "nurofen-200",
+      "price": 232
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "no-spa-40",
+      "price": 278
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "drotaverin-40",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "suprastin-25",
+      "price": 239
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "loratadin-10",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "amoxicillin-500",
+      "price": 126
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "azithromycin-250",
+      "price": 150
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "ceftriaxone-1g",
+      "price": 64
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "omeprazol-20",
+      "price": 87
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "smecta-3",
+      "price": 356
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "amlodipin-5",
+      "price": 86
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "metformin-850",
+      "price": 176
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "validol-60",
+      "price": 32
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "corvalol-25",
+      "price": 66
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "nazivin-005",
+      "price": 278
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "theraflu",
+      "price": 476
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "levomekol-40",
+      "price": 165
+    },
+    {
+      "pharmacyId": "osm-node5971277408",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "panadol-500",
+      "price": 190
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "ibuprofen-200",
+      "price": 99
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "nurofen-200",
+      "price": 215
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "citramon-p",
+      "price": 25
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "no-spa-40",
+      "price": 283
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "drotaverin-40",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "suprastin-25",
+      "price": 227
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "loratadin-10",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "amoxicillin-500",
+      "price": 120
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "azithromycin-250",
+      "price": 166
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "ceftriaxone-1g",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "omeprazol-20",
+      "price": 90
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "smecta-3",
+      "price": 333
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "enalapril-10",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "amlodipin-5",
+      "price": 86
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "metformin-850",
+      "price": 167
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "aspirin-cardio-100",
+      "price": 290
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "validol-60",
+      "price": 29
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "corvalol-25",
+      "price": 67
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "nazivin-005",
+      "price": 265
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "theraflu",
+      "price": 487
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "levomekol-40",
+      "price": 166
+    },
+    {
+      "pharmacyId": "osm-node10090076410",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "panadol-500",
+      "price": 179
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "ibuprofen-200",
+      "price": 99
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "nurofen-200",
+      "price": 221
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "citramon-p",
+      "price": 27
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "no-spa-40",
+      "price": 259
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "drotaverin-40",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "suprastin-25",
+      "price": 243
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "loratadin-10",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "amoxicillin-500",
+      "price": 118
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "augmentin-875",
+      "price": 681
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "enalapril-10",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "metformin-850",
+      "price": 170
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "corvalol-25",
+      "price": 63
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "nazivin-005",
+      "price": 250
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "theraflu",
+      "price": 469
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "levomekol-40",
+      "price": 161
+    },
+    {
+      "pharmacyId": "osm-node10823527472",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "ibuprofen-200",
+      "price": 98
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "nurofen-200",
+      "price": 208
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "drotaverin-40",
+      "price": 50
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "loratadin-10",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "amoxicillin-500",
+      "price": 124
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "azithromycin-250",
+      "price": 146
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "augmentin-875",
+      "price": 671
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "ceftriaxone-1g",
+      "price": 63
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "omeprazol-20",
+      "price": 92
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "smecta-3",
+      "price": 345
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "loperamid-2",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "amlodipin-5",
+      "price": 89
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "metformin-850",
+      "price": 157
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "corvalol-25",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "nazivin-005",
+      "price": 249
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "levomekol-40",
+      "price": 151
+    },
+    {
+      "pharmacyId": "osm-node12146262224",
+      "drugId": "diclofenac-50",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "panadol-500",
+      "price": 183
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "no-spa-40",
+      "price": 262
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "drotaverin-40",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "suprastin-25",
+      "price": 223
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "loratadin-10",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "amoxicillin-500",
+      "price": 128
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "augmentin-875",
+      "price": 653
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "loperamid-2",
+      "price": 53
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "amlodipin-5",
+      "price": 85
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "metformin-850",
+      "price": 158
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "aspirin-cardio-100",
+      "price": 288
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "validol-60",
+      "price": 32
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "corvalol-25",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "nazivin-005",
+      "price": 262
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "theraflu",
+      "price": 458
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "levomekol-40",
+      "price": 146
+    },
+    {
+      "pharmacyId": "osm-node2327962343",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "ibuprofen-200",
+      "price": 104
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "nurofen-200",
+      "price": 220
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "citramon-p",
+      "price": 27
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "no-spa-40",
+      "price": 268
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "suprastin-25",
+      "price": 243
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "loratadin-10",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "amoxicillin-500",
+      "price": 127
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "azithromycin-250",
+      "price": 162
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "augmentin-875",
+      "price": 634
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "ceftriaxone-1g",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "omeprazol-20",
+      "price": 92
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "activated-carbon",
+      "price": 13
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "loperamid-2",
+      "price": 50
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "amlodipin-5",
+      "price": 85
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "aspirin-cardio-100",
+      "price": 284
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "corvalol-25",
+      "price": 62
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "levomekol-40",
+      "price": 159
+    },
+    {
+      "pharmacyId": "osm-node5838176109",
+      "drugId": "diclofenac-50",
+      "price": 43
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "paracetamol-500",
+      "price": 24
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "panadol-500",
+      "price": 192
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "ibuprofen-200",
+      "price": 95
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "nurofen-200",
+      "price": 217
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "no-spa-40",
+      "price": 262
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "drotaverin-40",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "suprastin-25",
+      "price": 253
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "loratadin-10",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "amoxicillin-500",
+      "price": 128
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "augmentin-875",
+      "price": 685
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "ceftriaxone-1g",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "omeprazol-20",
+      "price": 89
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "smecta-3",
+      "price": 328
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "enalapril-10",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "amlodipin-5",
+      "price": 82
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "aspirin-cardio-100",
+      "price": 307
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "validol-60",
+      "price": 32
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "corvalol-25",
+      "price": 60
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "nazivin-005",
+      "price": 275
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "theraflu",
+      "price": 470
+    },
+    {
+      "pharmacyId": "osm-node5281766622",
+      "drugId": "diclofenac-50",
+      "price": 44
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "paracetamol-500",
+      "price": 23
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "panadol-500",
+      "price": 178
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "drotaverin-40",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "loratadin-10",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "amoxicillin-500",
+      "price": 124
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "azithromycin-250",
+      "price": 166
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "augmentin-875",
+      "price": 638
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "ceftriaxone-1g",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "omeprazol-20",
+      "price": 91
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "smecta-3",
+      "price": 340
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "enalapril-10",
+      "price": 48
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "metformin-850",
+      "price": 161
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "aspirin-cardio-100",
+      "price": 294
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "validol-60",
+      "price": 30
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "corvalol-25",
+      "price": 65
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "nazivin-005",
+      "price": 265
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "theraflu",
+      "price": 463
+    },
+    {
+      "pharmacyId": "osm-node5838049214",
+      "drugId": "diclofenac-50",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "panadol-500",
+      "price": 189
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "ibuprofen-200",
+      "price": 103
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "nurofen-200",
+      "price": 209
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "citramon-p",
+      "price": 26
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "no-spa-40",
+      "price": 275
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "suprastin-25",
+      "price": 249
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "loratadin-10",
+      "price": 42
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "azithromycin-250",
+      "price": 165
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "augmentin-875",
+      "price": 663
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "ceftriaxone-1g",
+      "price": 67
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "omeprazol-20",
+      "price": 97
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "smecta-3",
+      "price": 325
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "loperamid-2",
+      "price": 54
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "enalapril-10",
+      "price": 46
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "amlodipin-5",
+      "price": 90
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "metformin-850",
+      "price": 168
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "aspirin-cardio-100",
+      "price": 314
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "validol-60",
+      "price": 34
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "corvalol-25",
+      "price": 61
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "nazivin-005",
+      "price": 256
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "theraflu",
+      "price": 466
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "levomekol-40",
+      "price": 162
+    },
+    {
+      "pharmacyId": "osm-node4148279586",
+      "drugId": "diclofenac-50",
+      "price": 41
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "paracetamol-500",
+      "price": 22
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "panadol-500",
+      "price": 191
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "ibuprofen-200",
+      "price": 92
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "citramon-p",
+      "price": 24
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "no-spa-40",
+      "price": 267
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "drotaverin-40",
+      "price": 45
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "amoxicillin-500",
+      "price": 118
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "azithromycin-250",
+      "price": 158
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "augmentin-875",
+      "price": 619
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "ceftriaxone-1g",
+      "price": 57
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "activated-carbon",
+      "price": 12
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "loperamid-2",
+      "price": 51
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "amlodipin-5",
+      "price": 78
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "metformin-850",
+      "price": 170
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "aspirin-cardio-100",
+      "price": 303
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "validol-60",
+      "price": 30
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "corvalol-25",
+      "price": 60
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "nazivin-005",
+      "price": 251
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "theraflu",
+      "price": 434
+    },
+    {
+      "pharmacyId": "osm-node2469008480",
+      "drugId": "levomekol-40",
+      "price": 158
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "paracetamol-500",
+      "price": 20
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "panadol-500",
+      "price": 177
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "nurofen-200",
+      "price": 184
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "no-spa-40",
+      "price": 241
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "drotaverin-40",
+      "price": 39
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "suprastin-25",
+      "price": 201
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "amoxicillin-500",
+      "price": 109
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "azithromycin-250",
+      "price": 130
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "augmentin-875",
+      "price": 624
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "ceftriaxone-1g",
+      "price": 54
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "omeprazol-20",
+      "price": 79
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "activated-carbon",
+      "price": 11
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "loperamid-2",
+      "price": 49
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "enalapril-10",
+      "price": 40
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "amlodipin-5",
+      "price": 75
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "metformin-850",
+      "price": 144
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "aspirin-cardio-100",
+      "price": 282
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "validol-60",
+      "price": 29
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "theraflu",
+      "price": 398
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "levomekol-40",
+      "price": 137
+    },
+    {
+      "pharmacyId": "osm-node1872257328",
+      "drugId": "diclofenac-50",
+      "price": 39
     }
   ]
 }

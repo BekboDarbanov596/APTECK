@@ -18,9 +18,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// Настоящие демо-данные из assets, без rootBundle.
 Catalog loadDemoCatalog() => Catalog.fromJson(
-      jsonDecode(File('assets/demo_data.json').readAsStringSync())
-          as Map<String, dynamic>,
-    );
+  jsonDecode(File('assets/demo_data.json').readAsStringSync())
+      as Map<String, dynamic>,
+);
 
 class _FixedRepository implements CatalogRepository {
   _FixedRepository(this.catalog);
@@ -82,8 +82,10 @@ void main() {
     });
 
     test('прощает опечатку', () {
-      expect(searchDrugs(catalog.drugs, 'парацитамол').map((d) => d.id),
-          contains('paracetamol-500'));
+      expect(
+        searchDrugs(catalog.drugs, 'парацитамол').map((d) => d.id),
+        contains('paracetamol-500'),
+      );
     });
 
     test('понимает падежи и дефис', () {
@@ -100,9 +102,23 @@ void main() {
 
   group('Часы работы и расстояние', () {
     const day = Pharmacy(
-        id: 'a', chain: 'A', address: '', lat: 0, lng: 0, opensAt: '08:00', closesAt: '22:00');
+      id: 'a',
+      chain: 'A',
+      address: '',
+      lat: 0,
+      lng: 0,
+      opensAt: '08:00',
+      closesAt: '22:00',
+    );
     const night = Pharmacy(
-        id: 'b', chain: 'B', address: '', lat: 0, lng: 0, opensAt: '20:00', closesAt: '08:00');
+      id: 'b',
+      chain: 'B',
+      address: '',
+      lat: 0,
+      lng: 0,
+      opensAt: '20:00',
+      closesAt: '08:00',
+    );
     const allDay = Pharmacy(id: 'c', chain: 'C', address: '', lat: 0, lng: 0);
 
     test('дневной график', () {
@@ -149,16 +165,19 @@ void main() {
       }
     });
 
-    test('с лекарством — только аптеки, где оно есть; сортировка по цене', () async {
-      final s = await makeState();
-      final drug = catalog.drug('paracetamol-500')!;
-      s.selectDrug(drug);
-      expect(s.results.length, catalog.offersForDrug(drug.id).length);
-      s.setSort(SortMode.cheapest);
-      final prices = s.results.map((r) => r.price!).toList();
-      expect(prices, [...prices]..sort());
-      expect(s.recentDrugIds.first, drug.id);
-    });
+    test(
+      'с лекарством — только аптеки, где оно есть; сортировка по цене',
+      () async {
+        final s = await makeState();
+        final drug = catalog.drug('paracetamol-500')!;
+        s.selectDrug(drug);
+        expect(s.results.length, catalog.offersForDrug(drug.id).length);
+        s.setSort(SortMode.cheapest);
+        final prices = s.results.map((r) => r.price!).toList();
+        expect(prices, [...prices]..sort());
+        expect(s.recentDrugIds.first, drug.id);
+      },
+    );
 
     test('фильтр по сети', () async {
       final s = await makeState();
@@ -169,7 +188,10 @@ void main() {
     });
 
     test('ошибка загрузки и повтор', () async {
-      final s = AppState(repository: _FailingRepository(), useDeviceServices: false);
+      final s = AppState(
+        repository: _FailingRepository(),
+        useDeviceServices: false,
+      );
       await s.init();
       expect(s.loadError, isNotNull);
       expect(s.results, isEmpty);
@@ -178,12 +200,12 @@ void main() {
 
   group('Ассистент', () {
     AssistantReply ask(String m) => assistantReply(
-          message: m,
-          catalog: catalog,
-          userLat: bishkekCenterLat,
-          userLng: bishkekCenterLng,
-          now: noon,
-        );
+      message: m,
+      catalog: catalog,
+      userLat: bishkekCenterLat,
+      userLng: bishkekCenterLng,
+      now: noon,
+    );
 
     test('находит лекарство и аналоги', () {
       final r = ask('Где есть Нурофен?');
@@ -212,53 +234,72 @@ void main() {
 
   group('Карточки-советы', () {
     List<Tip> tipsAt(DateTime now) => buildTips(
-          catalog: catalog,
-          userLat: bishkekCenterLat,
-          userLng: bishkekCenterLng,
-          now: now,
-        );
+      catalog: catalog,
+      userLat: bishkekCenterLat,
+      userLng: bishkekCenterLng,
+      now: now,
+    );
 
     test('экономия считается по аналогам с тем же веществом', () {
       final saving = tipsAt(noon).firstWhere((t) => t.kind == TipKind.savings);
       final drug = (saving.action! as SelectDrugAction).drug;
       final analogs = catalog.analogs(drug);
       expect(analogs, isNotEmpty);
-      int minPrice(String id) =>
-          catalog.offersForDrug(id).map((o) => o.price).reduce((a, b) => a < b ? a : b);
+      int minPrice(String id) => catalog
+          .offersForDrug(id)
+          .map((o) => o.price)
+          .reduce((a, b) => a < b ? a : b);
       expect(analogs.any((a) => minPrice(a.id) > minPrice(drug.id)), isTrue);
     });
 
     test('круглосуточная аптека — действительно круглосуточная', () {
-      final night = tipsAt(noon).firstWhere((t) => t.kind == TipKind.nightPharmacy);
+      final night = tipsAt(
+        noon,
+      ).firstWhere((t) => t.kind == TipKind.nightPharmacy);
       final id = (night.action! as OpenPharmacyAction).pharmacyId;
       expect(catalog.pharmacy(id)!.isAroundTheClock, isTrue);
     });
 
     test('советы переводятся на кыргызский и английский', () {
       List<Tip> tipsIn(String lang) => buildTips(
-            catalog: catalog,
-            userLat: bishkekCenterLat,
-            userLng: bishkekCenterLng,
-            now: noon,
-            lang: lang,
-          );
+        catalog: catalog,
+        userLat: bishkekCenterLat,
+        userLng: bishkekCenterLng,
+        now: noon,
+        lang: lang,
+      );
       final en = tipsIn('en');
       final ky = tipsIn('ky');
-      expect(en.firstWhere((t) => t.kind == TipKind.homeKit).title, 'Home first-aid kit');
-      expect(ky.firstWhere((t) => t.kind == TipKind.homeKit).title, 'Үй дарылыгы');
-      expect(en.firstWhere((t) => t.kind == TipKind.nightPharmacy).text, contains(' from you'));
+      expect(
+        en.firstWhere((t) => t.kind == TipKind.homeKit).title,
+        'Home first-aid kit',
+      );
+      expect(
+        ky.firstWhere((t) => t.kind == TipKind.homeKit).title,
+        'Үй дарылыгы',
+      );
+      expect(
+        en.firstWhere((t) => t.kind == TipKind.nightPharmacy).text,
+        contains(' from you'),
+      );
       expect(en.map((t) => t.kind), tipsIn('ru').map((t) => t.kind));
     });
 
     test('совет про льготные рецепты исчезает в 2027 году', () {
       expect(tipsAt(noon).any((t) => t.kind == TipKind.benefit), isTrue);
-      expect(tipsAt(DateTime(2027, 1, 2, 12)).any((t) => t.kind == TipKind.benefit), isFalse);
+      expect(
+        tipsAt(DateTime(2027, 1, 2, 12)).any((t) => t.kind == TipKind.benefit),
+        isFalse,
+      );
     });
 
     test('ночью открыто меньше аптек, чем днём', () {
-      int openCount(DateTime t) => catalog.pharmacies.where((p) => isOpenAt(p, t)).length;
+      int openCount(DateTime t) =>
+          catalog.pharmacies.where((p) => isOpenAt(p, t)).length;
       expect(openCount(DateTime(2026, 11, 8, 3)), lessThan(openCount(noon)));
-      final tip = tipsAt(DateTime(2026, 11, 8, 3)).firstWhere((t) => t.kind == TipKind.openNow);
+      final tip = tipsAt(
+        DateTime(2026, 11, 8, 3),
+      ).firstWhere((t) => t.kind == TipKind.openNow);
       expect(tip.action, isA<FilterAction>());
     });
   });
@@ -268,13 +309,26 @@ void main() {
       for (final shape in Shape3D.values) {
         final m = meshFor(shape);
         expect(m.triangleCount, greaterThan(100), reason: '$shape');
-        expect(m.indices.every((i) => i < m.vertexCount), isTrue, reason: '$shape');
+        expect(
+          m.indices.every((i) => i < m.vertexCount),
+          isTrue,
+          reason: '$shape',
+        );
         for (var v = 0; v < m.vertexCount; v++) {
-          final x = m.normals[v * 3], y = m.normals[v * 3 + 1], z = m.normals[v * 3 + 2];
+          final x = m.normals[v * 3],
+              y = m.normals[v * 3 + 1],
+              z = m.normals[v * 3 + 2];
           final len = x * x + y * y + z * z;
           // У вершин-«полюсов» нормаль может быть нулевой — остальные единичные.
-          expect(len == 0 || (len - 1).abs() < 1e-3, isTrue, reason: '$shape #$v');
-          expect(m.positions[v * 3].isFinite && m.positions[v * 3 + 1].isFinite, isTrue);
+          expect(
+            len == 0 || (len - 1).abs() < 1e-3,
+            isTrue,
+            reason: '$shape #$v',
+          );
+          expect(
+            m.positions[v * 3].isFinite && m.positions[v * 3 + 1].isFinite,
+            isTrue,
+          );
         }
       }
     });
@@ -285,9 +339,11 @@ void main() {
     });
 
     testWidgets('объект рисуется без ошибок', (tester) async {
-      await tester.pumpWidget(const MaterialApp(
-        home: Center(child: Object3D(shape: Shape3D.heart)),
-      ));
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Center(child: Object3D(shape: Shape3D.heart)),
+        ),
+      );
       await tester.pump(const Duration(milliseconds: 500));
       expect(tester.takeException(), isNull);
     });
@@ -302,13 +358,15 @@ void main() {
     await state.init();
     Drug? picked;
 
-    await tester.pumpWidget(AppScope(
-      state: state,
-      child: MaterialApp(
-        theme: buildTheme(),
-        home: SearchScreen(embedded: true, onPicked: (d) => picked = d),
+    await tester.pumpWidget(
+      AppScope(
+        state: state,
+        child: MaterialApp(
+          theme: buildTheme(),
+          home: SearchScreen(embedded: true, onPicked: (d) => picked = d),
+        ),
       ),
-    ));
+    );
 
     expect(find.text('Часто ищут'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'смек');

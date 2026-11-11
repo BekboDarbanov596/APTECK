@@ -17,12 +17,17 @@ class GeminiAssistant implements LlmAssistant {
   GeminiAssistant({
     required this.apiKey,
     http.Client? client,
-    this.models = const ['gemini-3.8-flash', 'gemini-3.5-flash-lite', 'gemini-3.1-flash-lite'],
+    this.models = const [
+      'gemini-3.8-flash',
+      'gemini-3.5-flash-lite',
+      'gemini-3.1-flash-lite',
+    ],
     this.timeout = const Duration(seconds: 30),
     this.baseUrl = 'https://generativelanguage.googleapis.com/v1beta',
   }) : _client = client ?? http.Client();
 
   final String apiKey;
+
   /// Бесплатные модели по порядку: если первая перегружена (503) или молчит,
   /// пробуем следующую.
   final List<String> models;
@@ -112,7 +117,8 @@ class GeminiAssistant implements LlmAssistant {
       throw LlmAssistantException(
         (err?['message'] as String?) ?? res.body,
         statusCode: res.statusCode,
-        isAuthError: res.statusCode == 401 ||
+        isAuthError:
+            res.statusCode == 401 ||
             res.statusCode == 403 ||
             details.contains('API_KEY_INVALID'),
         isRateLimited: res.statusCode == 429,
@@ -129,7 +135,9 @@ class GeminiAssistant implements LlmAssistant {
     final candidate = candidates.first as Map<String, dynamic>;
     final finish = candidate['finishReason'] as String?;
     final content = candidate['content'] as Map<String, dynamic>?;
-    final parts = ((content?['parts'] as List?) ?? const []).whereType<Map<String, dynamic>>().toList();
+    final parts = ((content?['parts'] as List?) ?? const [])
+        .whereType<Map<String, dynamic>>()
+        .toList();
     // Части с thought: true — размышления модели, в ответ не идут.
     final text = parts
         .where((p) => p['thought'] != true && p['text'] is String)

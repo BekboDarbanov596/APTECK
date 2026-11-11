@@ -136,8 +136,9 @@ class AppState extends ChangeNotifier {
       recentDrugIds
         ..remove(drug.id)
         ..insert(0, drug.id);
-      if (recentDrugIds.length > 5)
+      if (recentDrugIds.length > 5) {
         recentDrugIds.removeRange(5, recentDrugIds.length);
+      }
     }
     _savePrefs();
     notifyListeners();
@@ -253,6 +254,12 @@ class AppState extends ChangeNotifier {
   List<Drug> get recentDrugs => [
     for (final id in recentDrugIds) ?catalog?.drug(id),
   ];
+
+  void removeRecentDrug(Drug drug) {
+    if (!recentDrugIds.remove(drug.id)) return;
+    _savePrefs();
+    notifyListeners();
+  }
 
   void clearHistory() {
     recentDrugIds.clear();

@@ -59,14 +59,14 @@ class Pill extends StatelessWidget {
   final VoidCallback? onTap;
   final double fontSize;
 
-  factory Pill.open({String label = 'Открыто'}) => Pill(
-        label: label,
+  factory Pill.open({String? label}) => Pill(
+        label: label ?? trNow('Открыто'),
         background: AppColors.greenSoft,
         foreground: AppColors.greenDark,
       );
 
-  factory Pill.closed({String label = 'Закрыто'}) => Pill(
-        label: label,
+  factory Pill.closed({String? label}) => Pill(
+        label: label ?? trNow('Закрыто'),
         background: AppColors.greySoft,
         foreground: AppColors.textMuted,
       );
@@ -94,7 +94,7 @@ class Pill extends StatelessWidget {
             const SizedBox(width: 6),
           ],
           Text(
-            label,
+            tr(context, label),
             style: TextStyle(
               color: foreground,
               fontSize: fontSize,
@@ -138,11 +138,12 @@ void showDemoInfo(BuildContext context) {
     context: context,
     builder: (context) => AlertDialog(
       title: Text(tr(context, 'Демо-данные')),
-      content: const Text(
-        'Названия лекарств и аптечных сетей настоящие, но цены и наличие '
-        'сейчас примерные, а координаты аптек приблизительные.\n\n'
-        'Реальные остатки появятся после подключения аптек к сервису. '
-        'Перед поездкой уточняйте наличие по телефону.',
+      content: Text(
+        tr(
+          context,
+          // Одной строкой — это ключ перевода в strings.dart.
+          'Аптеки и их адреса на карте настоящие — из OpenStreetMap. Названия лекарств настоящие, а цены и наличие пока примерные.\n\nРеальные остатки появятся после подключения аптек к сервису. Перед поездкой уточняйте наличие по телефону.',
+        ),
       ),
       actions: [
         TextButton(
@@ -235,7 +236,7 @@ class PharmacyAvatar extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.surface,
         shape: BoxShape.circle,
         boxShadow: cardShadow,
@@ -244,7 +245,7 @@ class PharmacyAvatar extends StatelessWidget {
       child: Container(
         width: size * 0.66,
         height: size * 0.66,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.green,
           shape: BoxShape.circle,
         ),
@@ -281,7 +282,7 @@ class MessageView extends StatelessWidget {
           Container(
             width: 72,
             height: 72,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppColors.greenSoft,
               shape: BoxShape.circle,
             ),
@@ -298,7 +299,7 @@ class MessageView extends StatelessWidget {
             Text(
               text!,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 15, color: AppColors.textMuted),
+              style: TextStyle(fontSize: 15, color: AppColors.textMuted),
             ),
           ],
           if (actionLabel != null && onAction != null) ...[
@@ -312,4 +313,4 @@ class MessageView extends StatelessWidget {
 }
 
 /// Цена: «68 сом».
-String formatPrice(int price) => '$price сом';
+String formatPrice(int price) => trNow('{n} сом', {'n': price});

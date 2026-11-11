@@ -137,7 +137,7 @@ class _SearchScreenState extends State<SearchScreen> {
         textInputAction: TextInputAction.search,
         style: const TextStyle(fontSize: 17),
         decoration: InputDecoration(
-          hintText: _listening ? 'Говорите…' : 'Название лекарства',
+          hintText: tr(context, _listening ? 'Говорите…' : 'Название лекарства'),
           filled: true,
           fillColor: AppColors.surface,
           prefixIcon: const Icon(Icons.search),
@@ -158,15 +158,15 @@ class _SearchScreenState extends State<SearchScreen> {
           contentPadding: const EdgeInsets.symmetric(vertical: 14),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(100),
-            borderSide: const BorderSide(color: AppColors.border),
+            borderSide: BorderSide(color: AppColors.border),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(100),
-            borderSide: const BorderSide(color: AppColors.border),
+            borderSide: BorderSide(color: AppColors.border),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(100),
-            borderSide: const BorderSide(color: AppColors.green, width: 1.5),
+            borderSide: BorderSide(color: AppColors.green, width: 1.5),
           ),
         ),
         onSubmitted: (text) {
@@ -204,8 +204,10 @@ class _SearchScreenState extends State<SearchScreen> {
         child: MessageView(
           icon: Icons.search_off,
           title: tr(context, 'Ничего не нашли'),
-          text: 'Проверьте название. Можно искать по действующему веществу, '
-              'например «ибупрофен».',
+          text: tr(
+            context,
+            'Проверьте название. Можно искать по действующему веществу, например «ибупрофен».',
+          ),
         ),
       );
     }
@@ -226,7 +228,7 @@ class _SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
-        child: Text(text, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
+        child: Text(tr(context, text), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
       );
 }
 
@@ -250,8 +252,11 @@ class _DrugRow extends StatelessWidget {
     if (showAvailability) {
       final offers = state.catalog!.offersForDrug(drug.id);
       availability = offers.isEmpty
-          ? 'Нет в наличии'
-          : 'В ${offers.length} аптеках · от ${formatPrice(offers.map((o) => o.price).reduce((a, b) => a < b ? a : b))}';
+          ? tr(context, 'Нет в наличии')
+          : tr(context, 'В {n} аптеках · от {p}', {
+              'n': offers.length,
+              'p': formatPrice(offers.map((o) => o.price).reduce((a, b) => a < b ? a : b)),
+            });
     }
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -274,13 +279,13 @@ class _DrugRow extends StatelessWidget {
                       Text(drug.title,
                           style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
                       Text(drug.subtitle,
-                          style: const TextStyle(fontSize: 14, color: AppColors.textMuted)),
+                          style: TextStyle(fontSize: 14, color: AppColors.textMuted)),
                       if (availability != null)
                         Padding(
                           padding: const EdgeInsets.only(top: 4),
                           child: Text(
                             availability,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 14,
                               color: AppColors.greenDark,
                               fontWeight: FontWeight.w600,

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' show ImageFilter;
 
@@ -91,6 +92,114 @@ class PromoBanners extends StatelessWidget {
             Expanded(child: _ad(_ads[5], height: 190)),
             const SizedBox(width: gap),
             Expanded(child: _ad(_ads[6], height: 190)),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+/// «Полезное рядом» каруселью: баннеры сами листаются каждые 4 секунды,
+/// пальцем тоже можно; снизу — точки.
+class PromoCarousel extends StatefulWidget {
+  const PromoCarousel({
+    super.key,
+    required this.catalog,
+    required this.onDrugPicked,
+    this.height = 196,
+  });
+
+  final Catalog catalog;
+  final ValueChanged<Drug> onDrugPicked;
+  final double height;
+
+  @override
+  State<PromoCarousel> createState() => _PromoCarouselState();
+}
+
+class _PromoCarouselState extends State<PromoCarousel> {
+  final _page = PageController(viewportFraction: 0.92);
+  Timer? _timer;
+  int _current = 0;
+
+  List<_Ad> get _items =>
+      [for (final ad in _ads) if (widget.catalog.drug(ad.drugId) != null) ad];
+
+  @override
+  void initState() {
+    super.initState();
+    _restart();
+  }
+
+  void _restart() {
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 4), (_) {
+      final n = _items.length;
+      if (!mounted || n < 2 || !_page.hasClients) return;
+      _page.animateToPage(
+        (_current + 1) % n,
+        duration: const Duration(milliseconds: 650),
+        curve: Curves.easeInOutCubic,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _page.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final items = _items;
+    if (items.isEmpty) return const SizedBox.shrink();
+    return Column(
+      children: [
+        SizedBox(
+          height: widget.height,
+          child: NotificationListener<ScrollStartNotification>(
+            // Листают пальцем — откладываем автопрокрутку.
+            onNotification: (n) {
+              if (n.dragDetails != null) _restart();
+              return false;
+            },
+            child: PageView.builder(
+              controller: _page,
+              itemCount: items.length,
+              onPageChanged: (i) => setState(() => _current = i),
+              itemBuilder: (context, i) {
+                final ad = items[i];
+                final drug = widget.catalog.drug(ad.drugId)!;
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: _AdCard(
+                    ad: ad,
+                    big: true,
+                    price: widget.catalog.minPrice(drug.id),
+                    onTap: () => widget.onDrugPicked(drug),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (var i = 0; i < items.length; i++)
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                margin: const EdgeInsets.symmetric(horizontal: 3),
+                width: i == _current ? 18 : 6,
+                height: 6,
+                decoration: BoxDecoration(
+                  color: i == _current ? const Color(0xFF2E9F46) : const Color(0xFFCCD5CF),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
           ],
         ),
       ],

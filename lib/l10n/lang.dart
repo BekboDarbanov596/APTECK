@@ -18,7 +18,9 @@ enum AppLang {
 
 /// Выбранный язык. Сохраняется на устройстве.
 class LangController extends ChangeNotifier {
-  LangController({AppLang initial = AppLang.ru, this.persist = true}) : _lang = initial;
+  LangController({AppLang initial = AppLang.ru, this.persist = true}) : _lang = initial {
+    _current = initial;
+  }
 
   static const _prefKey = 'app_lang';
   final bool persist;
@@ -34,6 +36,7 @@ class LangController extends ChangeNotifier {
       final found = AppLang.values.where((l) => l.name == saved);
       if (found.isNotEmpty && found.first != _lang) {
         _lang = found.first;
+        _current = _lang;
         notifyListeners();
       }
     } catch (_) {
@@ -44,6 +47,7 @@ class LangController extends ChangeNotifier {
   Future<void> set(AppLang value) async {
     if (value == _lang) return;
     _lang = value;
+    _current = value;
     notifyListeners();
     if (!persist) return;
     try {
@@ -64,6 +68,22 @@ class LangScope extends InheritedNotifier<LangController> {
 
 /// Текущий язык (русский, если язык не настроен — например, в тестах).
 AppLang langOf(BuildContext context) => LangScope.maybeOf(context)?.lang ?? AppLang.ru;
+
+/// Язык последнего [LangController] — для текста, который собирается без
+/// BuildContext: цены, расстояния, время в пути, часы работы.
+AppLang _current = AppLang.ru;
+AppLang get currentLang => _current;
+
+/// Как [tr], но по текущему языку приложения, без BuildContext.
+String trNow(String ru, [Map<String, Object> args = const {}]) {
+  var out = switch (_current) {
+    AppLang.ru => ru,
+    AppLang.ky => uiStrings[ru]?.$1 ?? ru,
+    AppLang.en => uiStrings[ru]?.$2 ?? ru,
+  };
+  args.forEach((k, v) => out = out.replaceAll('{$k}', '$v'));
+  return out;
+}
 
 /// Перевод строки интерфейса. Ключ — русский текст; если перевода нет,
 /// показываем русский. Подстановки: `{n}` → [args].

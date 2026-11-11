@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../auth/auth_service.dart';
 import '../../auth/validators.dart';
-import '../theme.dart';
-import '../three/mesh.dart';
 import 'auth_widgets.dart';
 import 'login_screen.dart';
 import '../../l10n/lang.dart';
 
-/// Экран регистрации: имя, почта, пароль или Google.
+/// Экран регистрации: почта, пароль или Google.
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -18,7 +16,6 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _form = GlobalKey<FormState>();
-  final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _repeat = TextEditingController();
@@ -27,7 +24,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   void dispose() {
-    _name.dispose();
     _email.dispose();
     _password.dispose();
     _repeat.dispose();
@@ -53,36 +49,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void _submit() {
     if (!(_form.currentState?.validate() ?? false)) return;
     final auth = AuthScope.read(context);
-    _run(() => auth.register(name: _name.text, email: _email.text, password: _password.text));
+    _run(() => auth.register(
+          name: _email.text.trim().split('@').first,
+          email: _email.text,
+          password: _password.text,
+        ));
+  }
+
+  void _openLogin(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute<void>(builder: (_) => const LoginScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final auth = AuthScope.of(context);
     final busy = _loading || _googleLoading;
-    return AuthScaffold(
-      shape: Shape3D.heart,
-      title: tr(context, 'Создать аккаунт'),
-      subtitle: tr(context, 'Это займёт меньше минуты'),
+    return AuthPageFrame(
+      registering: true,
+      onSwitch: busy ? null : () => _openLogin(context),
       children: [
-        GoogleButton(
-          loading: _googleLoading,
-          onPressed: busy ? null : () => _run(auth.signInWithGoogle, google: true),
-        ),
-        const OrDivider(),
         Form(
           key: _form,
           child: AutofillGroup(
             child: Column(
               children: [
-                AuthField(
-                  controller: _name,
-                  label: tr(context, 'Имя'),
-                  icon: Icons.person_outline,
-                  autofillHints: const [AutofillHints.name],
-                  validator: validateName,
-                  enabled: !busy,
-                ),
                 AuthField(
                   controller: _email,
                   label: tr(context, 'Почта'),
@@ -119,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           padding: EdgeInsets.only(bottom: 16, left: 4),
           child: Text(
             tr(context, 'Минимум 8 символов, буквы и цифры.'),
-            style: TextStyle(fontSize: 13, color: AppColors.textMuted),
+            style: const TextStyle(fontSize: 13),
           ),
         ),
         AuthPrimaryButton(
@@ -127,21 +119,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           loading: _loading,
           onPressed: busy ? null : _submit,
         ),
-        const SizedBox(height: 24),
-        Wrap(
-          alignment: WrapAlignment.center,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            Text(tr(context, 'Уже есть аккаунт?'), style: TextStyle(color: AppColors.textMuted)),
-            TextButton(
-              onPressed: busy
-                  ? null
-                  : () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute<void>(builder: (_) => const LoginScreen()),
-                      ),
-              child: Text(tr(context, 'Войти')),
-            ),
-          ],
+        const SizedBox(height: 12),
+        GoogleButton(
+          loading: _googleLoading,
+          onPressed: busy ? null : () => _run(auth.signInWithGoogle, google: true),
         ),
       ],
     );

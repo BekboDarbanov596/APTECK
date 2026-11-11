@@ -50,3 +50,6 @@ app.*.map.json
 # Локальные настройки инструментов
 .claude/
 .impeccable/
+
+# Локальные ключи для сборки (--dart-define-from-file). Не коммитить.
+/dart_defines.local.json

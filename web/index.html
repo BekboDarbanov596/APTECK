@@ -29,8 +29,24 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>apteka_ryadom</title>
+  <title>Аптека рядом</title>
   <link rel="manifest" href="manifest.json">
+  <script>
+    // На компьютере (широкий экран) показываем приложение в рамке телефона.
+    // Не трогаем: страницу внутри рамки (iframe), телефоны и планшеты
+    // (узкий экран или сенсор) и адрес с ?full=1 — полноэкранная версия.
+    (function () {
+      try {
+        var inFrame = window.self !== window.top;
+        var full = new URLSearchParams(location.search).has('full');
+        var wide = window.innerWidth >= 700;
+        var touch = window.matchMedia('(pointer: coarse)').matches;
+        if (!inFrame && !full && wide && !touch) {
+          location.replace('phone.html');
+        }
+      } catch (e) { /* если что-то пошло не так — просто открываем приложение */ }
+    })();
+  </script>
 </head>
 <body>
   <!--

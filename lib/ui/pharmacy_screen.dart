@@ -44,7 +44,7 @@ class PharmacyScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            tooltip: fav ? 'Убрать из избранного' : 'В избранное',
+            tooltip: tr(context, fav ? 'Убрать из избранного' : 'В избранное'),
             onPressed: () => state.toggleFavoritePharmacy(p.id),
             icon: Icon(fav ? Icons.favorite : Icons.favorite_border,
                 color: fav ? AppColors.green : AppColors.text),
@@ -104,7 +104,7 @@ class PharmacyScreen extends StatelessWidget {
                     Text(p.chain,
                         style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w800)),
                     Text('${p.address} · ${formatDistance(distance)}',
-                        style: const TextStyle(fontSize: 16, color: AppColors.textMuted)),
+                        style: TextStyle(fontSize: 16, color: AppColors.textMuted)),
                   ],
                 ),
               ),
@@ -122,7 +122,7 @@ class PharmacyScreen extends StatelessWidget {
             _Card(
               child: Row(
                 children: [
-                  const Icon(Icons.medication, color: AppColors.green, size: 32),
+                  Icon(Icons.medication, color: AppColors.green, size: 32),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
@@ -131,7 +131,7 @@ class PharmacyScreen extends StatelessWidget {
                         Text(drug.title,
                             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                         Text(drug.subtitle,
-                            style: const TextStyle(fontSize: 14, color: AppColors.textMuted)),
+                            style: TextStyle(fontSize: 14, color: AppColors.textMuted)),
                         if (drug.rx) ...[const SizedBox(height: 6), Pill.rx()],
                       ],
                     ),
@@ -164,10 +164,10 @@ class PharmacyScreen extends StatelessWidget {
                 _InfoRow(
                   icon: Icons.call_outlined,
                   title: tr(context, 'Телефон'),
-                  value: p.phone ?? 'Появится после подключения аптеки',
+                  value: p.phone ?? tr(context, 'Появится после подключения аптеки'),
                 ),
                 const Divider(height: 24),
-                _InfoRow(icon: Icons.place_outlined, title: tr(context, 'Адрес'), value: 'Бишкек, ${p.address}'),
+                _InfoRow(icon: Icons.place_outlined, title: tr(context, 'Адрес'), value: '${tr(context, 'Бишкек')}, ${p.address}'),
               ],
             ),
           ),
@@ -200,7 +200,7 @@ class PharmacyScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Text('В наличии в этой аптеке (${offers.length})',
+          Text(tr(context, 'В наличии в этой аптеке ({n})', {'n': offers.length}),
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
           const SizedBox(height: 8),
           _Card(
@@ -211,7 +211,7 @@ class PharmacyScreen extends StatelessWidget {
                   if (catalog.drug(o.drugId) case final d?)
                     ListTile(
                       title: Text(d.title, style: const TextStyle(fontWeight: FontWeight.w600)),
-                      subtitle: Text(d.rx ? '${d.subtitle} · по рецепту' : d.subtitle),
+                      subtitle: Text(d.rx ? '${d.subtitle} · ${tr(context, 'по рецепту')}' : d.subtitle),
                       trailing: Text(formatPrice(o.price),
                           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
                     ),
@@ -266,7 +266,7 @@ class _InfoRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontSize: 14, color: AppColors.textMuted)),
+                Text(title, style: TextStyle(fontSize: 14, color: AppColors.textMuted)),
                 const SizedBox(height: 2),
                 Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
               ],
