@@ -4,14 +4,37 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' show LatLng;
 
-/// Как добираемся. Профили открытого сервера маршрутов OSRM (FOSSGIS).
-enum TravelMode {
-  walk('routed-foot', 'Пешком'),
-  car('routed-car', 'На машине');
+import '../l10n/lang.dart';
+import 'transit.dart';
 
-  const TravelMode(this.profile, this.label);
-  final String profile;
+/// Как добираемся. Профили открытого сервера маршрутов OSRM (FOSSGIS).
+/// У автобуса профиля нет: расписаний общественного транспорта в OSRM нет,
+/// такой маршрут открываем во внешнем навигаторе.
+enum TravelMode {
+  walk('routed-foot', 'Пешком', 4.8, 'walking'),
+  bus(null, 'Автобус', 0, 'transit'),
+  bike('routed-bike', 'Велосипед', 14, 'bicycling'),
+  scooter('routed-bike', 'Самокат', 15, 'bicycling'),
+  car('routed-car', 'На машине', 25, 'driving');
+
+  const TravelMode(this.profile, this.label, this.speedKmh, this.googleMode);
+
+  /// Профиль OSRM; null — маршрут строим не у себя, а в навигаторе.
+  final String? profile;
   final String label;
+
+  /// Средняя скорость по городу — для примерного времени в списке аптек.
+  final double speedKmh;
+
+  /// Значение travelmode для Google Карт.
+  final String googleMode;
+
+  bool get routedInApp => profile != null;
+
+  /// Примерное время в пути по прямому расстоянию (улицы ≈ ×1.3).
+  /// null — для автобуса, где время зависит от расписания.
+  double? estimateSeconds(double straightMeters) =>
+      routedInApp ? straightMeters * 1.3 / (speedKmh / 3.6) : null;
 }
 
 /// Один шаг маршрута: «Поверните направо на ул. Киевская» и сколько идти.
@@ -36,9 +59,17 @@ class RouteResult {
     required this.duration,
     required this.steps,
     required this.mode,
+    this.transit,
+    this.transitOptions = const [],
   });
 
   final List<LatLng> points;
+
+  /// Для автобуса: вариант поездки из 2ГИС (номера, остановки, пересадки).
+  final TransitOption? transit;
+
+  /// Все варианты поездки — карточки листаются, как в 2ГИС.
+  final List<TransitOption> transitOptions;
 
   /// Метры и секунды.
   final double distance;
@@ -54,21 +85,51 @@ class RoutingException implements Exception {
   String toString() => message;
 }
 
+/// 2ГИС предлагает только пешком: аптека близко, автобус не нужен.
+class NoTransitException extends RoutingException {
+  const NoTransitException()
+    : super('Подходящего автобуса нет — быстрее дойти пешком.');
+}
+
 /// Построение маршрута по улицам через открытый сервер OSRM
 /// (routing.openstreetmap.de, данные OpenStreetMap, без ключа).
 class RouteService {
   RouteService({
     http.Client? client,
     this.baseUrl = 'https://routing.openstreetmap.de',
+    this.transit,
   }) : _client = client ?? http.Client();
 
   final http.Client _client;
   final String baseUrl;
 
+  /// Общественный транспорт из 2ГИС; null — ключа нет, автобус в навигаторе.
+  final TwoGisTransitService? transit;
+
+  /// Можно ли построить маршрут этим способом прямо в приложении.
+  bool canRouteInApp(TravelMode mode) =>
+      mode.routedInApp || (mode == TravelMode.bus && transit != null);
+
   Future<RouteResult> route(LatLng from, LatLng to, TravelMode mode) async {
+    final t = transit;
+    if (mode == TravelMode.bus && t != null) {
+      try {
+        final options = await t.plan(from, to);
+        if (options.isEmpty) throw const NoTransitException();
+        return transitToRoute(options.first, options: options);
+      } on TransitException catch (e) {
+        throw RoutingException(e.message);
+      }
+    }
+    final profile = mode.profile;
+    if (profile == null) {
+      throw const RoutingException(
+        'Маршрут на автобусе строится в навигаторе.',
+      );
+    }
     // В пути OSRM всегда пишется «driving», профиль задаёт адрес сервера.
     final uri = Uri.parse(
-      '$baseUrl/${mode.profile}/route/v1/driving/'
+      '$baseUrl/$profile/route/v1/driving/'
       '${from.longitude},${from.latitude};${to.longitude},${to.latitude}'
       '?overview=full&geometries=geojson&steps=true',
     );
@@ -218,7 +279,65 @@ String stepKind(String type, String? modifier) {
 /// «7 мин», «1 ч 05 мин», «меньше минуты».
 String formatDuration(double seconds) {
   final min = (seconds / 60).round();
-  if (min < 1) return 'меньше минуты';
-  if (min < 60) return '$min мин';
-  return '${min ~/ 60} ч ${(min % 60).toString().padLeft(2, '0')} мин';
+  if (min < 1) return trNow('меньше минуты');
+  if (min < 60) return trNow('{n} мин', {'n': min});
+  return trNow('{h} ч {m} мин', {
+    'h': min ~/ 60,
+    'm': (min % 60).toString().padLeft(2, '0'),
+  });
+}
+
+/// Вариант поездки 2ГИС → маршрут для карты и пошаговых подсказок.
+RouteResult transitToRoute(
+  TransitOption option, {
+  List<TransitOption> options = const [],
+}) {
+  final steps = <RouteStep>[];
+  final legs = option.legs;
+  for (var i = 0; i < legs.length; i++) {
+    final leg = legs[i];
+    if (leg.walk) {
+      if (leg.distance < 15) continue;
+      TransitLeg? next;
+      for (var j = i + 1; j < legs.length; j++) {
+        if (!legs[j].walk) {
+          next = legs[j];
+          break;
+        }
+      }
+      steps.add(
+        RouteStep(
+          instruction: next == null
+              ? 'Пешком до аптеки'
+              : 'Пешком до остановки «${next.fromStop ?? '—'}»',
+          distance: leg.distance,
+          kind: steps.isEmpty ? 'depart' : 'straight',
+        ),
+      );
+    } else {
+      final lines = leg.lines.isEmpty ? '' : ' № ${leg.lines.join(', ')}';
+      final stops = leg.stopCount > 0 ? ', ${leg.stopCount} ост.' : '';
+      final to = leg.toStop == null ? '' : ' до «${leg.toStop}»';
+      steps.add(
+        RouteStep(
+          instruction:
+              '${leg.kindLabel}$lines — от «${leg.fromStop ?? '—'}»$to$stops',
+          distance: leg.distance,
+          kind: 'bus',
+        ),
+      );
+    }
+  }
+  steps.add(
+    const RouteStep(instruction: 'Вы на месте', distance: 0, kind: 'arrive'),
+  );
+  return RouteResult(
+    points: option.points,
+    distance: option.totalDistance,
+    duration: option.totalSeconds,
+    steps: steps,
+    mode: TravelMode.bus,
+    transit: option,
+    transitOptions: options.isEmpty ? [option] : options,
+  );
 }

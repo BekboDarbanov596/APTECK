@@ -17,7 +17,7 @@ class GroqAssistant implements LlmAssistant {
   GroqAssistant({
     required this.apiKey,
     http.Client? client,
-    this.models = const ['qwen/qwen3.8-27b', 'llama-3.3-70b-versatile'],
+    this.models = const ['qwen/qwen3.8-27b', 'openai/gpt-oss-120b'],
     this.timeout = const Duration(seconds: 30),
     this.endpoint = 'https://api.groq.com/openai/v1/chat/completions',
   }) : _client = client ?? http.Client();

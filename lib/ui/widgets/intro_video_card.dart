@@ -15,6 +15,9 @@ class IntroVideoCard extends StatelessWidget {
   });
   final String videoUrl;
 
+  /// Открыть «Как это работает» (используют плитки на главной).
+  void open(BuildContext context) => _open(context);
+
   void _open(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,

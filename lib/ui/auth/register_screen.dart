@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../auth/auth_service.dart';
 import '../../auth/validators.dart';
-import '../theme.dart';
 import 'auth_widgets.dart';
 import 'login_screen.dart';
 import '../../l10n/lang.dart';
@@ -57,13 +56,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ));
   }
 
+  void _openLogin(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute<void>(builder: (_) => const LoginScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = AuthScope.of(context);
     final busy = _loading || _googleLoading;
     return AuthPageFrame(
-      title: tr(context, 'Создать аккаунт'),
-      subtitle: tr(context, 'Это займёт меньше минуты'),
+      registering: true,
+      onSwitch: busy ? null : () => _openLogin(context),
       children: [
         Form(
           key: _form,
@@ -106,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           padding: EdgeInsets.only(bottom: 16, left: 4),
           child: Text(
             tr(context, 'Минимум 8 символов, буквы и цифры.'),
-            style: TextStyle(fontSize: 13, color: AppColors.textMuted),
+            style: const TextStyle(fontSize: 13),
           ),
         ),
         AuthPrimaryButton(
@@ -114,26 +119,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           loading: _loading,
           onPressed: busy ? null : _submit,
         ),
-        const OrDivider(),
+        const SizedBox(height: 12),
         GoogleButton(
           loading: _googleLoading,
           onPressed: busy ? null : () => _run(auth.signInWithGoogle, google: true),
-        ),
-        const SizedBox(height: 24),
-        Wrap(
-          alignment: WrapAlignment.center,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            Text(tr(context, 'Уже есть аккаунт?'), style: TextStyle(color: AppColors.textMuted)),
-            TextButton(
-              onPressed: busy
-                  ? null
-                  : () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute<void>(builder: (_) => const LoginScreen()),
-                      ),
-              child: Text(tr(context, 'Войти')),
-            ),
-          ],
         ),
       ],
     );

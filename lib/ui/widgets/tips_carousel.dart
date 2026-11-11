@@ -133,7 +133,7 @@ class _TipStyle {
   final Color accent;
 }
 
-const _styles = {
+final _styles = {
   TipKind.savings: _TipStyle(Icons.savings_outlined, Color(0xFFE6F6E9), Color(0xFFCDEDD4), AppColors.greenDark),
   TipKind.nightPharmacy: _TipStyle(Icons.nightlight_round, Color(0xFFE8ECFB), Color(0xFFD3DBF7), Color(0xFF3B4FA8)),
   TipKind.openNow: _TipStyle(Icons.storefront_outlined, Color(0xFFE5F4F6), Color(0xFFCBE8EC), Color(0xFF1F7180)),
@@ -187,7 +187,7 @@ class _TipCard extends StatelessWidget {
                   tip.text,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 14, height: 1.3, color: AppColors.text),
+                  style: TextStyle(fontSize: 14, height: 1.3, color: AppColors.text),
                 ),
               ),
               if (tip.actionLabel != null && action != null)

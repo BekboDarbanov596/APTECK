@@ -48,14 +48,14 @@ class LlmAssistantException implements Exception {
 /// Явное указание языка ответа для текущего сообщения: лёгкие модели
 /// иначе иногда отвечают по-английски на русский вопрос.
 String llmLanguageHint(String message) => switch (detectLang(message)) {
-      AssistantLang.ky =>
-        'The user wrote in Kyrgyz. Write "reply" in Kyrgyz and set language to "ky".',
-      AssistantLang.en =>
-        'The user wrote in English. Write "reply" in English and set language to "en".',
-      AssistantLang.ru =>
-        'The user wrote in Russian. Write "reply" in Russian (на русском языке) '
-            'and set language to "ru".',
-    };
+  AssistantLang.ky =>
+    'The user wrote in Kyrgyz. Write "reply" in Kyrgyz and set language to "ky".',
+  AssistantLang.en =>
+    'The user wrote in English. Write "reply" in English and set language to "en".',
+  AssistantLang.ru =>
+    'The user wrote in Russian. Write "reply" in Russian (на русском языке) '
+        'and set language to "ru".',
+};
 
 /// Разбор JSON-ответа модели ({reply, language, drug_ids}) в [AssistantReply].
 AssistantReply parseLlmReply(String text, Catalog catalog) {
@@ -65,10 +65,18 @@ AssistantReply parseLlmReply(String text, Catalog catalog) {
   } catch (_) {
     throw LlmAssistantException('Ответ не в формате JSON');
   }
-  final reply = (parsed['reply'] as String? ?? '').trim();
+  final rawReply = parsed['reply'];
+  if (rawReply is! String) {
+    throw LlmAssistantException('Некорректный текст ответа');
+  }
+  final reply = rawReply.trim();
   if (reply.isEmpty) throw LlmAssistantException('Пустой ответ');
+  final drugIds = parsed['drug_ids'];
+  if (drugIds != null && drugIds is! List) {
+    throw LlmAssistantException('Некорректный список лекарств');
+  }
   final drugs = <Drug>[
-    for (final id in (parsed['drug_ids'] as List? ?? const []).whereType<String>())
+    for (final id in (drugIds is List ? drugIds : const []).whereType<String>())
       if (catalog.drug(id) != null) catalog.drug(id)!,
   ];
   final lang = switch (parsed['language']) {
@@ -103,7 +111,8 @@ const llmReplySchema = {
     'drug_ids': {
       'type': 'array',
       'items': {'type': 'string'},
-      'description': 'id препаратов из каталога, которые упомянуты в ответе '
+      'description':
+          'id препаратов из каталога, которые упомянуты в ответе '
           '(для кнопок «показать на карте»). Пустой список, если препаратов нет.',
     },
   },
@@ -135,15 +144,17 @@ Style: friendly and short — usually 2–6 sentences, or a short list with "•
 String catalogContext(Catalog catalog, double lat, double lng, DateTime now) {
   final buf = StringBuffer()
     ..writeln('Current local time: ${now.toIso8601String().substring(0, 16)}.')
-    ..writeln('User location: lat ${lat.toStringAsFixed(4)}, lng ${lng.toStringAsFixed(4)} '
-        '(if geolocation is unavailable this is Ala-Too Square, the city centre).')
     ..writeln()
-    ..writeln('CATALOG (id | name | active ingredient | category | prescription | '
-        'pharmacies in stock | open now | lowest price | nearest pharmacy with stock | cheapest):');
+    ..writeln(
+      'CATALOG (id | name | active ingredient | category | prescription | '
+      'pharmacies in stock | open now | lowest price | nearest pharmacy with stock | cheapest):',
+    );
 
   for (final d in catalog.drugs) {
     final offers = catalog.offersForDrug(d.id);
-    final open = offers.where((o) => isOpenAt(catalog.pharmacy(o.pharmacyId)!, now)).toList();
+    final open = offers
+        .where((o) => isOpenAt(catalog.pharmacy(o.pharmacyId)!, now))
+        .toList();
     final pool = open.isNotEmpty ? open : offers;
     String nearest = '-', cheapest = '-', minPrice = '-';
     if (pool.isNotEmpty) {
@@ -156,22 +167,25 @@ String catalogContext(Catalog catalog, double lat, double lng, DateTime now) {
       final c = pool.reduce((a, b) => a.price <= b.price ? a : b);
       final np = catalog.pharmacy(n.pharmacyId)!;
       final cp = catalog.pharmacy(c.pharmacyId)!;
-      nearest = '${np.chain}, ${np.address}, ${formatDistance(dist(n))}, ${n.price} сом';
+      nearest =
+          '${np.chain}, ${np.address}, ${formatDistance(dist(n))}, ${n.price} сом';
       cheapest = '${cp.chain}, ${cp.address}, ${c.price} сом';
       minPrice = '${c.price} сом';
     }
-    buf.writeln([
-      d.id,
-      '${d.title} (${d.subtitle})',
-      d.inn,
-      d.category,
-      d.rx ? 'RX' : 'OTC',
-      offers.length,
-      open.length,
-      minPrice,
-      nearest,
-      cheapest,
-    ].join(' | '));
+    buf.writeln(
+      [
+        d.id,
+        '${d.title} (${d.subtitle})',
+        d.inn,
+        d.category,
+        d.rx ? 'RX' : 'OTC',
+        offers.length,
+        open.length,
+        minPrice,
+        nearest,
+        cheapest,
+      ].join(' | '),
+    );
   }
   return buf.toString();
 }

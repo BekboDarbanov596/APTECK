@@ -4,7 +4,6 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 import '../l10n/lang.dart';
@@ -71,14 +70,8 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> with SingleTickerProv
       };
 
   Future<void> _start() async {
-    // Ключ нейросети — тот же, что сохранён в окне ассистента.
-    try {
-      if (AppScope.read(context).useDeviceServices) {
-        final prefs = await SharedPreferences.getInstance();
-        final key = prefs.getString('llm_api_key') ?? prefs.getString('claude_api_key');
-        if (key != null && key.isNotEmpty) _llm = llmAssistantForKey(key);
-      }
-    } catch (_) {}
+    // Нейросеть на встроенном ключе (как в окне ассистента).
+    _llm = builtInLlmAssistant();
 
     try {
       await _tts.awaitSpeakCompletion(true);
@@ -329,12 +322,12 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> with SingleTickerProv
                             child: Container(
                               width: 150,
                               height: 150,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: RadialGradient(
                                   center: Alignment(-0.35, -0.4),
                                   radius: 0.9,
-                                  colors: [Color(0xFF8BE39B), AppColors.green, AppColors.greenDark],
+                                  colors: [Color(0xFF8BE39B), AppColors.green, AppColors.greenFill],
                                   stops: [0, 0.55, 1],
                                 ),
                                 boxShadow: [

@@ -118,7 +118,7 @@ class _Tile extends StatelessWidget {
         trailing: IconButton(
           tooltip: tr(context, 'Убрать из избранного'),
           onPressed: onRemove,
-          icon: const Icon(Icons.favorite, color: AppColors.green),
+          icon: Icon(Icons.favorite, color: AppColors.green),
         ),
       ),
     ),

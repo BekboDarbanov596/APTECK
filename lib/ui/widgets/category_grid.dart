@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models.dart';
+import '../../l10n/lang.dart';
 import '../theme.dart';
 import 'medical_illustration.dart';
 import 'common.dart';
@@ -87,7 +88,7 @@ class _GlassCategory extends StatelessWidget {
     final accent = accents[index % accents.length];
     return Semantics(
       button: true,
-      label: '$title, препаратов: $count',
+      label: '${tr(context, title)}, ${tr(context, 'препаратов: {n}', {'n': count})}',
       child: PressTilt(
         onTap: onTap,
         child: SizedBox(
@@ -139,7 +140,7 @@ class _GlassCategory extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      tr(context, title),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -151,7 +152,7 @@ class _GlassCategory extends StatelessWidget {
                     ),
                     const SizedBox(height: 7),
                     Text(
-                      '$count препаратов',
+                      tr(context, '{n} препаратов', {'n': count}),
                       style: const TextStyle(
                         fontSize: 10,
                         color: Color(0xFF526B66),
@@ -192,7 +193,7 @@ Future<void> showCategorySheet(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
           children: [
             Text(
-              category,
+              tr(context, category),
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 12),
@@ -258,7 +259,9 @@ class _DrugRow extends StatelessWidget {
             ),
           ),
           Text(
-            minPrice == null ? 'нет' : 'от ${formatPrice(minPrice!)}',
+            minPrice == null
+                ? tr(context, 'нет')
+                : '${tr(context, 'от')} ${formatPrice(minPrice!)}',
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
           ),
         ],

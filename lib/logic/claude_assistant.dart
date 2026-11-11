@@ -54,7 +54,10 @@ class ClaudeAssistant implements LlmAssistant {
       'max_tokens': 8000,
       'system': [
         {'type': 'text', 'text': llmInstructions},
-        {'type': 'text', 'text': catalogContext(catalog, userLat, userLng, now)},
+        {
+          'type': 'text',
+          'text': catalogContext(catalog, userLat, userLng, now),
+        },
         {'type': 'text', 'text': llmLanguageHint(message)},
       ],
       'messages': messages,
@@ -90,7 +93,8 @@ class ClaudeAssistant implements LlmAssistant {
     if (res.statusCode != 200) {
       String detail = res.body;
       try {
-        final err = jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
+        final err =
+            jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
         detail = ((err['error'] as Map?)?['message'] as String?) ?? detail;
       } catch (_) {}
       throw LlmAssistantException(
@@ -132,4 +136,3 @@ class ClaudeAssistant implements LlmAssistant {
   @override
   void close() => _client.close();
 }
-

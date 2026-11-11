@@ -1,4 +1,5 @@
 import '../data/models.dart';
+import '../l10n/lang.dart';
 
 /// Открыта ли аптека в момент [now]. Учитывает график через полночь.
 bool isOpenAt(Pharmacy p, DateTime now) {
@@ -13,13 +14,16 @@ bool isOpenAt(Pharmacy p, DateTime now) {
 
 /// «Открыто до 22:00», «Закрыто до 08:00», «Круглосуточно».
 String openingStatus(Pharmacy p, DateTime now) {
-  if (p.isAroundTheClock) return 'Круглосуточно';
-  return isOpenAt(p, now) ? 'Открыто до ${p.closesAt}' : 'Закрыто до ${p.opensAt}';
+  if (p.isAroundTheClock) return trNow('Круглосуточно');
+  return isOpenAt(p, now)
+      ? trNow('Открыто до {t}', {'t': p.closesAt!})
+      : trNow('Закрыто до {t}', {'t': p.opensAt!});
 }
 
 /// «08:00–22:00» или «Круглосуточно».
-String scheduleText(Pharmacy p) =>
-    p.isAroundTheClock ? 'Круглосуточно' : 'Ежедневно ${p.opensAt}–${p.closesAt}';
+String scheduleText(Pharmacy p) => p.isAroundTheClock
+    ? trNow('Круглосуточно')
+    : trNow('Ежедневно {a}–{b}', {'a': p.opensAt!, 'b': p.closesAt!});
 
 int _minutes(String hhmm) {
   final parts = hhmm.split(':');

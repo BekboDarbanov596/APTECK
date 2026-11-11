@@ -5,14 +5,26 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
 import '../../logic/routing.dart';
+import '../../logic/transit.dart';
 import '../../state/app_state.dart';
 import '../theme.dart';
 import 'common.dart';
+import 'map_controls.dart';
 import 'motion.dart';
+import 'transit_legs.dart';
 import '../../l10n/lang.dart';
 
 /// Карта на весь экран: аптеки «падают» на карту с 3D-переворотом,
 /// выбранная поднимается, над ней всплывает подсказка с ценой.
+/// Ночная карта: яркость инвертируется, оттенок сохраняется
+/// (c' = 0.72·(c − 2·Y + 255) + 12, Y — яркость по Rec. 709).
+const _nightMatrix = <double>[
+  0.4139, -1.0299, -0.104, 0, 195.6, //
+  -0.3061, -0.3099, -0.104, 0, 195.6, //
+  -0.3061, -1.0299, 0.616, 0, 195.6, //
+  0, 0, 0, 1, 0, //
+];
+
 class PharmacyMap extends StatelessWidget {
   const PharmacyMap({
     super.key,
@@ -25,9 +37,11 @@ class PharmacyMap extends StatelessWidget {
     required this.onMarkerTap,
     required this.onPopupTap,
     required this.onMapTap,
+    this.layer = MapLayer.scheme,
     this.route,
     this.routeTargetId,
     this.onRouteTap,
+    this.showPopup = true,
   });
 
   final MapController controller;
@@ -42,6 +56,9 @@ class PharmacyMap extends StatelessWidget {
   final ValueChanged<PharmacyResult> onPopupTap;
   final VoidCallback onMapTap;
 
+  /// Подложка: схема, светлая или спутник.
+  final MapLayer layer;
+
   /// Построенный маршрут — рисуется линией по улицам.
   final RouteResult? route;
 
@@ -51,15 +68,23 @@ class PharmacyMap extends StatelessWidget {
   /// Кнопка «Маршрут» в подсказке над аптекой.
   final ValueChanged<PharmacyResult>? onRouteTap;
 
+  /// false — подсказку над меткой не показываем (вместо неё карточка внизу).
+  final bool showPopup;
+
   @override
   Widget build(BuildContext context) {
+    final tiles = layer;
     PharmacyResult? highlighted;
     for (final r in results) {
-      if (r.pharmacy.id == highlightedId && r.pharmacy.id != routeTargetId) highlighted = r;
+      if (r.pharmacy.id == highlightedId && r.pharmacy.id != routeTargetId) {
+        highlighted = r;
+      }
     }
     final route = this.route;
     // Ближние падают первыми — волна расходится от пользователя.
-    final order = {for (var i = 0; i < results.length; i++) results[i].pharmacy.id: i};
+    final order = {
+      for (var i = 0; i < results.length; i++) results[i].pharmacy.id: i,
+    };
 
     return FlutterMap(
       mapController: controller,
@@ -68,7 +93,9 @@ class PharmacyMap extends StatelessWidget {
         initialZoom: 13.5,
         minZoom: 10,
         maxZoom: 18,
-        backgroundColor: const Color(0xFFEFF3F1),
+        backgroundColor: AppColors.dark
+            ? const Color(0xFF0E1110)
+            : const Color(0xFFEFF3F1),
         onTap: (_, _) => onMapTap(),
         interactionOptions: const InteractionOptions(
           flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
@@ -76,18 +103,29 @@ class PharmacyMap extends StatelessWidget {
       ),
       children: [
         TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          key: ValueKey(tiles),
+          urlTemplate: tiles.urlTemplate,
+          subdomains: tiles.subdomains,
           userAgentPackageName: 'kg.aptekaryadom.apteka_ryadom',
-          // Приглушаем карту, чтобы акцентом были метки.
-          tileBuilder: (context, tile, _) => ColorFiltered(
-            colorFilter: const ColorFilter.matrix([
-              0.75, 0.15, 0.05, 0, 18, //
-              0.10, 0.80, 0.05, 0, 20, //
-              0.10, 0.15, 0.70, 0, 22, //
-              0, 0, 0, 1, 0,
-            ]),
-            child: tile,
-          ),
+          // Схему приглушаем, чтобы акцентом были метки.
+          // Схему приглушаем, чтобы акцентом были метки; ночную —
+          // инвертируем по яркости с сохранением оттенков.
+          tileBuilder: tiles == MapLayer.dark
+              ? (context, tile, _) => ColorFiltered(
+                  colorFilter: const ColorFilter.matrix(_nightMatrix),
+                  child: tile,
+                )
+              : !tiles.muted
+              ? null
+              : (context, tile, _) => ColorFiltered(
+                  colorFilter: const ColorFilter.matrix([
+                    0.75, 0.15, 0.05, 0, 18, //
+                    0.10, 0.80, 0.05, 0, 20, //
+                    0.10, 0.15, 0.70, 0, 22, //
+                    0, 0, 0, 1, 0,
+                  ]),
+                  child: tile,
+                ),
         ),
         if (route != null && route.points.length > 1)
           _AnimatedRoute(key: ValueKey(route), route: route),
@@ -104,16 +142,21 @@ class PharmacyMap extends StatelessWidget {
                   onTap: () => onMarkerTap(r),
                   child: _AnimatedPin(
                     key: ValueKey('${r.pharmacy.id}|$animationKey'),
-                    delay: Duration(milliseconds: 60 * math.min(order[r.pharmacy.id]!, 14)),
+                    delay: Duration(
+                      milliseconds: 60 * math.min(order[r.pharmacy.id]!, 14),
+                    ),
                     selected: r.pharmacy.id == highlightedId,
                     dimmed: !r.isOpen,
                   ),
                 ),
               ),
-            if (highlighted != null)
+            if (highlighted != null && showPopup)
               Marker(
                 key: ValueKey('popup-${highlighted.pharmacy.id}'),
-                point: LatLng(highlighted.pharmacy.lat, highlighted.pharmacy.lng),
+                point: LatLng(
+                  highlighted.pharmacy.lat,
+                  highlighted.pharmacy.lng,
+                ),
                 width: 250,
                 height: 84,
                 alignment: const Alignment(0, -2.5),
@@ -121,7 +164,9 @@ class PharmacyMap extends StatelessWidget {
                   key: ValueKey('popup-${highlighted.pharmacy.id}'),
                   result: highlighted,
                   onTap: () => onPopupTap(highlighted!),
-                  onRoute: onRouteTap == null ? null : () => onRouteTap!(highlighted!),
+                  onRoute: onRouteTap == null
+                      ? null
+                      : () => onRouteTap!(highlighted!),
                 ),
               ),
             // Точка «я здесь» — последней: не сдвигает метки аптек
@@ -131,7 +176,7 @@ class PharmacyMap extends StatelessWidget {
                 point: userPoint,
                 width: 72,
                 height: 72,
-                child: const PulseRing(
+                child: PulseRing(
                   size: 40,
                   color: AppColors.userDot,
                   child: _UserDot(),
@@ -140,7 +185,10 @@ class PharmacyMap extends StatelessWidget {
           ],
         ),
         SimpleAttributionWidget(
-          source: Text(tr(context, 'участники OpenStreetMap')),
+          source: Text(
+            tr(context, tiles.attribution),
+            style: TextStyle(color: AppColors.textMuted),
+          ),
           alignment: Alignment.bottomLeft,
           backgroundColor: Color(0x00000000),
         ),
@@ -166,8 +214,12 @@ class _AnimatedPin extends StatefulWidget {
   State<_AnimatedPin> createState() => _AnimatedPinState();
 }
 
-class _AnimatedPinState extends State<_AnimatedPin> with SingleTickerProviderStateMixin {
-  late final _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 900));
+class _AnimatedPinState extends State<_AnimatedPin>
+    with SingleTickerProviderStateMixin {
+  late final _c = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 900),
+  );
 
   @override
   void initState() {
@@ -189,15 +241,11 @@ class _AnimatedPinState extends State<_AnimatedPin> with SingleTickerProviderSta
     return AnimatedBuilder(
       animation: _c,
       builder: (context, _) {
-        final drop = Curves.elasticOut.transform(_c.value);
-        final flip = Curves.easeOutCubic.transform(_c.value);
+        final drop = Curves.easeOutCubic.transform(_c.value);
         return Opacity(
           opacity: (_c.value * 3).clamp(0, 1),
-          child: Transform(
-            alignment: Alignment.bottomCenter,
-            transform: perspective(0.004)
-              ..translateByDouble(0, -60 * (1 - drop), 0, 1)
-              ..rotateY(math.pi * (1 - flip)),
+          child: Transform.translate(
+            offset: Offset(0, -16 * (1 - drop)),
             child: AnimatedScale(
               scale: widget.selected ? 1.3 : 1,
               alignment: Alignment.bottomCenter,
@@ -301,7 +349,12 @@ class _UserDot extends StatelessWidget {
 
 /// Подсказка над выбранной аптекой — раскрывается с 3D-наклоном.
 class _Popup extends StatelessWidget {
-  const _Popup({super.key, required this.result, required this.onTap, this.onRoute});
+  const _Popup({
+    super.key,
+    required this.result,
+    required this.onTap,
+    this.onRoute,
+  });
 
   final PharmacyResult result;
   final VoidCallback onTap;
@@ -345,13 +398,19 @@ class _Popup extends StatelessWidget {
                         result.pharmacy.chain,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       Text(
                         result.pharmacy.address,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 13, color: AppColors.textMuted),
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: AppColors.textMuted,
+                        ),
                       ),
                     ],
                   ),
@@ -359,7 +418,7 @@ class _Popup extends StatelessWidget {
                 if (price != null)
                   Text(
                     formatPrice(price),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w800,
                       color: AppColors.green,
@@ -377,13 +436,17 @@ class _Popup extends StatelessWidget {
                         onTap: onRoute,
                         child: const Padding(
                           padding: EdgeInsets.all(8),
-                          child: Icon(Icons.directions, color: Colors.white, size: 20),
+                          child: Icon(
+                            Icons.directions,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ] else
-                  const Icon(Icons.chevron_right, color: AppColors.textMuted),
+                  Icon(Icons.chevron_right, color: AppColors.textMuted),
               ],
             ),
           ),
@@ -404,9 +467,12 @@ class _AnimatedRoute extends StatefulWidget {
   State<_AnimatedRoute> createState() => _AnimatedRouteState();
 }
 
-class _AnimatedRouteState extends State<_AnimatedRoute> with SingleTickerProviderStateMixin {
-  late final _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 1100))
-    ..forward();
+class _AnimatedRouteState extends State<_AnimatedRoute>
+    with SingleTickerProviderStateMixin {
+  late final _c = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1100),
+  )..forward();
 
   @override
   void dispose() {
@@ -424,6 +490,8 @@ class _AnimatedRouteState extends State<_AnimatedRoute> with SingleTickerProvide
         final t = Curves.easeInOutCubic.transform(_c.value);
         final count = math.max(2, (all.length * t).ceil());
         final points = all.sublist(0, math.min(count, all.length));
+        final transit = widget.route.transit;
+        if (transit != null) return _transitLayers(transit, count, t >= 1);
         return PolylineLayer(
           polylines: [
             // Мягкая подложка — линия читается на любой карте.
@@ -445,6 +513,177 @@ class _AnimatedRouteState extends State<_AnimatedRoute> with SingleTickerProvide
           ],
         );
       },
+    );
+  }
+
+  /// Как в 2ГИС: пешком — серый пунктир, поездка — синяя линия,
+  /// на остановках — подписи с номерами.
+  Widget _transitLayers(TransitOption option, int count, bool done) {
+    final lines = <Polyline>[];
+    var left = count;
+    for (final leg in option.legs) {
+      if (left <= 0 || leg.points.length < 2) continue;
+      final pts = leg.points.sublist(0, math.min(left, leg.points.length));
+      left -= leg.points.length;
+      if (pts.length < 2) continue;
+      if (leg.walk) {
+        lines.add(
+          Polyline(
+            points: pts,
+            strokeWidth: 5,
+            color: const Color(0xFF6B7570),
+            pattern: StrokePattern.dotted(spacingFactor: 1.8),
+          ),
+        );
+      } else {
+        lines.add(
+          Polyline(
+            points: pts,
+            strokeWidth: 7,
+            color: transitColor(leg.kind),
+            borderStrokeWidth: 2,
+            borderColor: Colors.white,
+          ),
+        );
+      }
+    }
+    final labels = <Marker>[];
+    final stops = <CircleMarker>[];
+    final legs = option.legs;
+    if (done) {
+      for (var i = 0; i < legs.length; i++) {
+        final leg = legs[i];
+        if (leg.walk || leg.points.isEmpty) continue;
+        final color = transitColor(leg.kind);
+        for (final p in [leg.points.first, leg.points.last]) {
+          stops.add(
+            CircleMarker(
+              point: p,
+              radius: 6,
+              color: Colors.white,
+              borderColor: color,
+              borderStrokeWidth: 3,
+            ),
+          );
+        }
+        labels.add(
+          _label(
+            leg.points.first,
+            icon: transitIcon(leg.kind),
+            color: color,
+            title: leg.fromStop ?? leg.kindLabel,
+            chips: lineChips(leg, max: 3),
+          ),
+        );
+        final after = i + 1 < legs.length ? legs[i + 1] : null;
+        if (leg.toStop != null) {
+          labels.add(
+            _label(
+              leg.points.last,
+              icon: Icons.directions_walk_rounded,
+              color: const Color(0xFF6B7570),
+              title: leg.toStop!,
+              subtitle: after != null && after.walk && after.distance >= 15
+                  ? trNow('Пешком {t}', {'t': formatDuration(after.movingSeconds)})
+                  : trNow('Выход'),
+            ),
+          );
+        }
+      }
+    }
+    return Stack(
+      children: [
+        PolylineLayer(polylines: lines),
+        if (stops.isNotEmpty) CircleLayer(circles: stops),
+        if (labels.isNotEmpty) MarkerLayer(markers: labels),
+      ],
+    );
+  }
+
+  Marker _label(
+    LatLng point, {
+    required IconData icon,
+    required Color color,
+    required String title,
+    String? subtitle,
+    List<Widget> chips = const [],
+  }) {
+    return Marker(
+      point: point,
+      width: 220,
+      height: 74,
+      alignment: Alignment.topCenter,
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 210),
+            padding: const EdgeInsets.fromLTRB(8, 5, 10, 5),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x33000000),
+                  blurRadius: 8,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon, size: 18, color: color),
+                const SizedBox(width: 6),
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.text,
+                        ),
+                      ),
+                      if (chips.isNotEmpty || subtitle != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              for (final c in chips) ...[
+                                Transform.scale(scale: 0.85, child: c),
+                                const SizedBox(width: 1),
+                              ],
+                              if (subtitle != null)
+                                Flexible(
+                                  child: Text(
+                                    chips.isEmpty ? subtitle : ' $subtitle',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 11.5,
+                                      color: AppColors.textMuted,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,0 +1,609 @@
+{
+  "source": "OpenStreetMap через Nominatim, © участники OpenStreetMap, ODbL",
+  "fetchedAt": "2026-11-11",
+  "known": {
+    "neman-chuy-125": {
+      "lat": 42.8754516,
+      "lng": 74.6242515,
+      "found": "Vita Dent, 125, проспект Чуй, Ленинский район, город Бишкек, 720046, Кыргызстан"
+    },
+    "farmamir-moskovskaya-134": {
+      "lat": 42.869385,
+      "lng": 74.5984878,
+      "found": "134, улица Московская, Микрорайон Восток-5, Свердловский район, город Бишкек, 720021, Кыргызстан"
+    },
+    "farmamir-toktogula-93": {
+      "lat": 42.8723164,
+      "lng": 74.6083138,
+      "found": "93, улица Токтогула, Первомайский район, город Бишкек, 720040, Кыргызстан"
+    },
+    "farmamir-tunguch-64": {
+      "lat": 42.8543365,
+      "lng": 74.6879418,
+      "found": "64/5, Тунгуч микрорайон, микрорайон Тунгуч, Октябрьский район, город Бишкек, 720048, Кыргызстан"
+    },
+    "elaman-logvinenko-30": {
+      "lat": 42.8822083,
+      "lng": 74.5985607,
+      "found": "Поликлиника №3, 30/1, улица Якова Логвиненко, Первомайский район, город Бишкек, 720014, Кыргызстан"
+    },
+    "elaman-fuchika-15": {
+      "lat": 42.8848906,
+      "lng": 74.5539974,
+      "found": "15, улица Фучика Юлиуса, Первомайский район, город Бишкек, 720046, Кыргызстан"
+    },
+    "farmservis-ahunbaeva-131": {
+      "lat": 42.8435498,
+      "lng": 74.5962469,
+      "found": "131, улица Ахунбаева Исы, 9-й микрорайон, Первомайский район, город Бишкек, 720055, Кыргызстан"
+    },
+    "farmservis-beishenalievoi-29": {
+      "lat": 42.8751396,
+      "lng": 74.5718633,
+      "found": "29, улица Бейшеналиевой, Ленинский район, город Бишкек, 720010, Кыргызстан"
+    }
+  },
+  "branches": [
+    {
+      "osm": "way1560006888",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Гоголя, 113/2",
+      "hasHouseNumber": true,
+      "lat": 42.8742721,
+      "lng": 74.6204054,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node4148327634",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "просп. Чынгыза Айтматова, 49",
+      "hasHouseNumber": true,
+      "lat": 42.8439825,
+      "lng": 74.585614,
+      "openingHours": "24/7",
+      "phone": null
+    },
+    {
+      "osm": "node2918324163",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "просп. Чуй, 161",
+      "hasHouseNumber": true,
+      "lat": 42.8760871,
+      "lng": 74.5458205,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node5479304022",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Лев Толстой, 59",
+      "hasHouseNumber": true,
+      "lat": 42.8651819,
+      "lng": 74.5542916,
+      "openingHours": "24/7",
+      "phone": null
+    },
+    {
+      "osm": "node6000965935",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "просп. Аалы Токомбаева",
+      "hasHouseNumber": false,
+      "lat": 42.8292438,
+      "lng": 74.5619532,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node792604955",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Тоголок Молдо, 14",
+      "hasHouseNumber": true,
+      "lat": 42.8723114,
+      "lng": 74.5954365,
+      "openingHours": "24/7",
+      "phone": null
+    },
+    {
+      "osm": "node10127026409",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Боконбаева, 136",
+      "hasHouseNumber": true,
+      "lat": 42.8665149,
+      "lng": 74.6107572,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node13201640908",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Жусупа Абдрахманова, 272",
+      "hasHouseNumber": true,
+      "lat": 42.9229727,
+      "lng": 74.6117079,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node1813385669",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "просп. Жайыл баатыра",
+      "hasHouseNumber": false,
+      "lat": 42.8142445,
+      "lng": 74.6305781,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node5971277398",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Чынгыза Айтматова, 97/4",
+      "hasHouseNumber": true,
+      "lat": 42.8299441,
+      "lng": 74.582727,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node1675856165",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Карыбека Тыналиева",
+      "hasHouseNumber": false,
+      "lat": 42.8419552,
+      "lng": 74.5672781,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node10182502502",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Осмонкула",
+      "hasHouseNumber": false,
+      "lat": 42.8872563,
+      "lng": 74.6288185,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2918357795",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Манаса",
+      "hasHouseNumber": false,
+      "lat": 42.8770487,
+      "lng": 74.5622448,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node1913699350",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Жусупа Абдрахманова",
+      "hasHouseNumber": false,
+      "lat": 42.8480273,
+      "lng": 74.6095854,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node1482515903",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Токтогула",
+      "hasHouseNumber": false,
+      "lat": 42.8728189,
+      "lng": 74.584247,
+      "openingHours": "24/7",
+      "phone": null
+    },
+    {
+      "osm": "node3404945078",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Юсупа Абдрахманова",
+      "hasHouseNumber": false,
+      "lat": 42.8852823,
+      "lng": 74.6115109,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2064054490",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Кольбаева",
+      "hasHouseNumber": false,
+      "lat": 42.8771303,
+      "lng": 74.6750677,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2405688805",
+      "chain": "Неман Фарм",
+      "name": "НЕМАН",
+      "address": "ул. Ауэзов көчөсү",
+      "hasHouseNumber": false,
+      "lat": 42.8775625,
+      "lng": 74.6908949,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node8171449522",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Геологический переулок",
+      "hasHouseNumber": false,
+      "lat": 42.8579203,
+      "lng": 74.6105928,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2563991263",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Боконбаева, 61",
+      "hasHouseNumber": true,
+      "lat": 42.8668076,
+      "lng": 74.6139202,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node14196653635",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Чолпон-Атинская",
+      "hasHouseNumber": false,
+      "lat": 42.8773966,
+      "lng": 74.6788214,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2062013987",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Калык Акиев көчөсү",
+      "hasHouseNumber": false,
+      "lat": 42.8713884,
+      "lng": 74.5774534,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node7994144286",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "просп. Жибек Жолу",
+      "hasHouseNumber": false,
+      "lat": 42.883501,
+      "lng": 74.5988213,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node5871733540",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "ул. Жусупа Абдрахманова, 6",
+      "hasHouseNumber": true,
+      "lat": 42.836144,
+      "lng": 74.6076956,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node13121825331",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "просп. Чуй, 37",
+      "hasHouseNumber": true,
+      "lat": 42.8745371,
+      "lng": 74.5081562,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node13140415307",
+      "chain": "Неман Фарм",
+      "name": "Неман",
+      "address": "просп. Жибек Жолу",
+      "hasHouseNumber": false,
+      "lat": 42.8708641,
+      "lng": 74.7278594,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node1221541533",
+      "chain": "Айболит",
+      "name": "Айболит",
+      "address": "ул. Юнусалиева Болота",
+      "hasHouseNumber": false,
+      "lat": 42.8397246,
+      "lng": 74.6228373,
+      "openingHours": "24/7",
+      "phone": null
+    },
+    {
+      "osm": "node5731703022",
+      "chain": "Айболит",
+      "name": "Айболит",
+      "address": "ул. Курманжан датка көчөсү",
+      "hasHouseNumber": false,
+      "lat": 42.8848178,
+      "lng": 74.636518,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node1469045125",
+      "chain": "Айболит",
+      "name": "Айболит",
+      "address": "ул. Жусупа Абдрахманова",
+      "hasHouseNumber": false,
+      "lat": 42.8502228,
+      "lng": 74.6098117,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2918357782",
+      "chain": "Айболит",
+      "name": "Айболит",
+      "address": "просп. Дэн Сяопина, 4",
+      "hasHouseNumber": true,
+      "lat": 42.8776721,
+      "lng": 74.5607774,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node4215726367",
+      "chain": "Айболит",
+      "name": "Айболит",
+      "address": "ул. Тоголок Молдо",
+      "hasHouseNumber": false,
+      "lat": 42.891803,
+      "lng": 74.596988,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node7047562236",
+      "chain": "ФармаМир",
+      "name": "ФармаМИР",
+      "address": "ул. 8-й микрорайон, 44",
+      "hasHouseNumber": true,
+      "lat": 42.8296583,
+      "lng": 74.6095509,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2688453768",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Жусупа Абдрахманова",
+      "hasHouseNumber": false,
+      "lat": 42.8298097,
+      "lng": 74.6070018,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node6326753506",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Гоголя",
+      "hasHouseNumber": false,
+      "lat": 42.8737862,
+      "lng": 74.6198434,
+      "openingHours": "24/7",
+      "phone": null
+    },
+    {
+      "osm": "node13116485701",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Чуй, 92",
+      "hasHouseNumber": true,
+      "lat": 42.8748271,
+      "lng": 74.6148715,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node14280054745",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "просп. Жибек-Жолу",
+      "hasHouseNumber": false,
+      "lat": 42.8883005,
+      "lng": 74.6422223,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node660731882",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Чуй",
+      "hasHouseNumber": false,
+      "lat": 42.8754634,
+      "lng": 74.6239993,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2918358310",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "просп. Дэн Сяопина, 4",
+      "hasHouseNumber": true,
+      "lat": 42.8776504,
+      "lng": 74.5605259,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node3608638864",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Ауэзов көчөсү",
+      "hasHouseNumber": false,
+      "lat": 42.876335,
+      "lng": 74.690687,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node5971277408",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Карыбека Тыналиева, 3/3",
+      "hasHouseNumber": true,
+      "lat": 42.8345016,
+      "lng": 74.5686259,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node10090076410",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Саякбай Каралаев, 42",
+      "hasHouseNumber": true,
+      "lat": 42.8311814,
+      "lng": 74.6311534,
+      "openingHours": "24/7",
+      "phone": null
+    },
+    {
+      "osm": "node10823527472",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Юсупа Абдрахманова, 150",
+      "hasHouseNumber": true,
+      "lat": 42.8683342,
+      "lng": 74.6108712,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node12146262224",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Юнусалиева Болота",
+      "hasHouseNumber": false,
+      "lat": 42.8315588,
+      "lng": 74.6214723,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2327962343",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Чалдыбар көчөсү",
+      "hasHouseNumber": false,
+      "lat": 42.8354588,
+      "lng": 74.6083685,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node5838176109",
+      "chain": "ФармаМир",
+      "name": "ФармаМир",
+      "address": "просп. Аалы Токомбаева",
+      "hasHouseNumber": false,
+      "lat": 42.8236331,
+      "lng": 74.6161302,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node5281766622",
+      "chain": "ФармаМир",
+      "name": "Фармамир",
+      "address": "ул. Ахунбаева Исы",
+      "hasHouseNumber": false,
+      "lat": 42.8435584,
+      "lng": 74.5939407,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node5838049214",
+      "chain": "Фарм-Сервис",
+      "name": "Фарм-Сервис",
+      "address": "просп. Аалы Токомбаева, 53/2",
+      "hasHouseNumber": true,
+      "lat": 42.8244576,
+      "lng": 74.615774,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node4148279586",
+      "chain": "Фарм-Сервис",
+      "name": "Фарм-сервис",
+      "address": "ул. Карыбека Тыналиева",
+      "hasHouseNumber": false,
+      "lat": 42.8345129,
+      "lng": 74.5686228,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "way755054956",
+      "chain": "Фарватер",
+      "name": "Фарватер",
+      "address": "ул. Койбагарова, 17/1",
+      "hasHouseNumber": true,
+      "lat": 42.8396868,
+      "lng": 74.6299096,
+      "openingHours": null,
+      "phone": null
+    },
+    {
+      "osm": "node2469008480",
+      "chain": "Фарватер",
+      "name": "Фарватер",
+      "address": "ул. Ахунбаева Исы",
+      "hasHouseNumber": false,
+      "lat": 42.8433543,
+      "lng": 74.5868394,
+      "openingHours": "24/7",
+      "phone": null
+    },
+    {
+      "osm": "node1872257328",
+      "chain": "Эл Аман",
+      "name": "Аман Эл",
+      "address": "ул. Львовский переулок",
+      "hasHouseNumber": false,
+      "lat": 42.9233524,
+      "lng": 74.6117837,
+      "openingHours": null,
+      "phone": null
+    }
+  ]
+}

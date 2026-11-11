@@ -21,12 +21,10 @@
       justify-content: center;
       overflow: hidden;
     }
-    /* Телефон 390×844 + рамка; масштабируется под высоту окна (см. скрипт). */
-    .stage { transform-origin: center center; }
     .phone {
       position: relative;
-      width: 414px;
-      height: 868px;
+      width: min(414px, calc(100vw - 32px));
+      height: min(868px, calc(100dvh - 32px));
       padding: 12px;
       border-radius: 64px;
       background: var(--frame);
@@ -103,7 +101,6 @@
   </style>
 </head>
 <body>
-  <div class="stage" id="stage">
     <div class="phone">
       <div class="screen">
         <div class="island"></div>
@@ -119,7 +116,6 @@
         <div class="home-bar"></div>
       </div>
     </div>
-  </div>
   <script>
     // Часы в статус-баре
     function tick() {
@@ -129,14 +125,6 @@
     }
     tick();
     setInterval(tick, 15000);
-
-    // Вписываем телефон в окно, сохраняя пропорции
-    function fit() {
-      const scale = Math.min(1, (window.innerHeight - 32) / 868, (window.innerWidth - 32) / 414);
-      document.getElementById('stage').style.transform = 'scale(' + scale + ')';
-    }
-    fit();
-    window.addEventListener('resize', fit);
   </script>
 </body>
 </html>

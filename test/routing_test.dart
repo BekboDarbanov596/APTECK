@@ -274,8 +274,14 @@ void main() {
       );
       await tester.pump(const Duration(seconds: 1));
 
-      expect(find.text('Неман Фарм'), findsOneWidget);
-      expect(find.text('7 мин'), findsOneWidget);
+      expect(
+        find.textContaining('Неман Фарм', findRichText: true),
+        findsOneWidget,
+      );
+      // Время — в карточке и в полоске способов внизу.
+      expect(find.text('7 мин'), findsWidgets);
+      expect(find.text('Моё местоположение'), findsNothing);
+      expect(find.text('Площадь Ала-Тоо'), findsOneWidget);
       final platform = tester.binding.defaultBinaryMessenger;
       String? copied;
       platform.setMockMethodCallHandler(SystemChannels.platform, (call) async {
@@ -291,12 +297,15 @@ void main() {
       await tester.pump();
       expect(copied, pharmacy.address);
       expect(find.text('Адрес скопирован'), findsOneWidget);
-      expect(find.textContaining('От площади Ала-Тоо'), findsOneWidget);
+      expect(find.textContaining('от площади Ала-Тоо'), findsOneWidget);
+      expect(find.text('В путь'), findsOneWidget);
 
-      await tester.tap(find.text('На машине'));
+      await tester.tap(find.byTooltip('На машине'));
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
-      expect(find.text('2 мин'), findsOneWidget);
+      expect(find.text('2 мин'), findsWidgets);
+      // Пешком уже считали — в полоске осталось точное время.
+      expect(find.text('7 мин'), findsOneWidget);
 
       await tester.tap(find.byTooltip('Закрыть маршрут'));
       expect(closed, isTrue);

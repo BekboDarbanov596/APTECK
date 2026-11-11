@@ -16,24 +16,27 @@ class SettingsGroup extends StatelessWidget {
     final rows = <Widget>[];
     for (var i = 0; i < children.length; i++) {
       if (i > 0) {
-        rows.add(const Divider(height: 1, indent: 58, endIndent: 18, color: Color(0xFFEDF1EE)));
+        rows.add(
+          Divider(
+            height: 1,
+            indent: 64,
+            endIndent: 16,
+            color: AppColors.dark ? AppColors.border : const Color(0xFFE9E3D7),
+          ),
+        );
       }
       rows.add(children[i]);
     }
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(color: Color(0x0A0E2A1C), blurRadius: 24, offset: Offset(0, 8)),
-        ],
+    return Material(
+      color: AppColors.dark ? AppColors.surface : const Color(0xFFFAF7EF),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+          color: AppColors.dark ? AppColors.border : const Color(0xFFDED8CA),
+        ),
       ),
-      child: Material(
-        type: MaterialType.transparency,
-        borderRadius: BorderRadius.circular(24),
-        clipBehavior: Clip.antiAlias,
-        child: Column(children: rows),
-      ),
+      clipBehavior: Clip.antiAlias,
+      child: Column(children: rows),
     );
   }
 }
@@ -73,8 +76,26 @@ class SettingsRow extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
           child: Row(
             children: [
-              Icon(icon, size: 22, color: fg),
-              const SizedBox(width: 14),
+              Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(
+                  color: AppColors.dark
+                      ? AppColors.greenSoft
+                      : enabled
+                      ? const Color(0xFFE7EBDF)
+                      : const Color(0xFFF0F2F1),
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                child: Icon(
+                  icon,
+                  size: 20,
+                  color: enabled
+                      ? AppColors.greenDark
+                      : const Color(0xFFA9B4AE),
+                ),
+              ),
+              const SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,13 +103,21 @@ class SettingsRow extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: fg),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: fg,
+                      ),
                     ),
                     if (subtitle != null) ...[
                       const SizedBox(height: 2),
                       Text(
                         subtitle!,
-                        style: const TextStyle(fontSize: 12, height: 1.3, color: AppColors.textMuted),
+                        style: TextStyle(
+                          fontSize: 12,
+                          height: 1.3,
+                          color: AppColors.textMuted,
+                        ),
                       ),
                     ],
                   ],
@@ -99,14 +128,20 @@ class SettingsRow extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8),
                   child: Text(
                     value!,
-                    style: const TextStyle(fontSize: 14, color: AppColors.textMuted),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppColors.textMuted,
+                    ),
                   ),
                 ),
               ?trailing,
               if (trailing == null && chevron)
                 const Padding(
                   padding: EdgeInsets.only(left: 4),
-                  child: Icon(Icons.chevron_right_rounded, color: Color(0xFFB4BEB8)),
+                  child: Icon(
+                    Icons.chevron_right_rounded,
+                    color: Color(0xFFB4BEB8),
+                  ),
                 ),
             ],
           ),
@@ -118,22 +153,27 @@ class SettingsRow extends StatelessWidget {
 
 /// Подпись над группой настроек.
 class SettingsCaption extends StatelessWidget {
-  const SettingsCaption(this.text, {super.key});
+  const SettingsCaption(
+    this.text, {
+    super.key,
+    this.color,
+  });
 
   final String text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(6, 0, 6, 10),
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w600,
-            color: AppColors.textMuted,
-          ),
-        ),
-      );
+    padding: const EdgeInsets.fromLTRB(6, 0, 6, 10),
+    child: Text(
+      text,
+      style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+        color: color ?? AppColors.textMuted,
+      ),
+    ),
+  );
 }
 
 /// Маленький переключатель «Ближе / Дешевле».
@@ -152,9 +192,9 @@ class _SortToggle extends StatelessWidget {
         onTap: () => onChanged(mode),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 7),
           decoration: BoxDecoration(
-            color: selected ? AppColors.text : Colors.transparent,
+            color: selected ? AppColors.green : Colors.transparent,
             borderRadius: BorderRadius.circular(99),
           ),
           child: Text(
@@ -172,7 +212,7 @@ class _SortToggle extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: AppColors.greenSoft,
         borderRadius: BorderRadius.circular(99),
       ),
       child: Row(
@@ -194,16 +234,24 @@ class ProfilePreferences extends StatelessWidget {
   Future<void> _copyFavorites(BuildContext context) async {
     final catalog = state.catalog;
     final lines = <String>[
-      'Мой список · Аптека рядом',
+      '${tr(context, 'Мой список')} · ${tr(context, 'Аптека рядом')}',
       for (final id in state.favoriteDrugIds)
-        if (catalog?.drug(id) case final drug?) '• ${drug.title} — ${drug.subtitle}',
-      if (state.favoritePharmacyIds.isNotEmpty) '\nАптеки:',
+        if (catalog?.drug(id) case final drug?)
+          '• ${drug.title} — ${drug.subtitle}',
+      if (state.favoritePharmacyIds.isNotEmpty) '\n${tr(context, 'Аптеки')}:',
       for (final id in state.favoritePharmacyIds)
-        if (catalog?.pharmacy(id) case final pharmacy?) '• ${pharmacy.chain}, ${pharmacy.address}',
+        if (catalog?.pharmacy(id) case final pharmacy?)
+          '• ${pharmacy.chain}, ${pharmacy.address}',
     ];
     final messenger = ScaffoldMessenger.of(context);
-    final okText = tr(context, 'Список скопирован — его можно отправить близким');
-    final failText = tr(context, 'Не удалось скопировать список. Попробуйте ещё раз.');
+    final okText = tr(
+      context,
+      'Список скопирован — его можно отправить близким',
+    );
+    final failText = tr(
+      context,
+      'Не удалось скопировать список. Попробуйте ещё раз.',
+    );
     try {
       await Clipboard.setData(ClipboardData(text: lines.join('\n')));
       messenger.showSnackBar(SnackBar(content: Text(okText)));
@@ -214,8 +262,11 @@ class ProfilePreferences extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasFavorites = state.favoriteDrugIds.any((id) => state.catalog?.drug(id) != null) ||
-        state.favoritePharmacyIds.any((id) => state.catalog?.pharmacy(id) != null);
+    final hasFavorites =
+        state.favoriteDrugIds.any((id) => state.catalog?.drug(id) != null) ||
+        state.favoritePharmacyIds.any(
+          (id) => state.catalog?.pharmacy(id) != null,
+        );
     return SettingsGroup(
       children: [
         SettingsRow(

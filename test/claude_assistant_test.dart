@@ -11,32 +11,36 @@ import 'package:http/testing.dart';
 
 void main() {
   final catalog = Catalog.fromJson(
-    jsonDecode(File('assets/demo_data.json').readAsStringSync()) as Map<String, dynamic>,
+    jsonDecode(File('assets/demo_data.json').readAsStringSync())
+        as Map<String, dynamic>,
   );
   final noon = DateTime(2026, 11, 8, 12);
 
-  http.Response ok(Map<String, dynamic> reply, {String stop = 'end_turn'}) => http.Response.bytes(
-        utf8.encode(jsonEncode({
-          'id': 'msg_1',
-          'type': 'message',
-          'role': 'assistant',
-          'stop_reason': stop,
-          'content': [
-            {'type': 'thinking', 'thinking': '', 'signature': 'sig'},
-            {'type': 'text', 'text': jsonEncode(reply)},
-          ],
-        })),
+  http.Response ok(Map<String, dynamic> reply, {String stop = 'end_turn'}) =>
+      http.Response.bytes(
+        utf8.encode(
+          jsonEncode({
+            'id': 'msg_1',
+            'type': 'message',
+            'role': 'assistant',
+            'stop_reason': stop,
+            'content': [
+              {'type': 'thinking', 'thinking': '', 'signature': 'sig'},
+              {'type': 'text', 'text': jsonEncode(reply)},
+            ],
+          }),
+        ),
         200,
         headers: {'content-type': 'application/json'},
       );
 
   Future<AssistantReply> ask(ClaudeAssistant c, String m) => c.reply(
-        message: m,
-        catalog: catalog,
-        userLat: bishkekCenterLat,
-        userLng: bishkekCenterLng,
-        now: noon,
-      );
+    message: m,
+    catalog: catalog,
+    userLat: bishkekCenterLat,
+    userLng: bishkekCenterLng,
+    now: noon,
+  );
 
   test('запрос: ключ, версия, модель, каталог в системном промпте', () async {
     late http.Request sent;
@@ -87,36 +91,67 @@ void main() {
     expect((assistant['content'] as List).first['signature'], 'sig');
   });
 
-  test('ошибки: неверный ключ, отказ, сеть — исключение, история не портится', () async {
-    var mode = 'auth';
-    final c = ClaudeAssistant(
-      apiKey: 'k',
-      client: MockClient((req) async {
-        switch (mode) {
-          case 'auth':
-            return http.Response(
-                jsonEncode({'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}}),
-                401);
-          case 'refusal':
-            return ok({'reply': '', 'language': 'ru', 'drug_ids': <String>[]}, stop: 'refusal');
-          default:
-            throw const SocketException('offline');
-        }
-      }),
-    );
+  test(
+    'ошибки: неверный ключ, отказ, сеть — исключение, история не портится',
+    () async {
+      var mode = 'auth';
+      final c = ClaudeAssistant(
+        apiKey: 'k',
+        client: MockClient((req) async {
+          switch (mode) {
+            case 'auth':
+              return http.Response(
+                jsonEncode({
+                  'type': 'error',
+                  'error': {
+                    'type': 'authentication_error',
+                    'message': 'invalid x-api-key',
+                  },
+                }),
+                401,
+              );
+            case 'refusal':
+              return ok({
+                'reply': '',
+                'language': 'ru',
+                'drug_ids': <String>[],
+              }, stop: 'refusal');
+            default:
+              throw const SocketException('offline');
+          }
+        }),
+      );
 
-    await expectLater(
-      ask(c, 'привет'),
-      throwsA(isA<ClaudeAssistantException>().having((e) => e.isAuthError, 'auth', isTrue)),
-    );
-    mode = 'refusal';
-    await expectLater(ask(c, 'привет'), throwsA(isA<ClaudeAssistantException>()));
-    mode = 'net';
-    await expectLater(ask(c, 'привет'), throwsA(isA<ClaudeAssistantException>()));
-  });
+      await expectLater(
+        ask(c, 'привет'),
+        throwsA(
+          isA<ClaudeAssistantException>().having(
+            (e) => e.isAuthError,
+            'auth',
+            isTrue,
+          ),
+        ),
+      );
+      mode = 'refusal';
+      await expectLater(
+        ask(c, 'привет'),
+        throwsA(isA<ClaudeAssistantException>()),
+      );
+      mode = 'net';
+      await expectLater(
+        ask(c, 'привет'),
+        throwsA(isA<ClaudeAssistantException>()),
+      );
+    },
+  );
 
   test('каталог для модели: рецептурные помечены, есть цены и аптеки', () {
-    final ctx = catalogContext(catalog, bishkekCenterLat, bishkekCenterLng, noon);
+    final ctx = catalogContext(
+      catalog,
+      bishkekCenterLat,
+      bishkekCenterLng,
+      noon,
+    );
     expect(ctx, contains('amoxicillin-500'));
     expect(RegExp(r'amoxicillin-500 \|[^\n]*\| RX \|').hasMatch(ctx), isTrue);
     expect(RegExp(r'smecta-3 \|[^\n]*\| OTC \|').hasMatch(ctx), isTrue);

@@ -20,17 +20,27 @@ class RouteState extends ChangeNotifier {
   bool loading = false;
   String? error;
 
+  /// По 2ГИС автобус не нужен — панель предложит идти пешком.
+  bool walkInstead = false;
+
   /// Пока маршрут не показан на карте — вкладка «Карта» должна открыться.
   bool _showMapPending = false;
   int _request = 0;
 
   bool get active => target != null;
 
+  /// Уже известное время в пути для этой аптеки — для нижней полоски способов.
+  final Map<TravelMode, double> knownDurations = {};
+
+  /// Этот способ строится прямо в приложении (автобус — только с ключом 2ГИС).
+  bool get inApp => _service.canRouteInApp(mode);
+
   Future<void> buildTo(
     Pharmacy pharmacy, {
     required LatLng from,
     required bool fromDevice,
   }) {
+    if (target?.id != pharmacy.id || this.from != from) knownDurations.clear();
     target = pharmacy;
     this.from = from;
     this.fromDevice = fromDevice;
@@ -46,6 +56,22 @@ class RouteState extends ChangeNotifier {
 
   Future<void> retry() => _load();
 
+  /// Выбранный вариант поездки на автобусе.
+  int get transitIndex {
+    final r = result;
+    if (r?.transit == null) return 0;
+    return r!.transitOptions.indexOf(r.transit!).clamp(0, 1 << 20);
+  }
+
+  /// Листаем карточки вариантов — на карте перерисовывается выбранный.
+  void selectTransit(int index) {
+    final r = result;
+    if (r == null || index < 0 || index >= r.transitOptions.length) return;
+    if (index == transitIndex) return;
+    result = transitToRoute(r.transitOptions[index], options: r.transitOptions);
+    notifyListeners();
+  }
+
   /// Вернёт true один раз после запроса маршрута — чтобы переключиться на карту.
   bool takeShowMapRequest() {
     final pending = _showMapPending;
@@ -58,6 +84,7 @@ class RouteState extends ChangeNotifier {
     target = null;
     result = null;
     error = null;
+    walkInstead = false;
     loading = false;
     notifyListeners();
   }
@@ -66,17 +93,28 @@ class RouteState extends ChangeNotifier {
     final t = target, f = from;
     if (t == null || f == null) return;
     final request = ++_request;
+    // Автобус без ключа 2ГИС: у нас не строим — панель предложит 2ГИС.
+    if (!_service.canRouteInApp(mode)) {
+      loading = false;
+      error = null;
+      result = null;
+      notifyListeners();
+      return;
+    }
     loading = true;
     error = null;
+    walkInstead = false;
     result = null;
     notifyListeners();
     try {
       final r = await _service.route(f, LatLng(t.lat, t.lng), mode);
       if (request != _request) return; // уже запросили другой маршрут
       result = r;
+      knownDurations[mode] = r.duration;
     } on RoutingException catch (e) {
       if (request != _request) return;
       error = e.message;
+      walkInstead = e is NoTransitException;
     } catch (_) {
       if (request != _request) return;
       error = 'Не удалось построить маршрут.';

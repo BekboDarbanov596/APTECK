@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/models.dart';
 import '../logic/assistant.dart';
 import '../logic/llm_providers.dart';
 import '../state/app_state.dart';
 import 'theme.dart';
+import 'voice_call_screen.dart';
 import '../l10n/lang.dart';
 
 /// Открыть ассистента во всплывающем окне снизу поверх карты.
@@ -57,98 +57,8 @@ class _AssistantSheetState extends State<_AssistantSheet> {
   bool _typing = false;
   Timer? _reply;
 
-  /// Модель (Gemini или Claude) подключена, если пользователь сохранил ключ.
-  /// Иначе — офлайн-правила.
-  LlmAssistant? _llm;
-  static const _keyPref = 'llm_api_key';
-  static const _oldKeyPref = 'claude_api_key';
-
-  @override
-  void initState() {
-    super.initState();
-    _loadKey();
-  }
-
-  Future<void> _loadKey() async {
-    if (!AppScope.read(context).useDeviceServices) return;
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final key = prefs.getString(_keyPref) ?? prefs.getString(_oldKeyPref);
-      if (key != null && key.isNotEmpty && mounted) {
-        setState(() => _llm = llmAssistantForKey(key));
-      }
-    } catch (e) {
-      debugPrint('Не удалось прочитать ключ: $e');
-    }
-  }
-
-  Future<void> _saveKey(String? key) async {
-    _llm?.close();
-    setState(() => _llm = key == null ? null : llmAssistantForKey(key));
-    if (!AppScope.read(context).useDeviceServices) return;
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove(_oldKeyPref);
-      if (key == null || key.isEmpty) {
-        await prefs.remove(_keyPref);
-      } else {
-        await prefs.setString(_keyPref, key);
-      }
-    } catch (e) {
-      debugPrint('Не удалось сохранить ключ: $e');
-    }
-  }
-
-  Future<void> _editKey() async {
-    final controller = TextEditingController();
-    final result = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(tr(context, 'Ключ нейросети')),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'С ключом ассистент отвечает как живой собеседник. '
-              'Бесплатно: Qwen через Groq (console.groq.com → API Keys, ключ gsk_…) '
-              'или Google Gemini (aistudio.google.com, ключ AIza…). '
-              'Подходит и платный ключ Claude (sk-ant-…). '
-              'Ключ хранится только в этом браузере.',
-              style: TextStyle(fontSize: 14, color: AppColors.textMuted),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: controller,
-              obscureText: true,
-              autocorrect: false,
-              enableSuggestions: false,
-              decoration: InputDecoration(hintText: tr(context, 'gsk_…, AIza… или sk-ant-…')),
-            ),
-          ],
-        ),
-        actions: [
-          if (_llm != null)
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(''),
-              child: Text(tr(context, 'Отключить')),
-            ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(tr(context, 'Отмена')),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(controller.text.trim()),
-            child: Text(tr(context, 'Сохранить')),
-          ),
-        ],
-      ),
-    );
-    controller.dispose();
-    if (result == null || !mounted) return;
-    if (result.isEmpty && _llm == null) return;
-    await _saveKey(result);
-  }
+  /// Нейросеть на встроенном ключе; без ключа — офлайн-правила.
+  final LlmAssistant? _llm = builtInLlmAssistant();
 
   @override
   void dispose() {
@@ -221,11 +131,12 @@ class _AssistantSheetState extends State<_AssistantSheet> {
     } on LlmAssistantException catch (e) {
       debugPrint('$e');
       final fallback = offline();
+      if (!mounted) return;
       final note = e.isAuthError
-          ? 'Ключ ${llm.label} не подошёл — проверьте его (значок ключа сверху). Пока отвечаю офлайн.'
+          ? tr(context, 'Ключ {p} не подошёл. Пока отвечаю офлайн.', {'p': llm.label})
           : e.isRateLimited
-          ? 'Лимит бесплатных запросов ${llm.label} исчерпан — попробуйте через минуту. Пока отвечаю офлайн.'
-          : 'Нет связи с ${llm.label} — отвечаю офлайн.';
+          ? tr(context, 'Лимит бесплатных запросов {p} исчерпан — попробуйте через минуту. Пока отвечаю офлайн.', {'p': llm.label})
+          : tr(context, 'Нет связи с {p} — отвечаю офлайн.', {'p': llm.label});
       _addReply(
         AssistantReply(
           '${fallback.text}\n\n($note)',
@@ -264,7 +175,7 @@ class _AssistantSheetState extends State<_AssistantSheet> {
       padding: EdgeInsets.only(bottom: media.viewInsets.bottom),
       child: Container(
         height: height,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.background,
           borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
@@ -273,7 +184,6 @@ class _AssistantSheetState extends State<_AssistantSheet> {
           children: [
             _Header(
               provider: _llm?.label,
-              onKey: _editKey,
               onClose: () => Navigator.of(context).pop(),
             ),
             Expanded(
@@ -300,11 +210,11 @@ class _AssistantSheetState extends State<_AssistantSheet> {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.fromLTRB(16, 2, 16, 4),
                   children: [
-                    for (final q in const [
-                      'Где есть Нурофен?',
-                      'Съел самсу, болит живот',
-                      'Мурунум бүтүп калды',
-                      'Allergy to pollen',
+                    for (final q in [
+                      tr(context, 'Где есть Нурофен?'),
+                      tr(context, 'Съел самсу, болит живот'),
+                      tr(context, 'Заложен нос'),
+                      tr(context, 'Аллергия на пыльцу'),
                     ])
                       Padding(
                         padding: const EdgeInsets.only(right: 8),
@@ -345,21 +255,19 @@ class FadeSlideIn extends StatelessWidget {
 class _Header extends StatelessWidget {
   const _Header({
     required this.provider,
-    required this.onKey,
     required this.onClose,
   });
 
   /// «Gemini» / «Claude», null — офлайн-правила.
   final String? provider;
   bool get online => provider != null;
-  final VoidCallback onKey;
   final VoidCallback onClose;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 8, 8, 12),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.surface,
         border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
@@ -400,10 +308,10 @@ class _Header extends StatelessWidget {
                         const SizedBox(width: 6),
                         Flexible(
                           child: Text(
-                            online ? 'ИИ $provider · RU · KG · EN' : 'Офлайн · RU · KG · EN',
+                            '${online ? tr(context, 'ИИ {p}', {'p': provider!}) : tr(context, 'Офлайн')} · RU · KG · EN',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 13, color: AppColors.textMuted),
+                            style: TextStyle(fontSize: 13, color: AppColors.textMuted),
                           ),
                         ),
                       ],
@@ -411,18 +319,26 @@ class _Header extends StatelessWidget {
                   ],
                 ),
               ),
+              // Голосовой «звонок» ассистенту (раньше — кнопка на карте).
               IconButton(
-                tooltip: tr(context, 'Ключ нейросети'),
-                onPressed: onKey,
-                icon: Icon(
-                  online ? Icons.key_rounded : Icons.key_off_rounded,
-                  color: online ? AppColors.green : AppColors.textMuted,
-                ),
+                tooltip: tr(context, 'Позвонить ассистенту'),
+                onPressed: () {
+                  // Навигатор берём до закрытия окна — потом контекст недействителен.
+                  final nav = Navigator.of(context);
+                  nav.pop();
+                  nav.push(
+                    MaterialPageRoute<void>(
+                      fullscreenDialog: true,
+                      builder: (_) => const VoiceCallScreen(),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.call_rounded, color: AppColors.green),
               ),
               IconButton(
                 tooltip: tr(context, 'Закрыть'),
                 onPressed: onClose,
-                icon: const Icon(Icons.close_rounded, color: AppColors.textMuted),
+                icon: Icon(Icons.close_rounded, color: AppColors.textMuted),
               ),
             ],
           ),
@@ -443,12 +359,12 @@ class _Orb extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: RadialGradient(
           center: Alignment(-0.35, -0.4),
           radius: 0.9,
-          colors: [Color(0xFF6BD47F), AppColors.green, AppColors.greenDark],
+          colors: [Color(0xFF6BD47F), AppColors.green, AppColors.greenFill],
           stops: [0, 0.55, 1],
         ),
       ),
@@ -467,7 +383,7 @@ class _SuggestionChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppColors.surface,
-      shape: const StadiumBorder(side: BorderSide(color: AppColors.border)),
+      shape: StadiumBorder(side: BorderSide(color: AppColors.border)),
       child: InkWell(
         customBorder: const StadiumBorder(),
         onTap: onTap,
@@ -475,7 +391,7 @@ class _SuggestionChip extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
           child: Text(
             label,
-            style: const TextStyle(fontSize: 14, color: AppColors.text),
+            style: TextStyle(fontSize: 14, color: AppColors.text),
           ),
         ),
       ),
@@ -590,7 +506,8 @@ class _Bubble extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              message.text,
+              // Приветствие — на языке интерфейса; ответы — как пришли.
+              message.fromUser ? message.text : tr(context, message.text),
               style: TextStyle(
                 fontSize: 15,
                 height: 1.4,
@@ -673,7 +590,7 @@ class _DrugCard extends StatelessWidget {
                   color: AppColors.greenSoft,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.medication_rounded, size: 18, color: AppColors.green),
+                child: Icon(Icons.medication_rounded, size: 18, color: AppColors.green),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -688,13 +605,13 @@ class _DrugCard extends StatelessWidget {
                     ),
                     Text(
                       price,
-                      style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
+                      style: TextStyle(fontSize: 12, color: AppColors.textMuted),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.place_rounded, size: 18, color: AppColors.green),
-              const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
+              Icon(Icons.place_rounded, size: 18, color: AppColors.green),
+              Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
             ],
           ),
         ),
@@ -731,7 +648,7 @@ class _TypingBubbleState extends State<_TypingBubble>
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(18),
@@ -759,7 +676,7 @@ class _TypingBubbleState extends State<_TypingBubble>
                     width: 7,
                     height: 7,
                     margin: const EdgeInsets.symmetric(horizontal: 2),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: AppColors.textMuted,
                       shape: BoxShape.circle,
                     ),

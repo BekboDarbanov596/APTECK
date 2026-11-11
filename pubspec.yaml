@@ -75,8 +75,13 @@ flutter:
         - asset: assets/fonts/Unbounded.ttf
 
   assets:
+    - assets/auth/sage-wall.jpg
+    - assets/auth/forest-matte.jpg
     - assets/demo_data.json
     - assets/ads/
+    - assets/route-pharmacy.png
+    - assets/route-pharmacy-evening.jpg
+    - assets/search/
     - assets/route-reference.png
     - assets/route-walk.png
 

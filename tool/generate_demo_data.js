@@ -78,7 +78,6 @@ const pharmacies = [
   ['farmservis-ahunbaeva-131', 'Фарм-Сервис', 'ул. Ахунбаева, 131', 42.8445, 74.6030, null],
   ['farmservis-beishenalievoi-29', 'Фарм-Сервис', 'ул. Бейшеналиевой, 29', 42.8815, 74.6200, ['08:00', '21:00']],
   ['farvater-ibraimova-115', 'Фарватер', 'ул. Ибраимова, 115', 42.8780, 74.6150, ['09:00', '21:00']],
-  ['zdorovie-zhibek-zholu-45', 'Аптека «Здоровье»', 'ул. Жибек Жолу, 45', 42.8870, 74.6000, ['09:00', '19:00']],
 ].map(([id, chain, address, lat, lng, hours]) => ({
   id, chain, address, lat, lng,
   opensAt: hours ? hours[0] : null,
@@ -86,10 +85,85 @@ const pharmacies = [
   phone: null,
 }));
 
+// ---------------------------------------------------------------------------
+// Реальные аптеки из OpenStreetMap (tool/fetch_osm_pharmacies.js).
+// Координаты и адреса — настоящие; часы — из OSM, если там есть «24/7»,
+// иначе типичные для сети (демо). Цены и наличие ниже — по-прежнему демо.
+// ---------------------------------------------------------------------------
+const osmPath = path.join(__dirname, '..', 'assets', 'osm_pharmacies.json');
+const osm = fs.existsSync(osmPath) ? JSON.parse(fs.readFileSync(osmPath, 'utf8')) : null;
+
+/** «ул. Ауэзов көчөсү» → «ул. Ауэзова»-подобная чистка частых артефактов OSM. */
+function cleanAddress(a) {
+  return a
+    .replace(/\s*көчөсү/g, '')
+    .replace(/^ул\.\s+(.+?)\s+переулок/, 'пер. $1')
+    .replace(/^ул\.\s+(\d+)-й\s+микрорайон/, 'мкр $1')
+    .replace(/^ул\.\s+Чуй\b/, 'просп. Чуй')
+    .replace(/^ул\.\s+Юсупа Абдрахманова/, 'ул. Абдрахманова')
+    .replace(/^ул\.\s+Жусупа Абдрахманова/, 'ул. Абдрахманова')
+    .trim();
+}
+
+const distM = (a, b) => {
+  const k = 111320;
+  const dx = (a.lng - b.lng) * k * Math.cos((a.lat * Math.PI) / 180);
+  const dy = (a.lat - b.lat) * k;
+  return Math.hypot(dx, dy);
+};
+
+if (osm) {
+  // 1. Адреса из плана исследования — точные координаты дома.
+  for (const p of pharmacies) {
+    const k = osm.known?.[p.id];
+    if (k) Object.assign(p, { lat: k.lat, lng: k.lng });
+  }
+
+  // 2. Придуманные адреса — заменяем реальными филиалами той же сети.
+  const replaceWith = {
+    'neman-kievskaya-98': ['Неман Фарм', 'ул. Тоголок Молдо, 14'],
+    'neman-dzhal-23': ['Неман Фарм', 'ул. Чынгыза Айтматова, 97/4'],
+    'aibolit-bokonbaeva-144': ['Айболит', 'ул. Жусупа Абдрахманова'],
+    'aibolit-vostok5-12': ['Айболит', 'ул. Курманжан датка көчөсү'],
+    'aibolit-manasa-67': ['Айболит', 'просп. Дэн Сяопина, 4'],
+    'farvater-ibraimova-115': ['Фарватер', 'ул. Койбагарова, 17/1'],
+  };
+  const used = new Set();
+  for (const p of pharmacies) {
+    const want = replaceWith[p.id];
+    if (!want) continue;
+    const b = osm.branches.find((x) => x.chain === want[0] && x.address === want[1] && !used.has(x.osm));
+    if (!b) throw new Error(`В снимке OSM нет филиала для ${p.id}: ${want.join(' / ')}`);
+    used.add(b.osm);
+    Object.assign(p, { address: cleanAddress(b.address), lat: b.lat, lng: b.lng });
+    if (b.openingHours === '24/7') Object.assign(p, { opensAt: null, closesAt: null });
+  }
+
+  // 3. Остальные реальные филиалы — новые аптеки (кроме дублей уже известных).
+  const typicalHours = { 'Неман Фарм': ['08:00', '22:00'], 'ФармаМир': ['08:00', '22:00'] };
+  for (const b of osm.branches) {
+    if (used.has(b.osm)) continue;
+    const duplicate = pharmacies.some((p) => p.chain === b.chain && distM(p, b) < 80);
+    if (duplicate) continue;
+    const allDay = b.openingHours === '24/7';
+    const hours = typicalHours[b.chain] ?? ['09:00', '21:00'];
+    pharmacies.push({
+      id: `osm-${b.osm}`,
+      chain: b.chain,
+      address: cleanAddress(b.address) || 'Бишкек',
+      lat: b.lat,
+      lng: b.lng,
+      opensAt: allDay ? null : hours[0],
+      closesAt: allDay ? null : hours[1],
+      phone: b.phone ?? null,
+    });
+  }
+}
+
 // Сетевой коэффициент цены (демо): госсеть дешевле, одиночная — дороже.
 const chainFactor = {
   'Неман Фарм': 1.05, 'Айболит': 1.0, 'ФармаМир': 1.03, 'Эл Аман': 0.92,
-  'Фарм-Сервис': 1.04, 'Фарватер': 1.0, 'Аптека «Здоровье»': 1.12,
+  'Фарм-Сервис': 1.04, 'Фарватер': 1.0,
 };
 
 // Детерминированный хеш, чтобы данные не менялись от запуска к запуску.
@@ -113,7 +187,9 @@ for (const p of pharmacies) {
 const out = {
   meta: {
     demo: true,
-    note: 'Демо-данные: цены и наличие примерные, координаты аптек приблизительные.',
+    note: osm
+      ? `Аптеки и координаты — OpenStreetMap (${osm.fetchedAt}, © участники OpenStreetMap, ODbL); цены и наличие — демо.`
+      : 'Демо-данные: цены и наличие примерные, координаты аптек приблизительные.',
     generatedAt: new Date().toISOString().slice(0, 10),
   },
   drugs: drugs.map(({ basePrice, ...d }) => d),
