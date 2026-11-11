@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../auth/auth_service.dart';
 import '../../auth/validators.dart';
+import '../theme.dart';
 import 'auth_widgets.dart';
 import 'register_screen.dart';
 import '../../l10n/lang.dart';
@@ -102,8 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
     final auth = AuthScope.of(context);
     final busy = _loading || _googleLoading;
     return AuthPageFrame(
-      registering: false,
-      onSwitch: busy ? null : () => _openRegistration(context),
+      title: tr(context, 'С возвращением'),
+      subtitle: tr(context, 'Войдите, чтобы пользоваться аккаунтом'),
       children: [
         Form(
           key: _form,
@@ -147,148 +148,151 @@ class _LoginScreenState extends State<LoginScreen> {
           loading: _loading,
           onPressed: busy ? null : _submit,
         ),
-        const SizedBox(height: 12),
+        const OrDivider(),
         GoogleButton(
           loading: _googleLoading,
           onPressed: busy
               ? null
               : () => _run(auth.signInWithGoogle, google: true),
         ),
+        const SizedBox(height: 24),
+        Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Text(
+              tr(context, 'Нет аккаунта?'),
+              style: TextStyle(color: AppColors.textMuted),
+            ),
+            TextButton(
+              onPressed: busy ? null : () => _openRegistration(context),
+              child: Text(tr(context, 'Зарегистрироваться')),
+            ),
+          ],
+        ),
       ],
     );
   }
 }
 
-/// Общий экран входа и регистрации.
+/// Лёгкая карточка авторизации, используемая обоими экранами.
 class AuthPageFrame extends StatelessWidget {
   const AuthPageFrame({
     super.key,
-    required this.registering,
-    required this.onSwitch,
+    required this.title,
+    required this.subtitle,
     required this.children,
   });
 
-  final bool registering;
-  final VoidCallback? onSwitch;
+  final String title;
+  final String subtitle;
   final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
-    final auth = AuthScope.of(context);
-    const panel = Color(0xFF383F30);
-    const ink = Color(0xFFF3EFE3);
-    const muted = Color(0xFFCED3C2);
-    const outline = Color(0xFF87968A);
-    final colors = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF829575),
-      brightness: Brightness.dark,
-      surface: panel,
-      onSurface: ink,
-      onSurfaceVariant: muted,
-      primary: ink,
-      onPrimary: const Color(0xFF283122),
-      outline: outline,
+    final theme = Theme.of(context).copyWith(
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: AppColors.greenFill,
+          foregroundColor: Colors.white,
+        ),
+      ),
     );
 
     return Theme(
-      data: ThemeData(useMaterial3: true, colorScheme: colors),
+      data: theme,
       child: Scaffold(
-        backgroundColor: const Color(0xFF252B20),
+        backgroundColor: AppColors.background,
         body: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset(
-              'assets/auth/forest-matte.jpg',
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
-              excludeFromSemantics: true,
+            ColoredBox(color: AppColors.background),
+            Positioned(
+              top: -150,
+              right: -120,
+              child: _AuthOrb(
+                size: 300,
+                color: AppColors.dark
+                    ? const Color(0xFF16261C)
+                    : const Color(0xFFDDEFE3),
+              ),
             ),
-            const ColoredBox(color: Color(0x4430392B)),
+            Positioned(
+              bottom: -180,
+              left: -130,
+              child: _AuthOrb(
+                size: 260,
+                color: AppColors.dark
+                    ? const Color(0xFF142019)
+                    : const Color(0xFFE7F0EA),
+              ),
+            ),
             SafeArea(
               child: Center(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 440),
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.fromLTRB(22, 42, 22, 24),
+                    padding: const EdgeInsets.fromLTRB(16, 30, 16, 24),
                     child: Container(
-                      padding: const EdgeInsets.fromLTRB(22, 22, 22, 14),
+                      padding: const EdgeInsets.fromLTRB(24, 28, 24, 18),
                       decoration: BoxDecoration(
-                        color: panel,
+                        color: AppColors.dark
+                            ? AppColors.surface
+                            : const Color(0xFFF9FBF9),
                         borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: const Color(0xFF65705B)),
+                        border: Border.all(color: AppColors.border),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0x120F3B29),
+                            blurRadius: 34,
+                            offset: Offset(0, 14),
+                          ),
+                        ],
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.eco_outlined,
-                                size: 29,
-                                color: ink,
+                          Center(
+                            child: Container(
+                              width: 56,
+                              height: 56,
+                              decoration: BoxDecoration(
+                                color: AppColors.greenSoft,
+                                borderRadius: BorderRadius.circular(18),
                               ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: Text(
-                                  tr(context, 'Аптека рядом'),
-                                  style: const TextStyle(
-                                    color: ink,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
+                              child: Icon(
+                                Icons.local_pharmacy_outlined,
+                                color: AppColors.greenDark,
+                                size: 30,
                               ),
-                              const ExcludeSemantics(
-                                child: Icon(
-                                  Icons.spa_outlined,
-                                  size: 27,
-                                  color: Color(0xFF879482),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                           const SizedBox(height: 14),
-                          Row(
-                            children: [
-                              for (final (active, label) in [
-                                (!registering, 'Вход'),
-                                (registering, 'Регистрация'),
-                              ])
-                                Expanded(
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                          width: active ? 2.5 : 1,
-                                          color: active
-                                              ? ink
-                                              : const Color(0xFF707B65),
-                                        ),
-                                      ),
-                                    ),
-                                    child: TextButton(
-                                      onPressed: active ? null : onSwitch,
-                                      style: TextButton.styleFrom(
-                                        foregroundColor: muted,
-                                        disabledForegroundColor: active
-                                            ? ink
-                                            : muted,
-                                        textStyle: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: active
-                                              ? FontWeight.w700
-                                              : FontWeight.w500,
-                                        ),
-                                      ),
-                                      child: Text(tr(context, label)),
-                                    ),
-                                  ),
-                                ),
-                            ],
+                          Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColors.text,
+                              fontSize: 28,
+                              height: 1.15,
+                              letterSpacing: -0.5,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
-                          const SizedBox(height: 16),
-                          if (auth.status == AuthStatus.notConfigured) ...[
+                          const SizedBox(height: 6),
+                          Text(
+                            subtitle,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColors.textMuted,
+                              fontSize: 14,
+                            ),
+                          ),
+                          const SizedBox(height: 22),
+                          // Firebase не подключён — честно говорим, что вход недоступен.
+                          if (AuthScope.of(context).status ==
+                              AuthStatus.notConfigured) ...[
                             const AuthNotConfiguredBanner(),
                             const SizedBox(height: 12),
                           ],
@@ -306,14 +310,15 @@ class AuthPageFrame extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: const EdgeInsets.all(8),
-                    child: IconButton(
+                    child: IconButton.filledTonal(
                       tooltip: tr(context, 'Назад'),
                       onPressed: () => Navigator.of(context).maybePop(),
                       style: IconButton.styleFrom(
-                        backgroundColor: const Color(0xFFE8EBDD),
-                        foregroundColor: panel,
+                        backgroundColor: AppColors.surface,
+                        foregroundColor: AppColors.greenDark,
+                        side: BorderSide(color: AppColors.border),
                       ),
-                      icon: const Icon(Icons.arrow_back_rounded),
+                      icon: const Icon(Icons.arrow_back),
                     ),
                   ),
                 ),
@@ -323,4 +328,18 @@ class AuthPageFrame extends StatelessWidget {
       ),
     );
   }
+}
+
+class _AuthOrb extends StatelessWidget {
+  const _AuthOrb({required this.size, required this.color});
+
+  final double size;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    width: size,
+    height: size,
+    decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+  );
 }
